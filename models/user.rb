@@ -4,6 +4,6 @@ class User
   end
 
   def save
-    
+
   end
 end
