@@ -2,14 +2,13 @@ class Request
   require 'net/http'
   require 'json'
 
+  ## session: Sinatra session
   ## request_type: Symbol(:login || :api)
   ## endpoint: String (ex: '/v1/oauth2/token')
   ## params: Hash (parameters for the request)
-  def initialize(request_type, endpoint, params = nil)
+  def initialize(session, request_type, endpoint, params = nil)
+    @session = session
     @uri = URI.parse(Spred.settings.send("#{request_type.to_s}_url") + endpoint)
-    @request = Net::HTTP::Post.new(@uri.path, 'Content-type' => 'application/json')
-    @request.basic_auth(Spred.settings.client_key, Spred.settings.client_secret)
-    @request.body = params.to_json if params
   end
 
   def body

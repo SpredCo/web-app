@@ -12,7 +12,6 @@ class Spred < Sinatra::Application
     set :login_url, 'http://login.sharemyscreen.fr:3000'
     set :client_key, 'zqGgPbVY25xUJ8pB'
     set :client_secret, 'E7zGQvUtyxvX7VOMFsxtV9NjDNndoxce'
-    set :client_hash, Proc.new { Base64.encode64("#{client_key}:#{client_secret}") }
   end
 
   configure :production do
@@ -27,3 +26,4 @@ end
 
 require_relative 'routes/init'
 require_relative 'models/init'
+require_relative 'helpers/init'
