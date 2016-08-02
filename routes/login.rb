@@ -11,6 +11,21 @@ class Spred < Sinatra::Application
     keep_user_in_session(req.response.body['access_token'], req.response.body['refresh_token'])
   end
 
+  post '/google_login' do
+    req = PostRequest.new(session, :login, ApiEndPoint::GOOGLE_LOGIN, {access_token: params[:access_token]})
+    req.send
+    puts req.response.body
+    keep_user_in_session(req.response.body['access_token'], req.response.body['refresh_token'])
+  end
+
+  post '/facebook_login' do
+    req = PostRequest.new(session, :login, ApiEndPoint::FACEBOOK_LOGIN, {access_token: params[:access_token]})
+    req.send
+    puts req.response.body
+    keep_user_in_session(req.response.body['access_token'], req.response.body['refresh_token'])
+  end
+
+
   get '/logout' do
     session[:spred_access_token] = nil
     session[:spred_refresh_token] = nil

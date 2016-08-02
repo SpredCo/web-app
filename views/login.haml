@@ -2,3 +2,11 @@
   %input{type: 'text', name: 'username'}
   %input{type: 'password', name: 'password'}
   %input{type: 'submit', name: 'login'}
+
+%form{action: 'google_login', method: 'post'}
+  %input{type: 'text', name: 'access_token'}
+  %input{type: 'submit', name: 'google login'}
+
+%form{action: 'facebook_login', method: 'post'}
+  %input{type: 'text', name: 'access_token'}
+  %input{type: 'submit', name: 'facebook login'}
