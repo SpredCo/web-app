@@ -27,8 +27,8 @@ class Spred < Sinatra::Application
 
 
   get '/logout' do
-    session[:spred_access_token] = nil
-    session[:spred_refresh_token] = nil
+    session[:current_user][:access_token] = nil
+    session[:current_user][:refresh_token] = nil
     redirect '/'
   end
 
@@ -36,7 +36,7 @@ class Spred < Sinatra::Application
 
   def keep_user_in_session(access_token, refresh_token)
     session[:current_user] = {access_token: access_token, refresh_token: refresh_token}
-    req = GetRequest.new(session, :api, ApiEndPoint::GET_USER + '/me')
+    req = GetRequest.new(session, :api, ApiEndPoint::USER + '/me')
     req.send
     session[:current_user].merge!(req.response.body.select! {|k,_| [:email, :first_name, :last_name].include?(k.to_sym)})
   end

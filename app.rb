@@ -1,7 +1,5 @@
 require 'sinatra'
 require 'json'
-require 'base64'
-require 'sinatra'
 require 'haml'
 
 class Spred < Sinatra::Application

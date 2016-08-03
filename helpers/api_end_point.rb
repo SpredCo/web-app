@@ -10,5 +10,5 @@ module ApiEndPoint
   ##
   ## API service
   ##
-  GET_USER = '/v1/users'
+  USER = '/v1/users'
 end
