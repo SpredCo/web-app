@@ -18,11 +18,9 @@ class Request
   def send
     puts "send request to #{@uri} with method #{@request.method}, header #{a={}; @request.each_header{|head, v| a[head] = v }; a}, body #{@request.body}"
     @response = Net::HTTP.new(@uri.host, @uri.port).start do |http|
-      puts 'ok'
       # http.use_ssl = (@uri.scheme == "https")
       http.request(@request)
     end
-    puts 'parse body'
     @response.body = JSON.parse(@response.body)
     @response
   end

@@ -2,8 +2,8 @@ class Spred < Sinatra::Application
   get '/user/show/:id' do
     req = GetRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}")
     req.send
-    user = req.response.body#.reject { |k,_| User::PRIVATE_FIELDS.include?(k) }
-    haml :user_show, :locals => {user: user}
+    user = req.response.body.reject { |k,_| User::PRIVATE_FIELDS.include?(k) }
+    haml :user_show, :locals => {user: user, response: req.response.body}
   end
 
   get '/user/edit/:id' do
@@ -16,7 +16,7 @@ class Spred < Sinatra::Application
     puts verified_params
     req = PatchRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}",  verified_params)
     req.send
-    puts req.response.body
     keep_user_in_session(session[:access_token], session[:refresh_token])
+    haml :user_edit, :locals => {user: user, response: req.response.body}
   end
 end
