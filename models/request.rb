@@ -17,11 +17,14 @@ class Request
 
   def send
     puts "send request to #{@uri} with method #{@request.method}, header #{a={}; @request.each_header{|head, v| a[head] = v }; a}, body #{@request.body}"
+    puts 'With session: '
+    @session.each_entry { |k| p k}
     @response = Net::HTTP.new(@uri.host, @uri.port).start do |http|
       # http.use_ssl = (@uri.scheme == "https")
       http.request(@request)
     end
     @response.body = JSON.parse(@response.body)
+    puts "reponse: #{@response.body}"
     @response
   end
 
