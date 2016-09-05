@@ -5,7 +5,7 @@ class Spred < Sinatra::Application
   end
 
   post '/signup' do
-    verified_params = params.select {|k,_| [:email, :password, :first_name, :last_name].include?(k.to_sym) }
+    verified_params = params.select {|k,_| [:email, :password, :first_name, :last_name, :pseudo].include?(k.to_sym) }
     req = PostRequest.new(session, :login, ApiEndPoint::SIGNUP, verified_params)
     req.send
     puts req.response.body

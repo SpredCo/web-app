@@ -14,6 +14,11 @@ class Spred < Sinatra::Application
   post '/user/edit' do
     verified_params = params.select {|k,_| [:email, :first_name, :last_name].include?(k.to_sym)}
     verified_params = verified_params.delete_if{|k,v| session[:current_user][k] == verified_params[k]}
+    new_pic = "public/profile_pictures/#{session[:current_user]['id']}.jpg"
+    File.open(new_pic, 'w') do |f|
+      f.write(params['picture'][:tempfile].read)
+    end
+    verified_params.merge({picture_url: "#{request.base_url}/#{new_pic}"})
     puts "verified params: #{verified_params}"
     req = PatchRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}",  verified_params)
     req.send

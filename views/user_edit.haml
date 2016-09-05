@@ -1,6 +1,7 @@
-%form{action: '/user/edit', method: 'post'}
+%form{action: '/user/edit', method: 'post', enctype: 'multipart/form-data'}
   %input{type: 'text', name: 'email', value: user['email']}
   %input{type: 'text', name: 'first_name', value: user['first_name']}
   %input{type: 'text', name: 'last_name', value: user['last_name']}
   %input{type: 'text', name: 'id', value: 'me'}
+  %input{type: 'file', name: 'picture', accept: 'image/*'}
   %input{type: 'submit', value: 'edit'}
