@@ -2,4 +2,5 @@
 %td
   %tr= user['email']
   %tr= user['first_name']
-  %tr= user['public_id']
+  %form{action: "/user/#{user['id']}/#{following_user ? 'unfollow' : 'follow'}", method: 'post'}
+    %input{type: 'submit', value: following_user ? 'unfollow' : 'follow'}
