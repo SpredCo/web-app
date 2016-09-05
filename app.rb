@@ -5,6 +5,10 @@ require 'haml'
 class Spred < Sinatra::Application
   enable :sessions
 
+  set :static, true
+  set :root, File.dirname(__FILE__)
+  set :public_folder, 'public'
+
   configure do
     set :api_url, 'http://api.sharemyscreen.fr:3000'
     set :login_url, 'http://login.sharemyscreen.fr:3000'
