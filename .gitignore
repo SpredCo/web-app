@@ -1,3 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
 public/profile_pictures/*.jpg
+public/profile_pictures/*.jpeg
+public/profile_pictures/*.png
