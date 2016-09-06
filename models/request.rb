@@ -23,7 +23,12 @@ class Request
       # http.use_ssl = (@uri.scheme == "https")
       http.request(@request)
     end
-    @response.body = JSON.parse(@response.body)
+    puts '*************************', @response.body, '******************************'
+    begin
+      @response.body = JSON.parse(@response.body)
+    rescue => e
+
+    end
     puts "reponse: #{@response.body}"
     @response
   end
