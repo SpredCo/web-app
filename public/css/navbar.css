@@ -1,0 +1,28 @@
+.navbar {
+    background-color: #55AA55;
+    height: 125px;
+}
+
+.navbar-col {
+    height: 100%;
+}
+
+.navbar-button {
+    color: #116611;
+}
+
+.navbar-button:hover {
+    color: white;
+}
+
+.navbar-button-icons {
+    font-size: 50px;
+}
+
+.navbar-button-labels {
+    font-size: 25px;
+}
+
+.vmiddle {
+    vertical-align: middle;
+}
