@@ -1,27 +1,41 @@
-%div.container-fluid
-  %nav.navbar
-    %div.icon-list
-      %div{ class:'col-xs-3 text-center navbar-col vmiddle' }
-        %a{ href:'#', class:'text-decoration-none navbar-button' }
-          %i.fa.fa-fw.fa-star-o.navbar-button-icons
-          %br
-          %span.navbar-button-labels
-            Favorites
-      %div{ class:'col-xs-3 text-center navbar-col' }
-        %a{ href:'#', class:'text-decoration-none navbar-button' }
-          %i.fa.fa-fw.fa-bell-o.navbar-button-icons
-          %br
-          %span.navbar-button-labels
-            Alerts
-      %div{ class:'col-xs-3 text-center navbar-col' }
-        %a{ href:'#', class:'text-decoration-none navbar-button' }
-          %i.fa.fa-fw.fa-envelope-o.navbar-button-icons
-          %br
-          %span.navbar-button-labels
-            Messages
-      %div{ class:'col-xs-3 text-center navbar-col' }
-        %a{ href:'#', class:'text-decoration-none navbar-button' }
-          %i.fa.fa-fw.fa-comment-o.navbar-button-icons
-          %br
-          %span.navbar-button-labels
-            Comments
+%nav.navbar.navbar-default
+  %div.container-fluid
+    %div.navbar-header
+      %button{'type' => 'button', 'class' => 'navbar-toggle collapsed', 'data-toggle' =>'collapse', 'data-target' => '#bs-example-navbar-collapse-1', 'aria-expanded' => 'false'}
+        %span.sr-only
+          Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a{ 'class' => 'navbar-brand spred-brand', 'href' =>'/' }
+        Spred
+
+    %div{ 'class' => 'collapse navbar-collapse',  'id' => 'bs-example-navbar-collapse-1' }
+      %ul{ 'class' =>'nav navbar-nav' }
+        - if !session[:current_user]
+          %li
+            %a{ 'href' => '/signup', 'class' => 'navbar-labels semibold' }
+              %i{ 'class' => 'fa fa-user-plus', ' aria-hidden' => 'true' }
+              Inscription
+              %span.sr-only
+          %li
+            %a{ 'href' => '/login', 'class' => 'navbar-labels semibold' }
+              %i{ 'class' => 'fa fa-sign-in', ' aria-hidden' => 'true' }
+              Connexion
+              %span.sr-only
+        - else
+          %li
+            %a{ 'href' => '/profile', 'class' => 'navbar-labels semibold' }
+              %i{ 'class' => 'fa fa-user', ' aria-hidden' => 'true' }
+              Mon profil
+              %span.sr-only
+          %li
+            %a{ 'href' => '/logout', 'class' => 'navbar-labels semibold' }
+              %i{ 'class' => 'fa fa-sign-out', ' aria-hidden' => 'true' }
+              Déconnexion
+              %span.sr-only
+      %form.navbar-form.navbar-right
+        %div.form-group
+          %input{ 'type' => 'text', 'class' => 'form-control', 'placeholder' => 'Search' }
+        %button{ 'type'=> 'submit', 'class' => 'btn btn-default' }
+          %i{ 'class' => 'fa fa-search', 'aria-hidden' => 'true' }

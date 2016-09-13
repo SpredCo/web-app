@@ -1,11 +1,120 @@
-.main-content {
-    margin-top: 125px;
+.title {
+    font-size: 40px;
+    margin-bottom: 40px;
+    font-style: italic;
+    color: #55AA55;
 }
 
-.container-fluid {
-    padding-left: 0px !important;
+.subtitle {
+    font-size: 18px;
+    font-style: italic;
+    color: black;
+    margin-bottom: 20px;
 }
 
-.text-decoration-none {
-    text-decoration: none !important;
+.vmiddle {
+    vertical-align: middle;
+}
+
+.border-right-thin {
+    border-right: 1px solid darkgrey;
+}
+
+.margin-bottom-none {
+    margin-bottom: 0;
+}
+
+.navbar-default .navbar-brand.spred-brand {
+    font-size: 25px;
+    font-style: italic;
+    color: #55AA55;
+    font-weight: bold;
+    padding-right: 50px;
+}
+
+.navbar-labels {
+    font-size: 16px;
+    color: black !important;
+}
+
+.navbar-labels:hover {
+    color: #55AA55 !important;
+}
+
+.semibold {
+    font-weight: 600;
+}
+
+.submit-button {
+    font-size: 18px;
+}
+
+.api-button {
+    width: 200px;
+}
+
+.margin-xs {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.cube {
+    background: url(../img/bg-pattern.png),linear-gradient(to left,#55AA55,#004400);
+    height: 100%;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.main-space {
+    height: 100%;
+    width: 100%;
+    display: table;
+}
+
+.login {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.form-field-margin {
+    margin-bottom: 15px;
+}
+
+.form-field-margin-last {
+    margin-bottom: 30px;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.absolute-hr {
+    position: relative;
+    top: 30px;
+    width: 100%;
+}
+
+.or {
+    padding-top: 12px;
+    font-weight: bold;
+}
+
+.video-img {
+    width: 200px;
+    height: 200px;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+}
+
+.video-card {
+    //border: 1px solid grey;
+}
+
+.margin-top-xs {
+    margin-top: 10px;
 }

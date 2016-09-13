@@ -1,13 +1,27 @@
-%div.container-fluid
-  %form{action: '', method: 'post'}
-    %input{type: 'text', name: 'username'}
-    %input{type: 'password', name: 'password'}
-    %input{type: 'submit', value: 'login'}
-
-  %form{action: 'google_login', method: 'post'}
-    %input{type: 'text', name: 'access_token'}
-    %input{type: 'submit', value: 'google login'}
-
-  %form{action: 'facebook_login', method: 'post'}
-    %input{type: 'text', name: 'access_token'}
-    %input{type: 'submit', value: 'facebook login'}
+%div.main-space
+  %div.login
+    %div.row
+      %div.col-xs-offset-4.col-xs-4
+        %div.panel.panel-default
+          %div.panel-body
+            %p.text-center.title.semibold
+              Connexion
+            %form{ 'action' => '/login', 'method' => 'post' }
+              %div.form-group
+                %input{ 'type' => 'text', 'class' => 'form-control form-field-margin', 'placeholder' => 'Email', 'name' => 'username' }
+                %input{ 'type' => 'password', 'class' => 'form-control form-field-margin-last', 'placeholder' => 'Mot de passe', 'name' => 'password' }
+                %input{ 'type' => 'submit', 'class' => ' form-control btn btn-success submit-button form-field-margin-last', 'value' => 'Valider' }
+                %div.row
+                  %div.col-xs-5
+                    %hr
+                  %div.col-xs-2.center-text.or
+                    %span OU
+                  %div.col-xs-5
+                    %hr
+                %div.row
+                  %div.col-xs-6.center-text
+                    %button{ 'type' => 'button', 'class' => 'api-button btn btn-success submit-button' }
+                      Connexion Facebook
+                  %div.col-xs-6.center-text
+                    %button{ 'type' => 'button', 'class' => 'api-button btn btn-success submit-button' }
+                      Connexion Google
