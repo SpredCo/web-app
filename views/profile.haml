@@ -5,7 +5,7 @@
         %div.panel-body
           %div.col-xs-3.vmiddle
             %p.semibold
-              %img{ 'src' => 'img/gary_gravatar.png', 'class' => 'profile-pic' }
+              %img{ 'src' => user['picture_url'] || 'img/gary_gravatar.pgn', 'class' => 'profile-pic' }
               #{user['first_name']} #{user['last_name']}
           %div.col-xs-3.text-center.vmiddle
             %p.border-right-thin.margin-bottom-none

@@ -5,7 +5,7 @@ class Spred < Sinatra::Application
     begin
       req.send
     rescue IOError
-      redirect request.path_info
+      status 404
     end
     user = req.response.body
     haml :user_show, :locals => {user: user, response: req.response.body, following_user: session[:current_user]['following'].include?(user['id'])}

@@ -12,6 +12,8 @@
     %link{ rel:'stylesheet', type:'text/css', href:'css/common.css' }
   %body.cube
     = haml :navbar
-
+    %p{class: 'error'}= flash[:error] if flash[:error]
+    %p{class: 'notice'}= flash[:notice] if flash[:notice]
+    %p{class: 'success'}= flash[:success] if flash[:success]
     %div.main-content
       = yield

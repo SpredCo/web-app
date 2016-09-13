@@ -5,6 +5,27 @@
     color: #55AA55;
 }
 
+.error {
+    background: #FBE3E4;
+    color: #8a1f11;
+    border-color: #FBC2C4;
+    text-align: center;
+}
+
+.notice {
+    background: #FFF6BF;
+    color: #514721;
+    border-color: #FFD324;
+    text-align: center;
+}
+
+.success {
+    background: #DDFCD5;
+    color: #000;
+    border-color: #44A815;
+    text-align: center;
+}
+
 .subtitle {
     font-size: 18px;
     font-style: italic;

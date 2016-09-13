@@ -23,14 +23,14 @@ class Request
       # http.use_ssl = (@uri.scheme == "https")
       http.request(@request)
     end
-    puts '*************************', @response.body, '******************************'
+    puts '*************************', @response.body, '*************************'
     begin
       @response.body = JSON.parse(@response.body)
-    rescue => e
-      raise e
+    rescue JSON::ParserError => e
+      puts "caught #{e}"
+      raise IOError
     end
     if @response.body.has_key?('error')
-      session[:error] = @response.body
       raise IOError
     end
     puts "reponse: #{@response.body}"
