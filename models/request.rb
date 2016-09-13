@@ -27,7 +27,11 @@ class Request
     begin
       @response.body = JSON.parse(@response.body)
     rescue => e
-
+      raise e
+    end
+    if @response.body.has_key?('error')
+      session[:error] = @response.body
+      raise IOError
     end
     puts "reponse: #{@response.body}"
     @response

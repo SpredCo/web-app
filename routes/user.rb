@@ -2,7 +2,11 @@ class Spred < Sinatra::Application
 
   get '/user/:id/show' do
     req = GetRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}")
-    req.send
+    begin
+      req.send
+    rescue IOError
+      redirect request.path_info
+    end
     user = req.response.body
     haml :user_show, :locals => {user: user, response: req.response.body, following_user: session[:current_user]['following'].include?(user['id'])}
   end
