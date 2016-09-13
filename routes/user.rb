@@ -27,7 +27,7 @@ class Spred < Sinatra::Application
     req = PatchRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}",  verified_params)
     req.send
     keep_user_in_session(session[:current_user].fetch(:access_token, nil), session[:current_user].fetch(:refresh_token, nil))
-    haml :user_edit, :locals => {user: session[:current_user], response: req.response.body}
+    haml :profile, :locals => {user: session[:current_user], response: req.response.body}
   end
 
   post '/user/:id/follow' do

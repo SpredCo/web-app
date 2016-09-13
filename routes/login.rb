@@ -5,11 +5,11 @@ class Spred < Sinatra::Application
   end
 
   post '/login' do
-    verified_params = {'grant_type' => 'password'}.merge(params.select {|k,_| [:username, :password].include?(k.to_sym) })
+    verified_params = {'grant_type' => 'password'}.merge!(params.select {|k,_| [:username, :password].include?(k.to_sym) })
     req = PostRequest.new(session, :login, ApiEndPoint::LOGIN, verified_params)
     req.send
     keep_user_in_session(req.response.body['access_token'], req.response.body['refresh_token'])
-    haml :main, :locals => {response: req.response.body}
+    haml :profile, :locals => {user: session[:current_user]}
   end
 
   post '/google_login' do
@@ -30,6 +30,8 @@ class Spred < Sinatra::Application
 
 
   get '/logout' do
+    session[:current_user][:access_token] = nil
+    session[:current_user][:refresh_token] = nil
     session[:current_user] = nil
     redirect '/'
   end
@@ -41,6 +43,6 @@ class Spred < Sinatra::Application
     session[:current_user].merge!({access_token: access_token, refresh_token: refresh_token})
     req = GetRequest.new(session, :api, ApiEndPoint::USER + '/me')
     req.send
-    session[:current_user].merge!(req.response.body.select! {|k,_| [:email, :first_name, :last_name, :id, :following].include?(k.to_sym)})
+    session[:current_user].merge!(req.response.body.select {|k,_| [:email, :first_name, :last_name, :id, :following].include?(k.to_sym)})
   end
 end
