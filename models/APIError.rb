@@ -11,6 +11,7 @@ class APIError < APIMessage
   INVALID_GOOGLE_TOKEN = 'User google token is invalid'
   JSON_PARSE_ERROR = 'API dev sucks'
   INVALID_LOGIN = 'Email and password does not match'
+  INVALID_REFRESH_TOKEN = 'Please re-login'
 
   ERRORS = {
       '400' => {
