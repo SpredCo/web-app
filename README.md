@@ -2,6 +2,7 @@
 ## Installation
 1. Install ruby
   * From RVM
+  
    First of all you need to install [RVM](https://rvm.io/).
    Once it's done install ruby (version is precised in [.ruby-version](https://github.com/SpredCo/web-app/blob/master/.ruby-version)) by typing
    ```bash
@@ -12,6 +13,7 @@
    cd ..; cd web-app
    ```
   * From Rbenv
+  
    First of all you need to install [Rbenv](https://github.com/rbenv/rbenv)
    Once it's done install ruby (version is precised in [.ruby-version](https://github.com/SpredCo/web-app/blob/master/.ruby-version)) by typing
    ```bash
