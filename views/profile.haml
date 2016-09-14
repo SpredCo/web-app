@@ -5,8 +5,8 @@
         %div.panel-body
           %div.col-xs-3.vmiddle
             %p.semibold
-              %img{ 'src' => user['picture_url'] || 'img/gary_gravatar.pgn', 'class' => 'profile-pic' }
-              #{user['first_name']} #{user['last_name']}
+              %img{ 'src' => session[:current_user]['picture_url'] || 'img/gary_gravatar.pgn', 'class' => 'profile-pic' }
+              #{session[:current_user]['first_name']} #{session[:current_user]['last_name']}
           %div.col-xs-3.text-center.vmiddle
             %p.border-right-thin.margin-bottom-none
               %span.semibold
@@ -80,28 +80,3 @@
               %p.text-center
                 21
                 %i{ 'class' => 'fa fa-users', 'aria-hidden' => 'true' }
-
-  %div.row
-    %div.col-xs-offset-1.col-xs-10
-      %div.panel.panel-default
-        %div.panel-body
-          %p.subtitle.semibold
-            Mes informations personnelles
-          %div.col-xs-6.vmiddle.form-field-margin
-            %p.semibold
-              Prénom
-            %input{ 'type' => 'text', 'class' => 'form-control', 'value' => "#{user['first_name']}" }
-          %div.col-xs-6.vmiddle.form-field-margin
-            %p.semibold
-              Nom
-            %input{ 'type' => 'text', 'class' => 'form-control', 'value' => "#{user['last_name']}" }
-          %div.col-xs-6.vmiddle.form-field-margin
-            %p.semibold
-              E-mail
-            %input{ 'type' => 'text', 'class' => 'form-control', 'value' => "#{user['email']}" }
-          %div.col-xs-6.vmiddle.form-field-margin-last
-            %p.semibold
-              Pseudonyme
-            %input{ 'type' => 'text', 'class' => 'form-control', 'value' => "M4x0w" }
-          %div.col-xs-6.vmiddle.form-field-margin.col-xs-offset-3
-            %input{ 'type' => 'submit', 'class' => 'form-control btn btn-success submit-button', 'value' => 'Sauvegarder vos informations' }

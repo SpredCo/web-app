@@ -2,13 +2,12 @@ class Spred < Sinatra::Application
 
   get '/user/:id/show' do
     req = GetRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}")
-    begin
-      req.send
-    rescue IOError
-      status 404
+    response = req.response
+    if response.is_a?(APIError)
+      flash[:error] = response.message
+      redirect '/'
     end
-    user = req.response.body
-    haml :user_show, :locals => {user: user, response: req.response.body, following_user: session[:current_user]['following'].include?(user['id'])}
+    haml :user_show, :locals => {user: user, response: response.body, following_user: session[:current_user]['following'].include?(user['id'])}
   end
 
   get '/user/:id/edit' do
@@ -25,18 +24,30 @@ class Spred < Sinatra::Application
       verified_params.merge!({picture_url: "#{request.base_url}/#{User.build_profile_picture_url(new_pic)}"})
     end
     req = PatchRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}",  verified_params)
-    req.send
+    response = req.send
+    if response.is_a?(APIError)
+      flash[:error] = response.message
+      redirect '/'
+    end
     keep_user_in_session(session[:current_user].fetch(:access_token, nil), session[:current_user].fetch(:refresh_token, nil))
-    haml :profile, :locals => {user: session[:current_user], response: req.response.body}
+    haml :profile, :locals => {user: session[:current_user], response: response.body}
   end
 
   post '/user/:id/follow' do
     req = PostRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}/follow")
-    req.send
+    response = req.send
+    if response.is_a?(APIError)
+      flash[:error] = response.message
+      redirect "/user/#{params[:id]}/show"
+    end
   end
 
   post '/user/:id/unfollow' do
     req = PostRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}/unfollow")
-    req.send
+    response = req.send
+    if response.is_a?(APIError)
+      flash[:error] = response.message
+      redirect "/user/#{params[:id]}/show"
+    end
   end
 end

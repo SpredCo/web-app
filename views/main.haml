@@ -6,18 +6,21 @@
           %div.panel-body
             %p.text-center.title.semibold
               Spred
-            %form
-              %div.form-group
-                %div.col-xs-offset-2.col-xs-8.text-center
-                  %a{ 'href' => '/login', 'class' => 'btn btn-success submit-button' }
-                    Connexion
-                %div.col-xs-offset-2.col-xs-8.text-center
-                  %a{ 'href' => '/signup', 'class' => 'btn btn-success submit-button' }
-                    Inscription
-                %div.col-xs-offset-2.col-xs-8.text-center
-                  %p
-                    OU
-                %div.col-xs-offset-2.col-xs-8.text-center
-                  %fb:login-button{ 'scope' => 'public_profile, email',  'onlogin' => 'checkLoginState();' }
-                %div.col-xs-offset-2.col-xs-8.text-center
-                  %div{ 'class' => 'g-signin2', 'data-onsuccess' => 'onSignIn', 'data-theme' => 'dark' }
+            - if session[:current_user]
+              = haml :profile
+            - else
+              %form
+                %div.form-group
+                  %div.col-xs-offset-2.col-xs-8.text-center
+                    %a{ 'href' => '/login', 'class' => 'btn btn-success submit-button' }
+                      Connexion
+                  %div.col-xs-offset-2.col-xs-8.text-center
+                    %a{ 'href' => '/signup', 'class' => 'btn btn-success submit-button' }
+                      Inscription
+                  %div.col-xs-offset-2.col-xs-8.text-center
+                    %p
+                      OU
+                  %div.col-xs-offset-2.col-xs-8.text-center
+                    %fb:login-button{ 'scope' => 'public_profile, email',  'onlogin' => 'checkLoginState();' }
+                  %div.col-xs-offset-2.col-xs-8.text-center
+                    %div{ 'class' => 'g-signin2', 'data-onsuccess' => 'onSignIn', 'data-theme' => 'dark' }

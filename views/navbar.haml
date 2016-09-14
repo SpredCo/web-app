@@ -12,7 +12,7 @@
 
     %div{ 'class' => 'collapse navbar-collapse',  'id' => 'bs-example-navbar-collapse-1' }
       %ul{ 'class' =>'nav navbar-nav' }
-        - if !session[:current_user]
+        - unless session[:current_user]
           %li
             %a{ 'href' => '/signup', 'class' => 'navbar-labels semibold' }
               %i{ 'class' => 'fa fa-user-plus', ' aria-hidden' => 'true' }

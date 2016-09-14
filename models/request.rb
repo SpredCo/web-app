@@ -28,10 +28,14 @@ class Request
       @response.body = JSON.parse(@response.body)
     rescue JSON::ParserError => e
       puts "caught #{e}"
-      raise IOError
+      refresh_token
+      retry
     end
-    if @response.body.has_key?('error')
-      raise IOError
+    puts 'check response'
+    @response.each_key { |k| puts k, @response[k]}
+    if APIError::ERRORS.has_key?(@response.code)
+      return nil unless @response.body['code']
+      return (APIError.new(@response.code, @response.body['code'], @response.body['sub_code'] || nil))
     end
     puts "reponse: #{@response.body}"
     @response
@@ -39,5 +43,9 @@ class Request
 
   def response
     @response
+  end
+
+  def refresh_token
+    Spred.redirect '/'
   end
 end

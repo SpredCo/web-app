@@ -7,31 +7,30 @@ class Spred < Sinatra::Application
   post '/login' do
     verified_params = {'grant_type' => 'password'}.merge!(params.select {|k,_| [:username, :password].include?(k.to_sym) })
     req = PostRequest.new(session, :login, ApiEndPoint::LOGIN, verified_params)
-    begin
-      req.send
-    rescue IOError
-      flash[:error] = req.response.body['error_description']
+    response = req.send
+    unless response
+      flash[:error] = APIError::INVALID_LOGIN
       redirect '/login'
     end
-    flash[:notice] = 'Successfully logged in'
-    keep_user_in_session(req.response.body['access_token'], req.response.body['refresh_token'])
+    flash[:success] = 'Successfully logged in'
+    keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
     haml :profile, :locals => {user: session[:current_user]}
   end
 
   post '/google_login' do
     req = PostRequest.new(session, :login, ApiEndPoint::GOOGLE_LOGIN, {access_token: params[:access_token]})
-    req.send
-    puts req.response.body
-    keep_user_in_session(req.response.body['access_token'], req.response.body['refresh_token'])
-    haml :main, :locals => {response: req.response.body}
+    response = req.send
+    set_error_and_redirect if response.is_a?(APIError)
+    keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
+    haml :main, :locals => {response: response.body}
   end
 
   post '/facebook_login' do
     req = PostRequest.new(session, :login, ApiEndPoint::FACEBOOK_LOGIN, {access_token: params[:access_token]})
-    req.send
-    puts req.response.body
-    keep_user_in_session(req.response.body['access_token'], req.response.body['refresh_token'])
-    haml :main, :locals => {response: req.response.body}
+    response = req.send
+    set_error_and_redirect if response.is_a?(APIError)
+    keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
+    haml :main, :locals => {response: response.body}
   end
 
 
@@ -43,6 +42,11 @@ class Spred < Sinatra::Application
   end
 
   private
+
+  def set_error_and_redirect
+    flash[:error] = response.message
+    redirect '/login'
+  end
 
   def keep_user_in_session(access_token, refresh_token)
     session[:current_user] ||= {}
