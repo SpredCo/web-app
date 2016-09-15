@@ -29,7 +29,6 @@ class Spred < Sinatra::Application
     haml :main
   end
 
-
   get '/logout' do
     session[:current_user] = nil
     redirect '/'
