@@ -52,15 +52,18 @@ class Spred < Sinatra::Application
   end
 
   post '/user/pseudo/check' do
-    if request.xhr?
-      req = PostRequest.new(session, login, ApiEndPoint::CHECK_PSEUDO, params[:pseudo])
-      response = req.send
-      if response.is_a?(APIError)
-        JSON.generate(result: 'ko')
-      end
-      JSON.generate(result: 'ok')
+    req = PostRequest.new(session, :login, ApiEndPoint::CHECK_PSEUDO, params[:pseudo])
+    response = req.send
+    if response.is_a?(APIError)
+      JSON.generate(result: 'ko')
     else
-      'Invalid AJAX request'
+      JSON.generate(result: 'ok')
     end
+  end
+
+
+  get '/user/search/:partial_email' do
+    req = PostRequest.new(session, :api, ApiEndPoint::SEARCH_BY_EMAIL, params[:partial_email])
+    req.send
   end
 end

@@ -14,4 +14,5 @@ module ApiEndPoint
   ## API service
   ##
   USER = '/v1/users'
+  SEARCH_BY_EMAIL = '/v1/users/search'
 end

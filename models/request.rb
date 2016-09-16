@@ -24,6 +24,16 @@ class Request
       http.request(@request)
     end
     puts '*************************', @response.body, '*************************'
+    parse_response
+  end
+
+  def response
+    @response
+  end
+
+  private
+
+  def parse_response
     begin
       @response.body = JSON.parse(@response.body)
     rescue JSON::ParserError => e
@@ -38,10 +48,6 @@ class Request
       return (APIError.new(@response.code, @response.body['code'], @response.body['sub_code'] || nil))
     end
     puts "reponse: #{@response.body}"
-    @response
-  end
-
-  def response
     @response
   end
 
