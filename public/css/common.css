@@ -1,141 +1,99 @@
-.title {
-    font-size: 40px;
-    margin-bottom: 40px;
-    font-style: italic;
+.body-main {
+    background-color: #f1f1f1;
+}
+.navbar-default {
+    background-color: #fff;
+}
+.navbar-default .navbar-brand.logo {
+    width: 250px;
+    padding-left: 50px;
+    font-size: 35px;
     color: #55AA55;
-}
-
-.error {
-    background: #FBE3E4;
-    color: #8a1f11;
-    border-color: #FBC2C4;
-    text-align: center;
-}
-
-.notice {
-    background: #FFF6BF;
-    color: #514721;
-    border-color: #FFD324;
-    text-align: center;
-}
-
-.success {
-    background: #DDFCD5;
-    color: #000;
-    border-color: #44A815;
-    text-align: center;
-}
-
-.subtitle {
-    font-size: 18px;
     font-style: italic;
-    color: black;
-    margin-bottom: 20px;
-}
-
-.vmiddle {
-    vertical-align: middle;
-}
-
-.border-right-thin {
-    border-right: 1px solid darkgrey;
-}
-
-.margin-bottom-none {
-    margin-bottom: 0;
-}
-
-.navbar-default .navbar-brand.spred-brand {
-    font-size: 25px;
-    font-style: italic;
-    color: #55AA55;
     font-weight: bold;
-    padding-right: 50px;
 }
-
-.navbar-labels {
+.search-bar {
+    width: 600px;
+}
+.search-btn {
     font-size: 16px;
-    color: black !important;
+    padding-bottom: 2px;
+    padding-top: 2px;
 }
-
-.navbar-labels:hover {
-    color: #55AA55 !important;
+.btn-nav {
+    margin-right: 30px;
 }
-
-.semibold {
-    font-weight: 600;
-}
-
-.submit-button {
-    font-size: 18px;
-}
-
-.api-button {
-    width: 200px;
-}
-
-.margin-xs {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.cube {
-    background: url(../img/bg-pattern.png),linear-gradient(to left,#55AA55,#004400);
+.main-content {
+    background-color: #fff;
     height: 100%;
 }
 
-.navbar {
-    margin-bottom: 0;
+.spredcast-grp h3 {
+    font-size: 20px;
+    padding-left: 10px;
 }
 
-.main-space {
-    height: 100%;
-    width: 100%;
-    display: table;
+.wrapper {
+    padding-top: 40px;
 }
-
-.login {
-    display: table-cell;
-    vertical-align: middle;
+.signup-bloc {
+    margin: auto;
+    width: 650px;
+    height: 500px;
 }
-
-.form-field-margin {
-    margin-bottom: 15px;
+.signup-title {
+    text-align: center;
+    font-size: 35px;
+    color: #55AA55;
+    font-style: italic;
+    font-weight: bold;
+    margin-bottom: 40px;
 }
-
-.form-field-margin-last {
-    margin-bottom: 30px;
-}
-
 .center-text {
     text-align: center;
 }
-
-.absolute-hr {
-    position: relative;
-    top: 30px;
+.badge.active {
+    background-color: #55AA55;
+    margin-bottom: 5px;
+}
+.text-signup-info {
+    color: #777;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.text-signup-info.active {
+    color: #55AA55;
+}
+.line-signup {
+    margin-top: 20px;
+    height: 5px;
     width: 100%;
+    background-color: #777;
+}
+.line-signup.active {
+    background-color: #55AA55;
+}
+.signup-form {
+    margin-top: 60px;
+}
+.btn-signup {
+    margin-top: 55px;
+}
+@media (max-width: 1200px) {
+    .navbar-default .navbar-brand.logo {
+        width: inherit;
+    }
+    .search-bar {
+        width: 250px;
+    }
 }
 
-.or {
-    padding-top: 12px;
-    font-weight: bold;
-}
+@media (max-width: 732px) {
+    .search-bar {
+        width: 250px;
+    }
 
-.video-img {
-    width: 200px;
-    height: 200px;
-}
-
-.profile-pic {
-    width: 50px;
-    height: 50px;
-}
-
-.video-card {
-    //border: 1px solid grey;
-}
-
-.margin-top-xs {
-    margin-top: 10px;
+    .navbar-right {
+        padding-left: 10px;
+    }
 }

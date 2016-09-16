@@ -1,4 +1,9 @@
 class Spred < Sinatra::Application
+
+  get '/signup-step1' do
+    haml :signup_step1, :layout => :sign_layout
+  end
+
   get '/signup' do
     @title = 'signup'
     haml :signup

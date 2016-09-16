@@ -1,0 +1,40 @@
+%div.container.wrapper
+  %div.signup-bloc
+    %div.row.signup-title
+      %span Inscription
+    %div.row
+      %div.col-xs-4.center-text
+        %span.badge.active 1
+        %br
+        %span.text-signup-info.active Informations personnelles
+        %div.line-signup.active
+      %div.col-xs-4.center-text
+        %span.badge 2
+        %br
+        %span.text-signup-info Selection du pseudo
+        %div.line-signup
+      %div.col-xs-4.center-text
+        %span.badge 3
+        %br
+        %span.text-signup-info Centre d'intéret
+        %div.line-signup
+    %div.row.signup-form
+      %div.col-sm-8.col-sm-offset-2
+        %form{'action' => 'post', 'name' => 'signup-step1'}
+          %div.form-group
+            %label{'for' => 'email'} Email
+            %input#email.form-control{'name' => 'email', 'type' => 'email'}
+          %div.form-group
+            %label{'for' => 'password'} Mot de passe
+            %input#password.form-control{'name' => 'password', 'type' => 'password'}
+          %div.form-group
+            %label{'for' => 'confirm-password'} Confirmer le mot de passe
+            %input#confirm-password.form-control{'name' => 'confirm-password', 'type' => 'password'}
+          %div.form-group
+            %label{'for' => 'first_name'} Prénom
+            %input#first_name.form-control{'name' => 'first_name', 'type' => 'text'}
+          %div.form-group
+            %label{'for' => 'last_name'} Nom
+            %input#last_name.form-control{'name' => 'last_name', 'type' => 'text'}
+          %div.form-group.btn-signup
+            %input.form-control.btn.btn-success{'type' => 'submit', 'value' => 'Passer à l\'étape suivante'}
