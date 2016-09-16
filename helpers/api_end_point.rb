@@ -3,6 +3,7 @@ module ApiEndPoint
   ## Login service
   ##
   SIGNUP = '/v1/users'
+  CHECK_PSEUDO = '/v1/users/pseudo/check'
   FACEBOOK_SIGNUP = "#{SIGNUP}/facebook"
   GOOGLE_SIGNUP = "#{SIGNUP}/google"
   LOGIN = '/v1/oauth2/token'

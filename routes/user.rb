@@ -50,4 +50,17 @@ class Spred < Sinatra::Application
       redirect "/user/#{params[:id]}/show"
     end
   end
+
+  post '/user/pseudo/check' do
+    if request.xhr?
+      req = PostRequest.new(session, login, ApiEndPoint::CHECK_PSEUDO, params[:pseudo])
+      response = req.send
+      if response.is_a?(APIError)
+        JSON.generate(result: 'ko')
+      end
+      JSON.generate(result: 'ok')
+    else
+      'Invalid AJAX request'
+    end
+  end
 end
