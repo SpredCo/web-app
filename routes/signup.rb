@@ -1,15 +1,21 @@
 class Spred < Sinatra::Application
-
-  get '/signup-step1' do
+  # Multiple step sign up
+  get '/signup_step1' do
     haml :signup_step1, :layout => :sign_layout
   end
 
-  get '/signup' do
-    @title = 'signup'
-    haml :signup
+  get '/signup_step2' do
+    @title = 'Get pseudo'
+    haml :signup_step2
   end
 
-  post '/signup' do
+  get '/signup_step3' do
+    @title = 'Register subject you like'
+    haml :signup_step3
+  end
+
+  post '/signup_step1' do
+    session[:futur_user] = {url: ApiEndPoint::SIGNUP}
     if params[:password] != params[:confirm_password]
       flash[:error] = 'Password does not match'
       redirect '/signup'
@@ -19,24 +25,14 @@ class Spred < Sinatra::Application
     redirect '/signup_step2'
   end
 
-  get '/signup_step2' do
-    @title = 'Get pseudo'
-    haml :signup_step2
-  end
-
   post '/signup_step2' do
     session[:futur_user].merge!(params[:pseudo])
     redirect '/signup_step3'
   end
 
-  get '/signup_step3' do
-    @title = 'Register subject you like'
-    haml :signup_step3
-  end
-
   post '/signup_step3' do
     user = session[:futur_user]#.merge(params[:interesting_subject_ids])
-    req = PostRequest.new(session, :login, ApiEndPoint::SIGNUP, user)
+    req = PostRequest.new(session, :login, session[:futur_user][:url], user.tap {|u| u.delete(:url)})
     response = req.send
     if response.is_a?(APIError)
       flash[:error] = response.message
@@ -46,19 +42,16 @@ class Spred < Sinatra::Application
     redirect '/'
   end
 
+  # Multiple step social network sign up
   post '/google_signup' do
-    req = PostRequest.new(session, :login, ApiEndPoint::GOOGLE_SIGNUP, {access_token: params[:access_token], pseudo: params[:pseudo]})
-    req.send
-    puts req.response.body
-    keep_user_in_session(req.response.body['access_token'], req.response.body['refresh_token'])
-    haml :main, :locals => {response: req.response.body}
+    session[:futur_user] = {url: ApiEndPoint::GOOGLE_SIGNUP}
+    session[:futur_user][:access_token] = params[:token]
+    redirect '/signup_step2'
   end
 
   post '/facebook_signup' do
-    req = PostRequest.new(session, :login, ApiEndPoint::FACEBOOK_SIGNUP, {access_token: params[:access_token], pseudo: params[:pseudo]})
-    req.send
-    puts req.response.body
-    keep_user_in_session(req.response.body['access_token'], req.response.body['refresh_token'])
-    haml :main, :locals => {response: req.response.body}
+    session[:futur_user] = {url: ApiEndPoint::FACEBOOK_SIGNUP}
+    session[:futur_user][:access_token] = params[:token]
+    redirect '/signup_step2'
   end
 end
