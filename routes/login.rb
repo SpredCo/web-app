@@ -13,7 +13,8 @@ class Spred < Sinatra::Application
       haml :login
     end
     keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
-    haml :profile, :locals => {user: session[:current_user]}
+    @user = session[:current_user]
+    haml :profile
   end
 
   post '/google_login' do
@@ -21,7 +22,7 @@ class Spred < Sinatra::Application
     response = req.send
     set_error_and_redirect if response.is_a?(APIError)
     keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
-    haml :main, :locals => {response: response.body}
+    haml :main
   end
 
   post '/facebook_login' do
@@ -29,7 +30,7 @@ class Spred < Sinatra::Application
     response = req.send
     set_error_and_redirect if response.is_a?(APIError)
     keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
-    haml :main, :locals => {response: response.body}
+    haml :main
   end
 
 

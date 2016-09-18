@@ -7,12 +7,15 @@ class Spred < Sinatra::Application
       @errors[:error] = response.message
       haml :main
     end
-    haml :user_show, :locals => {user: user, response: response.body, following_user: session[:current_user]['following'].include?(user['id'])}
+    @user = response.body[:user]
+    @following_user = session[:current_user]['following'].include?(@user['id'])
+    haml :user_show
   end
 
   get '/user/:id/edit' do
     @title = 'Edit profil'
-    haml :user_edit, :locals => {user: session[:current_user]}
+    @user = session[:current_user]
+    haml :user_edit
   end
 
   post '/user/edit' do
@@ -30,7 +33,8 @@ class Spred < Sinatra::Application
       haml :user_edit
     end
     keep_user_in_session(session[:current_user].fetch(:access_token, nil), session[:current_user].fetch(:refresh_token, nil))
-    haml :profile, :locals => {user: session[:current_user], response: response.body}
+    @user = session[:current_user]
+    haml :profile
   end
 
   post '/user/:id/follow' do

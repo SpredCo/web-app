@@ -30,7 +30,6 @@ class Spred < Sinatra::Application
                              else
                                redirect '/signup-step1'
                            end
-    puts @errors
     if @errors
       haml :signup_step1, layout: :sign_layout
     else
