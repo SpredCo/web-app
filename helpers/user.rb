@@ -15,8 +15,8 @@ module User
 
   def self.check_new_account_validity(email, password, confirm_password)
     response = {}
-    response[:error][:password] = 'Password does not match' unless password == confirm_password
-    response[:error][:email] = 'Email already in use' unless is_email_available?(email)
+    response[:password] = 'Password does not match' unless password == confirm_password
+    response[:email] = 'Email already in use' unless is_email_available?(email)
     response.empty? ? nil : response
   end
 
