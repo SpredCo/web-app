@@ -19,10 +19,9 @@ window.fbAsyncInit = function() {
 function fbLogin() {
     FB.login(function (responses) {
         if (responses.authResponse) {
-            console.log(responses.authResponse);
             $('#signup-type').val('facebook_token');
             $('#token').val(responses.authResponse.accessToken);
-            //$('#token-form').submit();
+            $('#token-form').submit();
         }
     }, {
         'scope': 'email'

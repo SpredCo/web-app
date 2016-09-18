@@ -1,30 +1,30 @@
 %nav.navbar.navbar-default
   %div.container-fluid
     %div.navbar-header
-      %button.navbar-toggle.collapsed{'type' => 'button', 'data-toggle' =>'collapse', 'data-target' => '#nav-collapse', 'aria-expanded' => 'false'}
+      %button.navbar-toggle.collapsed{:type => 'button', 'data-toggle' =>'collapse', 'data-target' => '#nav-collapse', 'aria-expanded' => 'false'}
         %span.sr-only
           Navigation
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand.logo{ 'href' =>'/' }
+      %a.navbar-brand.logo{:href =>'/' }
         Spred
 
     %div#nav-collapse.collapse.navbar-collapse
       %form.navbar-form.navbar-left
         %div.input-group.search-bar
-          %input.form-control{'type' => 'text', 'name' => 'search', 'placeholder' => 'Rechercher'}
+          %input.form-control{:type => 'text', :name => 'search', :placeholder => 'Rechercher'}
           %span.input-group-btn
-            %button.btn.btn-default{'type' => 'submit'}
+            %button.btn.btn-default{:type => 'submit'}
               %span.fa.fa-search.search-btn
       - unless session[:current_user]
         %ul.nav.navbar-nav.navbar-right
           %li
             %p.navbar-btn
-              %a.btn.btn-default.btn-nav{'href' => '/login'} Connexion
+              %a.btn.btn-default.btn-nav{:href => '/login'} Connexion
           %li
             %p.navbar-btn
-              %a.btn.btn-success.btn-nav{'href' => '/signup-step1'} Créer un compte
+              %a.btn.btn-success.btn-nav{:href => '/signup-step1'} Créer un compte
       - else
         %ul.nav.navbar-nav.navbar-right
           %li
