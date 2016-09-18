@@ -21,7 +21,7 @@ class Spred < Sinatra::Application
                              when 'facebook_token'
                                {url: ApiEndPoint::FACEBOOK_SIGNUP, access_token: params[:token]}
                              when 'password'
-                               @errors = User.check_new_account_validity(params[:email], params[:password], params['password-confirmation'])
+                               @errors = User.check_new_account_validity(session, params[:email], params[:password], params['password-confirmation'])
                                unless @errors
                                 session[:futur_user] = {url: ApiEndPoint::SIGNUP}
                                 params.select { |k, _| [:email, :password, :first_name, :last_name].include?(k.to_sym) }
