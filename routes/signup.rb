@@ -24,14 +24,13 @@ class Spred < Sinatra::Application
                           session[:futur_user] = {url: ApiEndPoint::SIGNUP}
                           if params[:password] != params['confirm-password']
                             flash[:error] = 'Password does not match'
-                            redirect '/signup-step1'
+                          else
+                            params.select {|k,_| [:email, :password, :first_name, :last_name].include?(k.to_sym) }
                           end
-                          params.select {|k,_| [:email, :password, :first_name, :last_name].include?(k.to_sym) }
                         else
                           flash[:error] = 'Invalid signup type'
-                          redirect '/signup-step1'
                       end
-    redirect '/signup-step2'
+    redirect '/signup-step2' unless flash[:error]
   end
 
   post '/signup-step2' do
