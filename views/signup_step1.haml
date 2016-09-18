@@ -25,28 +25,33 @@
             %i.fa.fa-envelope-o{:aria => {:hidden => 'true'}}
             %span Inscription avec adresse email
           %div#email-signin.row.signup-form.collapse{:class => ('in' if @signup)}
+            - if @errors
+              %div.alert.alert-danger
+                %ul
+                  - @errors.each_value do |error|
+                    %li=error
             %form{:method => 'post', :name => 'signup-step1'}
-              %div.form-group{:class => ('has-feedback' if @errors && @errors[:email])}
+              %div.form-group{:class => ('has-feedback has-error' if @errors && @errors[:email])}
                 %label.control-label{:for => 'email'} Email
-                %input.form-control{:name => 'email', :type => 'email'}
-                - if @errors && @errors['email']
+                %input.form-control{:name => 'email', :type => 'email', :value => (@signup[:email] if @signup && @signup[:email])}
+                - if @errors && @errors[:email]
                   %span.glyphicon.glyphicon-remove.form-control-feedback
-              %div.form-group{:class => ('has-feedback' if @errors && @errors[:password])}
-                %label{:for => 'password'} Mot de passe
+              %div.form-group{:class => ('has-feedback has-error' if @errors && @errors[:password])}
+                %label.control-label{:for => 'password'} Mot de passe
                 %input#password.form-control{:name => 'password', :type => 'password'}
-                - if @errors && @errors['password']
+                - if @errors && @errors[:password]
                   %span.glyphicon.glyphicon-remove.form-control-feedback
-              %div.form-group{:class => ('has-feedback' if @errors && @errors[:password])}
-                %label{:for => 'confirm-password'} Confirmer le mot de passe
+              %div.form-group{:class => ('has-feedback has-error' if @errors && @errors[:password])}
+                %label.control-label{:for => 'confirm-password'} Confirmer le mot de passe
                 %input#confirm-password.form-control{:name => 'confirm-password', :type => 'password'}
-                - if @errors && @errors['password']
+                - if @errors && @errors[:password]
                   %span.glyphicon.glyphicon-remove.form-control-feedback
               %div.form-group
                 %label{:for => 'first-name'} Prénom
-                %input#first_name.form-control{:name => 'first-name', :type => 'text'}
+                %input#first_name.form-control{:name => 'first-name', :type => 'text', :value => (@signup['first-name'] if @signup && @signup['first-name'])}
               %div.form-group
                 %label{:for => 'last-name'} Nom
-                %input#last-name.form-control{:name => 'last-name', :type => 'text'}
+                %input#last-name.form-control{:name => 'last-name', :type => 'text', :value => (@signup['last-name'] if @signup && @signup['last-name'])}
               %div.form-group.btn-signup
                 %input{:type => 'hidden', :name => 'signup-type', :value => 'password'}
                 %input.form-control.btn.btn-success{:type => 'submit', :value => 'Passer à l\'étape suivante'}
@@ -63,3 +68,6 @@
           %button#googleLogin.btn.signup-btn.signup-google
             %i.fa.fa-google-plus{:aria => {:hidden => 'true'}}
             %span Inscription avec Google
+          %form#token-form{:method => 'post', :name => 'signup-step1'}
+            %input#signup-type{:type => 'hidden', :name => 'signup-type'}
+            %input#token{:type => 'hidden', :name => 'access_token'}

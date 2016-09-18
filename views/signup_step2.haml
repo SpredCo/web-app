@@ -1,0 +1,39 @@
+%div.container.wrapper
+  %div.signup-bloc
+    %div.row.signup-title
+      %span Inscription
+    %div.row
+      %div.col-xs-4.center-text
+        %span.badge.active 1
+        %br
+        %span.text-signup-info.active Informations personnelles
+        %div.line-signup.active
+      %div.col-xs-4.center-text
+        %span.badge.active 2
+        %br
+        %span.text-signup-info.active Choix du pseudo
+        %div.line-signup.active
+      %div.col-xs-4.center-text
+        %span.badge 3
+        %br
+        %span.text-signup-info Centre d'intéret
+        %div.line-signup
+    %div.row
+      %div.col-sm-8.col-sm-offset-2
+        %div.alert.alert-success.info-pseudo
+          Le choix de votre pseudo est une étape importante dans la création de votre compte.
+          %br
+          C'est à travers de celui-ci que vous serez reconnu sur Spred
+        - if @errors
+          %div.alert.alert-danger
+            Ce pseudo est déja utilisé, veuillez en choisir un nouveau
+        %form{:method => 'post', :name => 'signp-step2'}
+          %div.form-group{:class => ('has-feedback has-error' if @errors && @errors[:pseudo])}
+            %label.control-label{:for => 'pseudo'} Pseudo
+            %div.input-group
+              %span#pseudo-id.input-group-addon @
+              %input#pseudo.form-control{:type => 'text', :aria  => {:describedby => 'pseudo-id', :value => @pseudo}}
+              - if @errors && @errors[:pseudo]
+                %span.glyphicon.glyphicon-remove.form-control-feedback
+          %div.form-group.btn-signup
+            %input.form-control.btn.btn-success{:type => 'submit', :name => 'validate', :value => 'Valider mon pseudo'}

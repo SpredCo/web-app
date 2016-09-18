@@ -7,7 +7,7 @@ class Spred < Sinatra::Application
   get '/signup-step2' do
     @title = 'Get pseudo'
     redirect '/signup-step1' unless session[:futur_user]
-    haml :signup_step2
+    haml :signup_step2, layout: :sign_layout
   end
 
   get '/signup-step3' do
