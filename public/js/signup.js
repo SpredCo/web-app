@@ -1,5 +1,3 @@
-var test;
-
 // Load the SDK asynchronously
 (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -21,13 +19,10 @@ window.fbAsyncInit = function() {
 function fbLogin() {
     FB.login(function (responses) {
         if (responses.authResponse) {
-            $.post('/signup-step1', {
-                'signup-type': 'facebook_token',
-                'access_token': responses.authResponse.access_token
-            }, function (resp) {
-                var result = JSON.parse(resp);
-                console.log(result);
-            });
+            console.log(responses.authResponse);
+            $('#signup-type').val('facebook_token');
+            $('#token').val(responses.authResponse.accessToken);
+            $('#token-form').submit();
         }
     }, {
         'scope': 'email'
@@ -37,8 +32,10 @@ function fbLogin() {
 function attachSignin(element) {
     auth2.attachClickHandler(element, {},
         function(googleUser) {
-            test = googleUser;
             console.log(googleUser.getAuthResponse().access_token);
+            $('#signup-type').val('google_token');
+            $('#token').val(googleUser.getAuthResponse().access_token);
+            $('#token-form').submit();
         }, function(error) {
         });
 }
