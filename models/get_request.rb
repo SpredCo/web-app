@@ -1,12 +1,11 @@
 class GetRequest < Request
-  def initialize(session, request_type, endpoint, params = nil)
-    super(session, request_type, endpoint, params)
+  def initialize(session, request_type, endpoint)
+    super(session, request_type, endpoint, nil)
     begin
       initialize_request(request_type)
     rescue => e
       raise e
     end
-    @request.body = params.to_json if params
   end
 
   private

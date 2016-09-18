@@ -1,7 +1,7 @@
 class Spred < Sinatra::Application
   # Multiple step sign up
   get '/signup-step1' do
-    haml :signup_step1, :layout => :sign_layout
+    haml :signup_step1, layout: :sign_layout
   end
 
   get '/signup-step2' do
@@ -15,14 +15,14 @@ class Spred < Sinatra::Application
   end
 
   post '/signup-step1' do
+    @signup = params
     session[:futur_user] = case params['signup-type']
                              when 'google_token'
                                {url: ApiEndPoint::GOOGLE_SIGNUP, access_token: params[:token]}
                              when 'facebook_token'
                                {url: ApiEndPoint::FACEBOOK_SIGNUP, access_token: params[:token]}
                              when 'password'
-                               @errors = User.check_new_account_validity(session, params[:email], params[:password], params['password-confirmation'])
-                               puts @errors
+                               @errors = User.check_new_account_validity(session, params[:email], params[:password], params['confirm-password'])
                                unless @errors
                                 session[:futur_user] = {url: ApiEndPoint::SIGNUP}
                                 params.select { |k, _| [:email, :password, :first_name, :last_name].include?(k.to_sym) }
@@ -30,8 +30,12 @@ class Spred < Sinatra::Application
                              else
                                redirect '/signup-step1'
                            end
-    @errors
-    redirect '/signup-step2' unless @errors
+    puts @errors
+    if @errors
+      haml :signup_step1, layout: :sign_layout
+    else
+      redirect '/signup-step2'
+    end
   end
 
   post '/signup-step2' do

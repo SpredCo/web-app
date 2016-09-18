@@ -52,7 +52,7 @@ class Request
   end
 
   def refresh_token
-    req = PostRequest.new(session, :login, ApiEndPoint::LOGIN, {'grant_type' => 'password', 'refresh_token' => session[:current_user]['refresh_token']})
+    req = PostRequest.new(@session, :login, ApiEndPoint::LOGIN, {'grant_type' => 'password', 'refresh_token' => session[:current_user]['refresh_token']})
     response = req.send
     if response.is_a?(APIError)
       flash[:error] = APIError::INVALID_REFRESH_TOKEN
