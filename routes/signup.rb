@@ -6,6 +6,7 @@ class Spred < Sinatra::Application
 
   get '/signup-step2' do
     @title = 'Get pseudo'
+    redirect '/signup-step1' unless session[:futur_user]
     haml :signup_step2, layout: :sign_layout
   end
 
@@ -45,7 +46,7 @@ class Spred < Sinatra::Application
     req = PostRequest.new(session, :login, url, user)
     response = req.send
     if response.is_a?(APIError)
-      @errors[:pseudo] = response.message
+      @errors = {pseudo: response.message}
       haml :signup_step2
     end
     redirect '/signup-step3'
