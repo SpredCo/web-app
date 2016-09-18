@@ -11,30 +11,55 @@
       %div.col-xs-4.center-text
         %span.badge 2
         %br
-        %span.text-signup-info Selection du pseudo
+        %span.text-signup-info Choix du pseudo
         %div.line-signup
       %div.col-xs-4.center-text
         %span.badge 3
         %br
         %span.text-signup-info Centre d'intéret
         %div.line-signup
-    %div.row.signup-form
+    %div.row
       %div.col-sm-8.col-sm-offset-2
-        %form{'action' => 'post', 'name' => 'signup-step1'}
-          %div.form-group
-            %label{'for' => 'email'} Email
-            %input#email.form-control{'name' => 'email', 'type' => 'email'}
-          %div.form-group
-            %label{'for' => 'password'} Mot de passe
-            %input#password.form-control{'name' => 'password', 'type' => 'password'}
-          %div.form-group
-            %label{'for' => 'confirm-password'} Confirmer le mot de passe
-            %input#confirm-password.form-control{'name' => 'confirm-password', 'type' => 'password'}
-          %div.form-group
-            %label{'for' => 'first_name'} Prénom
-            %input#first_name.form-control{'name' => 'first_name', 'type' => 'text'}
-          %div.form-group
-            %label{'for' => 'last_name'} Nom
-            %input#last_name.form-control{'name' => 'last_name', 'type' => 'text'}
-          %div.form-group.btn-signup
-            %input.form-control.btn.btn-success{'type' => 'submit', 'value' => 'Passer à l\'étape suivante'}
+        %div.btn-space
+          %button.btn.signup-btn.signup-email{:data => { :toggle => 'collapse', :target => '#email-signin'}}
+            %i.fa.fa-envelope-o{:aria => {:hidden => 'true'}}
+            %span Inscription avec adresse email
+          %div#email-signin.row.signup-form.collapse{:class => ('in' if @signup)}
+            %form{:method => 'post', :name => 'signup-step1'}
+              %div.form-group{:class => ('has-feedback' if @errors && @errors['email'])}
+                %label.control-label{:for => 'email'} Email
+                %input.form-control{:name => 'email', :type => 'email'}
+                - if @errors && @errors['email']
+                  %span.glyphicon.glyphicon-remove.form-control-feedback
+              %div.form-group{:class => ('has-feedback' if @errors && @errors['password'])}
+                %label{:for => 'password'} Mot de passe
+                %input#password.form-control{:name => 'password', :type => 'password'}
+                - if @errors && @errors['password']
+                  %span.glyphicon.glyphicon-remove.form-control-feedback
+              %div.form-group{:class => ('has-feedback' if @errors && @errors['password'])}
+                %label{:for => 'confirm-password'} Confirmer le mot de passe
+                %input#confirm-password.form-control{:name => 'confirm-password', :type => 'password'}
+                - if @errors && @errors['password']
+                  %span.glyphicon.glyphicon-remove.form-control-feedback
+              %div.form-group
+                %label{:for => 'first-name'} Prénom
+                %input#first_name.form-control{:name => 'first-name', :type => 'text'}
+              %div.form-group
+                %label{:for => 'last-name'} Nom
+                %input#last-name.form-control{:name => 'last-name', :type => 'text'}
+              %div.form-group.btn-signup
+                %input{:type => 'hidden', :name => 'signup-type', :value => 'password'}
+                %input.form-control.btn.btn-success{:type => 'submit', :value => 'Passer à l\'étape suivante'}
+          %div.row
+            %div.col-xs-5
+              %hr.signup-hr
+            %div.col-xs-2.or
+              %span OU
+            %div.col-xs-5
+              %hr.signup-hr
+          %button.btn.signup-btn.signup-facebook{:onclick => 'fbLogin()'}
+            %i.fa.fa-facebook{:aria => {:hidden => 'true'}}
+            %span Inscription avec Facebook
+          %button#googleLogin.btn.signup-btn.signup-google
+            %i.fa.fa-google-plus{:aria => {:hidden => 'true'}}
+            %span Inscription avec Google

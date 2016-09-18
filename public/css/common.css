@@ -27,19 +27,16 @@
     background-color: #fff;
     height: 100%;
 }
-
 .spredcast-grp h3 {
     font-size: 20px;
     padding-left: 10px;
 }
-
 .wrapper {
-    padding-top: 40px;
+    padding-top: 35px;
 }
 .signup-bloc {
     margin: auto;
     width: 650px;
-    height: 500px;
 }
 .signup-title {
     text-align: center;
@@ -73,11 +70,89 @@
 .line-signup.active {
     background-color: #55AA55;
 }
+.btn-space {
+    margin-top: 50px;
+}
+.signup-btn {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.signup-btn i {
+    margin-right: 20px;
+}
+
+.signup-email {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+.signup-email:hover {
+    color: #fff;
+}
+.signup-email:active {
+    color: #fff;
+}
+.signup-email:visited {
+    color: #fff;
+}
+.signup-email:focus {
+    color: #fff;
+}
+
+.signup-facebook {
+    color: #fff;
+    background-color: #4267b2;
+}
+.signup-facebook:hover {
+    color: #fff;
+}
+.signup-facebook:active {
+    color: #fff;
+}
+.signup-facebook:visited {
+    color: #fff;
+}
+.signup-facebook:focus {
+    color: #fff;
+}
+
+.signup-google {
+    color: #fff;
+    background-color: #c53929;
+}
+.signup-google:hover {
+    color: #fff;
+}
+.signup-google:active {
+    color: #fff;
+}
+.signup-google:visited {
+    color: #fff;
+}
+.signup-google:focus {
+    color: #fff;
+}
+
+
 .signup-form {
-    margin-top: 60px;
+    margin-top: 10px;
 }
 .btn-signup {
-    margin-top: 55px;
+    margin-top: 40px;
+}
+.signup-hr {
+    border-top-color: #777;
+}
+.or {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 10px;
+    margin-bottom: 25px;
+}
+.hidden-feedback {
+    display: none;
 }
 @media (max-width: 1200px) {
     .navbar-default .navbar-brand.logo {

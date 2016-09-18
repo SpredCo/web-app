@@ -15,13 +15,14 @@ class Spred < Sinatra::Application
   end
 
   post '/signup-step1' do
-    session[:futur_user] = case params[:signup_type]
+    session[:futur_user] = case params['signup-type']
                              when 'google_token'
                                {url: ApiEndPoint::GOOGLE_SIGNUP, access_token: params[:token]}
                              when 'facebook_token'
                                {url: ApiEndPoint::FACEBOOK_SIGNUP, access_token: params[:token]}
                              when 'password'
                                @errors = User.check_new_account_validity(session, params[:email], params[:password], params['password-confirmation'])
+                               puts @errors
                                unless @errors
                                 session[:futur_user] = {url: ApiEndPoint::SIGNUP}
                                 params.select { |k, _| [:email, :password, :first_name, :last_name].include?(k.to_sym) }
