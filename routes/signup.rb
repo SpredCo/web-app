@@ -51,7 +51,7 @@ class Spred < Sinatra::Application
       @errors = {pseudo: response.message}
       haml :signup_step2
     end
-    keep_user_in_session(response[:access_token], response[:refresh_token])
+    keep_user_in_session(response.body[:access_token], response.body[:refresh_token])
     redirect '/signup-step3'
   end
 
