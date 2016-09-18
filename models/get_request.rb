@@ -6,7 +6,9 @@ class GetRequest < Request
     rescue => e
       raise e
     end
-    @request.body = params.to_json if params
+    if params
+      params.each_key { |k| @uri = @uri + "/#{params[k]}"}
+    end
   end
 
   private
