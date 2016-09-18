@@ -20,13 +20,15 @@ class Spred < Sinatra::Application
     @signup = params
     session[:futur_user] = case params['signup-type']
                              when 'google_token'
-                               {url: ApiEndPoint::GOOGLE_SIGNUP, access_token: params[:access_token]}
+                               {url: ApiEndPoint::GOOGLE_SIGNUP, access_token: params[:access_token], signup_type: params['signup-type']}
                              when 'facebook_token'
-                               {url: ApiEndPoint::FACEBOOK_SIGNUP, access_token: params[:access_token]}
+                               {url: ApiEndPoint::FACEBOOK_SIGNUP, access_token: params[:access_token], signup_type: params['signup-type']}
                              when 'password'
                                @errors = User.check_new_account_validity(session, params[:email], params[:password], params['confirm-password'])
                                unless @errors
-                                {url: ApiEndPoint::SIGNUP, email: params[:email], password: params[:password], first_name: params['first-name'], last_name: params['last-name']}
+                                {url: ApiEndPoint::SIGNUP, email: params[:email], password: params[:password],
+                                first_name: params['first-name'], last_name: params['last-name'],
+                                signup_type: params['signup-type']}
                                end
                              else
                                redirect '/signup-step1'
@@ -40,18 +42,19 @@ class Spred < Sinatra::Application
   end
 
   post '/signup-step2' do
-    url = session[:futur_user][:url]
-    session[:futur_user].delete(:url)
+    url = session[:futur_user].delete(:url)
+    signup_type = session[:futur_user].delete(:signup_type)
     user = session[:futur_user]
     user[:pseudo] = @pseudo = params[:pseudo]
-    puts session[:futur_user], user
     req = PostRequest.new(session, :login, url, user)
     response = req.send
     if response.is_a?(APIError)
       @errors = {pseudo: response.message}
       haml :signup_step2
     end
-    keep_user_in_session(response.body[:access_token], response.body[:refresh_token])
+    puts "TOTITOTOUTYIUTIUTOIUTIOUTUIOTIUOTTTO"
+    response = User.login(session, signup_type, user)
+    keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
     redirect '/signup-step3'
   end
 

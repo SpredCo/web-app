@@ -31,4 +31,20 @@ module User
     response = req.send
     !response.is_a?(APIError)
   end
+
+  def self.login(session, login_type, user)
+    puts login_type
+    case login_type
+      when 'google_token'
+        req = PostRequest.new(session, :login, ApiEndPoint::GOOGLE_LOGIN, {access_token: user[:access_token]})
+        req.send
+      when 'facebook_token'
+        req = PostRequest.new(session, :login, ApiEndPoint::FACEBOOK_LOGIN, {access_token: user[:access_token]})
+        req.send
+      when 'password'
+        verified_params = {'grant_type' => 'password'}.merge!(user.select {|k,_| [:username, :password].include?(k.to_sym) })
+        req = PostRequest.new(session, :login, ApiEndPoint::LOGIN, verified_params)
+        req.send
+    end
+  end
 end

@@ -5,9 +5,7 @@ class Spred < Sinatra::Application
   end
 
   post '/login' do
-    verified_params = {'grant_type' => 'password'}.merge!(params.select {|k,_| [:username, :password].include?(k.to_sym) })
-    req = PostRequest.new(session, :login, ApiEndPoint::LOGIN, verified_params)
-    response = req.send
+    response = User.login(session, 'password', params)
     unless response
       @errors = {default: APIError::INVALID_LOGIN}
       haml :login
@@ -18,16 +16,14 @@ class Spred < Sinatra::Application
   end
 
   post '/google_login' do
-    req = PostRequest.new(session, :login, ApiEndPoint::GOOGLE_LOGIN, {access_token: params[:access_token]})
-    response = req.send
+    response = User.login(session, 'google_token', params)
     set_error_and_redirect if response.is_a?(APIError)
     keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
     haml :main
   end
 
   post '/facebook_login' do
-    req = PostRequest.new(session, :login, ApiEndPoint::FACEBOOK_LOGIN, {access_token: params[:access_token]})
-    response = req.send
+    response = User.login(session, 'facebook_token', params)
     set_error_and_redirect if response.is_a?(APIError)
     keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
     haml :main
@@ -47,7 +43,7 @@ class Spred < Sinatra::Application
   end
 
   def keep_user_in_session(access_token, refresh_token)
-    session[:current_user] ||= {}
+    session[:current_user] = {}
     session[:current_user].merge!({access_token: access_token, refresh_token: refresh_token})
     req = GetRequest.new(session, :api, ApiEndPoint::USER + '/me')
     req.send
