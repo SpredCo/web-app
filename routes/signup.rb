@@ -16,21 +16,21 @@ class Spred < Sinatra::Application
 
   post '/signup-step1' do
     session[:futur_user] = case params[:signup_type]
-                        when 'google_token'
-                          {url: ApiEndPoint::GOOGLE_SIGNUP, access_token: params[:token]}
-                        when 'facebook_token'
-                          {url: ApiEndPoint::FACEBOOK_SIGNUP, access_token: params[:token]}
-                        when 'password'
-                          session[:futur_user] = {url: ApiEndPoint::SIGNUP}
-                          if params[:password] != params['confirm-password']
-                            flash[:error] = 'Password does not match'
-                          else
-                            params.select {|k,_| [:email, :password, :first_name, :last_name].include?(k.to_sym) }
-                          end
-                        else
-                          flash[:error] = 'Invalid signup type'
-                      end
-    redirect '/signup-step2' unless flash[:error]
+                             when 'google_token'
+                               {url: ApiEndPoint::GOOGLE_SIGNUP, access_token: params[:token]}
+                             when 'facebook_token'
+                               {url: ApiEndPoint::FACEBOOK_SIGNUP, access_token: params[:token]}
+                             when 'password'
+                               @errors = User.check_new_account_validity(params[:email], params[:password], params['password-confirmation'])
+                               unless @errors
+                                session[:futur_user] = {url: ApiEndPoint::SIGNUP}
+                                params.select { |k, _| [:email, :password, :first_name, :last_name].include?(k.to_sym) }
+                               end
+                             else
+                               redirect '/signup-step1'
+                           end
+    @errors
+    redirect '/signup-step2' unless @errors
   end
 
   post '/signup-step2' do
@@ -39,8 +39,8 @@ class Spred < Sinatra::Application
   end
 
   post '/signup-step3' do
-    user = session[:futur_user]#.merge(params[:interesting_subject_ids])
-    req = PostRequest.new(session, :login, session[:futur_user][:url], user.tap {|u| u.delete(:url)})
+    user = session[:futur_user] #.merge(params[:interesting_subject_ids])
+    req = PostRequest.new(session, :login, session[:futur_user][:url], user.tap { |u| u.delete(:url) })
     response = req.send
     if response.is_a?(APIError)
       flash[:error] = response.message

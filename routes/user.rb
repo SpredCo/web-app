@@ -52,9 +52,7 @@ class Spred < Sinatra::Application
   end
 
   get '/user/pseudo/check/:pseudo' do
-    req = GetRequest.new(session, :login, ApiEndPoint::CHECK_PSEUDO, params[:pseudo])
-    response = req.send
-    if response.is_a?(APIError)
+    if User.is_pseudo_available?(params[:pseudo])
       JSON.generate(result: 'ko')
     else
       JSON.generate(result: 'ok')
@@ -62,9 +60,7 @@ class Spred < Sinatra::Application
   end
 
   get '/user/email/check/:email' do
-    req = GetRequest.new(session, :login, ApiEndPoint::CHECK_EMAIL, params[:email])
-    response = req.send
-    if response.is_a?(APIError)
+    if User.is_email_available?(params[:email])
       JSON.generate(result: 'ko')
     else
       JSON.generate(result: 'ok')
