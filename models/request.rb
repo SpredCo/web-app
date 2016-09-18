@@ -47,7 +47,6 @@ class Request
       return nil unless @response.body['code']
       return (APIError.new(@response.code, @response.body['code'], @response.body['sub_code'] || nil))
     end
-    puts "reponse: #{@response.body}"
     @response
   end
 

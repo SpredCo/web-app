@@ -16,7 +16,6 @@ class Spred < Sinatra::Application
   end
 
   post '/signup-step1' do
-    puts params
     @signup = params
     session[:futur_user] = case params['signup-type']
                              when 'google_token'
@@ -33,7 +32,6 @@ class Spred < Sinatra::Application
                              else
                                redirect '/signup-step1'
                            end
-    puts session[:futur_user]
     if @errors
       haml :signup_step1, layout: :sign_layout
     else
@@ -52,7 +50,6 @@ class Spred < Sinatra::Application
       @errors = {pseudo: response.message}
       haml :signup_step2
     end
-    puts "TOTITOTOUTYIUTIUTOIUTIOUTUIOTIUOTTTO"
     response = User.login(session, signup_type, user)
     keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
     redirect '/signup-step3'

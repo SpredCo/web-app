@@ -33,7 +33,6 @@ module User
   end
 
   def self.login(session, login_type, user)
-    puts login_type
     case login_type
       when 'google_token'
         req = PostRequest.new(session, :login, ApiEndPoint::GOOGLE_LOGIN, {access_token: user[:access_token]})
