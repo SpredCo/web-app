@@ -22,7 +22,7 @@ function fbLogin() {
             console.log(responses.authResponse);
             $('#signup-type').val('facebook_token');
             $('#token').val(responses.authResponse.accessToken);
-            $('#token-form').submit();
+            //$('#token-form').submit();
         }
     }, {
         'scope': 'email'
@@ -32,9 +32,8 @@ function fbLogin() {
 function attachSignin(element) {
     auth2.attachClickHandler(element, {},
         function(googleUser) {
-            console.log(googleUser.getAuthResponse().access_token);
             $('#signup-type').val('google_token');
-            $('#token').val(googleUser.getAuthResponse().access_token);
+            $('#token').val(googleUser.Zi.access_token);
             $('#token-form').submit();
         }, function(error) {
         });
