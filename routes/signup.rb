@@ -38,18 +38,20 @@ class Spred < Sinatra::Application
   end
 
   post '/signup-step2' do
-    session[:futur_user].merge!(params[:pseudo])
+    url = session[:futur_user][:url]
+    session[:futur_user].delete(:url)
+    user = session[:futur_user]
+    user[:pseudo] = @pseudo = params[:pseudo]
+    req = PostRequest.new(session, :login, url, user)
+    response = req.send
+    if response.is_a?(APIError)
+      @errors[:pseudo] = response.message
+      haml :signup_step2
+    end
     redirect '/signup-step3'
   end
 
   post '/signup-step3' do
-    user = session[:futur_user] #.merge(params[:interesting_subject_ids])
-    req = PostRequest.new(session, :login, session[:futur_user][:url], user.tap { |u| u.delete(:url) })
-    response = req.send
-    if response.is_a?(APIError)
-      @errors[:error] = response.message
-      haml :signup_step3
-    end
     redirect '/'
   end
 end
