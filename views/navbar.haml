@@ -25,3 +25,7 @@
           %li
             %p.navbar-btn
               %a.btn.btn-success.btn-nav{'href' => '/signup-step1'} Créer un compte
+      - else
+        %ul.nav.navbar-nav.navbar-right
+          %li
+            %img{:src => session[:current_user][:picture_url]}

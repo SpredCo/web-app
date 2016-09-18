@@ -12,7 +12,7 @@ class Spred < Sinatra::Application
 
   get '/signup-step3' do
     @title = 'Register subject you like'
-    haml :signup_step3
+    haml :signup_step3, layout: :sign_layout
   end
 
   post '/signup-step1' do
