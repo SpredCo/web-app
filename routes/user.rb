@@ -52,7 +52,7 @@ class Spred < Sinatra::Application
   end
 
   get '/user/pseudo/check/:pseudo' do
-    if User.is_pseudo_available?(params[:pseudo])
+    if User.is_pseudo_available?(session, params[:pseudo])
       JSON.generate(result: 'ko')
     else
       JSON.generate(result: 'ok')
@@ -60,7 +60,7 @@ class Spred < Sinatra::Application
   end
 
   get '/user/email/check/:email' do
-    if User.is_email_available?(params[:email])
+    if User.is_email_available?(session, params[:email])
       JSON.generate(result: 'ko')
     else
       JSON.generate(result: 'ok')
@@ -68,7 +68,7 @@ class Spred < Sinatra::Application
   end
 
   get '/user/search/:partial_email' do
-    req = GetRequest.new(session, :api, ApiEndPoint::SEARCH_BY_EMAIL, params[:partial_email])
+    req = GetRequest.new(session, :api, ApiEndPoint::SEARCH_BY_EMAIL + "/#{params[:email]}")
     req.send
   end
 end

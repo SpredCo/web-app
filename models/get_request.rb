@@ -1,13 +1,10 @@
 class GetRequest < Request
-  def initialize(session, request_type, endpoint, params = nil)
-    super(session, request_type, endpoint, params)
+  def initialize(session, request_type, endpoint)
+    super(session, request_type, endpoint, nil)
     begin
       initialize_request(request_type)
     rescue => e
       raise e
-    end
-    if params
-      params.each_key { |k| @uri = @uri + "/#{params[k]}"}
     end
   end
 

@@ -15,19 +15,19 @@ module User
 
   def self.check_new_account_validity(session, email, password, confirm_password)
     response = {}
-    response[:password] = 'Password does not match' unless password == confirm_password
+    response[:password] = 'Password does not match' if password != confirm_password
     response[:email] = 'Email already in use' unless is_email_available?(session, email)
     response.empty? ? nil : response
   end
 
   def self.is_email_available?(session, email)
-    req = GetRequest.new(session, :login, ApiEndPoint::CHECK_EMAIL, email)
+    req = GetRequest.new(session, :login, ApiEndPoint::CHECK_EMAIL + "/#{email}")
     response = req.send
     !response.is_a?(APIError)
   end
 
   def self.is_pseudo_available?(session, pseudo)
-    req = GetRequest.new(session, :login, ApiEndPoint::CHECK_PSEUDO, pseudo)
+    req = GetRequest.new(session, :login, ApiEndPoint::CHECK_PSEUDO + "/#{pseudo}")
     response = req.send
     !response.is_a?(APIError)
   end
