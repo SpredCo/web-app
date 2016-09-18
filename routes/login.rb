@@ -9,7 +9,7 @@ class Spred < Sinatra::Application
     req = PostRequest.new(session, :login, ApiEndPoint::LOGIN, verified_params)
     response = req.send
     unless response
-      @errors[:default] = APIError::INVALID_LOGIN
+      @errors = {default: APIError::INVALID_LOGIN}
       haml :login
     end
     keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
@@ -42,7 +42,7 @@ class Spred < Sinatra::Application
   end
 
   def set_error_and_redirect
-    @errors[:default] = response.message
+    @errors = {default: response.message}
     haml :login
   end
 

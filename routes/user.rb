@@ -4,7 +4,7 @@ class Spred < Sinatra::Application
     req = GetRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}")
     response = req.response
     if response.is_a?(APIError)
-      @errors[:error] = response.message
+      @errors = {default: response.message}
       haml :main
     end
     @user = response.body[:user]
@@ -29,7 +29,7 @@ class Spred < Sinatra::Application
     req = PatchRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}",  verified_params)
     response = req.send
     if response.is_a?(APIError)
-      @errors[:error] = response.message
+      @errors = {default: response.message}
       haml :user_edit
     end
     keep_user_in_session(session[:current_user].fetch(:access_token, nil), session[:current_user].fetch(:refresh_token, nil))
@@ -41,7 +41,7 @@ class Spred < Sinatra::Application
     req = PostRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}/follow")
     response = req.send
     if response.is_a?(APIError)
-      @errors[:default] = response.message
+      @errors = {default: response.message}
       haml :user_show
     end
   end
@@ -50,7 +50,7 @@ class Spred < Sinatra::Application
     req = PostRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}/unfollow")
     response = req.send
     if response.is_a?(APIError)
-      @errors[:default] = response.message
+      @errors = {default: response.message}
       haml :user_show
     end
   end
