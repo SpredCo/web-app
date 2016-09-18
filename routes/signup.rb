@@ -22,7 +22,7 @@ class Spred < Sinatra::Application
                           {url: ApiEndPoint::FACEBOOK_SIGNUP, access_token: params[:token]}
                         when 'password'
                           session[:futur_user] = {url: ApiEndPoint::SIGNUP}
-                          if params[:password] != params[:confirm_password]
+                          if params[:password] != params['confirm-password']
                             flash[:error] = 'Password does not match'
                             redirect '/signup-step1'
                           end
