@@ -4,15 +4,18 @@ class Spred < Sinatra::Application
     req = GetRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}")
     response = req.response
     if response.is_a?(APIError)
-      flash[:error] = response.message
-      redirect '/'
+      @errors[:error] = response.message
+      haml :main
     end
-    haml :user_show, :locals => {user: user, response: response.body, following_user: session[:current_user]['following'].include?(user['id'])}
+    @user = response.body[:user]
+    @following_user = session[:current_user]['following'].include?(@user['id'])
+    haml :user_show
   end
 
   get '/user/:id/edit' do
     @title = 'Edit profil'
-    haml :user_edit, :locals => {user: session[:current_user]}
+    @user = session[:current_user]
+    haml :user_edit
   end
 
   post '/user/edit' do
@@ -26,19 +29,20 @@ class Spred < Sinatra::Application
     req = PatchRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}",  verified_params)
     response = req.send
     if response.is_a?(APIError)
-      flash[:error] = response.message
-      redirect '/'
+      @errors[:error] = response.message
+      haml :user_edit
     end
     keep_user_in_session(session[:current_user].fetch(:access_token, nil), session[:current_user].fetch(:refresh_token, nil))
-    haml :profile, :locals => {user: session[:current_user], response: response.body}
+    @user = session[:current_user]
+    haml :profile
   end
 
   post '/user/:id/follow' do
     req = PostRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}/follow")
     response = req.send
     if response.is_a?(APIError)
-      flash[:error] = response.message
-      redirect "/user/#{params[:id]}/show"
+      @errors[:default] = response.message
+      haml :user_show
     end
   end
 
@@ -46,8 +50,8 @@ class Spred < Sinatra::Application
     req = PostRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}/unfollow")
     response = req.send
     if response.is_a?(APIError)
-      flash[:error] = response.message
-      redirect "/user/#{params[:id]}/show"
+      @errors[:default] = response.message
+      haml :user_show
     end
   end
 

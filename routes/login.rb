@@ -9,12 +9,12 @@ class Spred < Sinatra::Application
     req = PostRequest.new(session, :login, ApiEndPoint::LOGIN, verified_params)
     response = req.send
     unless response
-      flash[:error] = APIError::INVALID_LOGIN
-      redirect '/login'
+      @errors[:default] = APIError::INVALID_LOGIN
+      haml :login
     end
-    flash[:success] = 'Successfully logged in'
     keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
-    haml :profile, :locals => {user: session[:current_user]}
+    @user = session[:current_user]
+    haml :profile
   end
 
   post '/google_login' do
@@ -22,7 +22,7 @@ class Spred < Sinatra::Application
     response = req.send
     set_error_and_redirect if response.is_a?(APIError)
     keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
-    haml :main, :locals => {response: response.body}
+    haml :main
   end
 
   post '/facebook_login' do
@@ -30,7 +30,7 @@ class Spred < Sinatra::Application
     response = req.send
     set_error_and_redirect if response.is_a?(APIError)
     keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
-    haml :main, :locals => {response: response.body}
+    haml :main
   end
 
 
@@ -41,11 +41,9 @@ class Spred < Sinatra::Application
     redirect '/'
   end
 
-  private
-
   def set_error_and_redirect
-    flash[:error] = response.message
-    redirect '/login'
+    @errors[:default] = response.message
+    haml :login
   end
 
   def keep_user_in_session(access_token, refresh_token)
