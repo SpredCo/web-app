@@ -48,10 +48,9 @@ class Spred < Sinatra::Application
     req = PostRequest.new(session, :login, session[:futur_user][:url], user.tap { |u| u.delete(:url) })
     response = req.send
     if response.is_a?(APIError)
-      flash[:error] = response.message
-      redirect '/signup'
+      @errors[:error] = response.message
+      haml :signup_step3
     end
-    flash[:success] = 'Successfully signed up'
     redirect '/'
   end
 end
