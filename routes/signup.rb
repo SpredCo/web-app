@@ -19,14 +19,13 @@ class Spred < Sinatra::Application
     @signup = params
     session[:futur_user] = case params['signup-type']
                              when 'google_token'
-                               {url: ApiEndPoint::GOOGLE_SIGNUP, access_token: params[:token]}
+                               {url: ApiEndPoint::GOOGLE_SIGNUP, access_token: params[:access_token]}
                              when 'facebook_token'
-                               {url: ApiEndPoint::FACEBOOK_SIGNUP, access_token: params[:token]}
+                               {url: ApiEndPoint::FACEBOOK_SIGNUP, access_token: params[:access_token]}
                              when 'password'
                                @errors = User.check_new_account_validity(session, params[:email], params[:password], params['confirm-password'])
                                unless @errors
-                                session[:futur_user] = {url: ApiEndPoint::SIGNUP}
-                                params.select { |k, _| [:email, :password, :first_name, :last_name].include?(k.to_sym) }
+                                params.select { |k, _| [:email, :password, :first_name, :last_name].include?(k.to_sym) }.merge!({url: ApiEndPoint::SIGNUP})
                                end
                              else
                                redirect '/signup-step1'
@@ -43,6 +42,7 @@ class Spred < Sinatra::Application
     session[:futur_user].delete(:url)
     user = session[:futur_user]
     user[:pseudo] = @pseudo = params[:pseudo]
+    puts session[:futur_user], user
     req = PostRequest.new(session, :login, url, user)
     response = req.send
     if response.is_a?(APIError)

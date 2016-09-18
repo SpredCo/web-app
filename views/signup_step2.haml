@@ -32,7 +32,7 @@
             %label.control-label{:for => 'pseudo'} Pseudo
             %div.input-group
               %span#pseudo-id.input-group-addon @
-              %input#pseudo.form-control{:type => 'text', :aria  => {:describedby => 'pseudo-id', :value => @pseudo}}
+              %input#pseudo.form-control{:type => 'text', :name => 'pseudo', :aria  => {:describedby => 'pseudo-id', :value => @pseudo}}
               - if @errors && @errors[:pseudo]
                 %span.glyphicon.glyphicon-remove.form-control-feedback
           %div.form-group.btn-signup
