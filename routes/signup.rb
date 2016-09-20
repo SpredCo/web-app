@@ -17,21 +17,13 @@ class Spred < Sinatra::Application
 
   post '/signup-step1' do
     @signup = params
-    session[:futur_user] = case params['signup-type']
-                             when 'google_token'
-                               {url: ApiEndPoint::GOOGLE_SIGNUP, access_token: params[:access_token], signup_type: params['signup-type']}
-                             when 'facebook_token'
-                               {url: ApiEndPoint::FACEBOOK_SIGNUP, access_token: params[:access_token], signup_type: params['signup-type']}
-                             when 'password'
-                               @errors = User.check_new_account_validity(session, params[:email], params[:password], params['confirm-password'])
-                               unless @errors
-                                {url: ApiEndPoint::SIGNUP, email: params[:email], password: params[:password],
-                                first_name: params['first-name'], last_name: params['last-name'],
-                                signup_type: params['signup-type']}
-                               end
-                             else
-                               redirect '/signup-step1'
-                           end
+    params.each do |k, v|
+      if v.empty?
+        @errors ||= {}
+        @errors[k] = "Le champs #{k} ne peut être vide."
+      end
+    end
+    session[:future_user] = fill_future_user(params) unless @errors
     if @errors
       haml :signup_step1, layout: :sign_layout
     else
@@ -40,9 +32,13 @@ class Spred < Sinatra::Application
   end
 
   post '/signup-step2' do
-    url = session[:futur_user].delete(:url)
-    signup_type = session[:futur_user].delete(:signup_type)
-    user = session[:futur_user]
+    if params[:pseudo].empty?
+      @errors = {pseudo: 'Le champs pseudo ne peut pas être vide'}
+      haml :signup_step2
+    end
+    url = session[:future_user].delete(:url)
+    signup_type = session[:future_user].delete(:signup_type)
+    user = session[:future_user]
     user[:pseudo] = @pseudo = params[:pseudo]
     req = PostRequest.new(session, :login, url, user)
     response = req.send
@@ -57,5 +53,27 @@ class Spred < Sinatra::Application
 
   post '/signup-step3' do
     redirect '/'
+  end
+
+  private
+
+  def fill_future_user(params)
+    p params
+    case params['signup-type']
+      when 'google_token'
+        {url: ApiEndPoint::GOOGLE_SIGNUP, access_token: params[:access_token], signup_type: params['signup-type']}
+      when 'facebook_token'
+        {url: ApiEndPoint::FACEBOOK_SIGNUP, access_token: params[:access_token], signup_type: params['signup-type']}
+      when 'password'
+        @errors = User.check_new_account_validity(session, params[:email], params[:password], params['confirm-password'])
+        p @errors
+        unless @errors
+          {url: ApiEndPoint::SIGNUP, email: params[:email], password: params[:password],
+           first_name: params['first-name'], last_name: params['last-name'],
+           signup_type: params['signup-type']}
+        end
+      else
+        redirect '/signup-step1'
+    end
   end
 end
