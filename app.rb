@@ -1,7 +1,7 @@
 require 'sinatra'
-require 'sinatra/flash'
 require 'json'
 require 'haml'
+require 'better_errors'
 
 class Spred < Sinatra::Application
   enable :sessions
@@ -23,7 +23,8 @@ class Spred < Sinatra::Application
   end
 
   configure :development do
-    # ...
+    use BetterErrors::Middleware
+    BetterErrors.application_root = __dir__
   end
 end
 
