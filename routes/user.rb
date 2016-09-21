@@ -1,6 +1,8 @@
 class Spred < Sinatra::Application
+  include Authentication
 
   get '/user/:id/show' do
+    authenticate!
     req = GetRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}")
     response = req.response
     if response.is_a?(APIError)
@@ -13,12 +15,14 @@ class Spred < Sinatra::Application
   end
 
   get '/user/:id/edit' do
+    authenticate!
     @title = 'Edit profil'
     @user = session[:current_user]
     haml :user_edit
   end
 
   post '/user/edit' do
+    authenticate!
     verified_params = params.select {|k,_| [:email, :first_name, :last_name].include?(k.to_sym)}
     verified_params = verified_params.delete_if{|k,v| session[:current_user][k] == verified_params[k]}
     if params['picture']
@@ -38,6 +42,7 @@ class Spred < Sinatra::Application
   end
 
   post '/user/:id/follow' do
+    authenticate!
     req = PostRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}/follow")
     response = req.send
     if response.is_a?(APIError)
@@ -47,6 +52,7 @@ class Spred < Sinatra::Application
   end
 
   post '/user/:id/unfollow' do
+    authenticate!
     req = PostRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}/unfollow")
     response = req.send
     if response.is_a?(APIError)
@@ -72,6 +78,7 @@ class Spred < Sinatra::Application
   end
 
   get '/user/search/:partial_email' do
+    authenticate!
     req = GetRequest.new(session, :api, ApiEndPoint::SEARCH_BY_EMAIL + "/#{params[:email]}")
     req.send
   end
