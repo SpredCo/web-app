@@ -1,6 +1,8 @@
 class Spred
   module User
     PRIVATE_FIELDS = [:public_id]
+    PASSWORD_DOES_NOT_MATCH = 'Les mots de passes ne correspondent pas'
+    EMAIL_ALREADY_USED = 'L\'adresse email est déjà utilisée'
 
     def self.build_profile_picture_url(path)
       pic_url = path.split('/')
@@ -14,10 +16,11 @@ class Spred
       end
     end
 
+
     def self.check_new_account_validity(session, email, password, confirm_password)
       response = {}
-      response[:password] = 'Les mots de passes ne correspondent pas' if password != confirm_password
-      response[:email] = 'L\'adresse email est déjà utilisée' unless is_email_available?(session, email)
+      response[:password] = PASSWORD_DOES_NOT_MATCH if password != confirm_password
+      response[:email] = EMAIL_ALREADY_USED unless is_email_available?(session, email)
       response.empty? ? nil : response
     end
 
@@ -42,7 +45,7 @@ class Spred
           req = PostRequest.new(session, :login, ApiEndPoint::FACEBOOK_LOGIN, {access_token: user[:access_token]})
           req.send
         when 'password'
-          verified_params = {'grant_type' => 'password'}.merge!(user.select {|k,_| [:username, :password].include?(k.to_sym) })
+          verified_params = {'grant_type' => 'password'}.merge!(user.select {|k,_| [:username, :password, :first_name, :last_name].include?(k.to_sym) })
           req = PostRequest.new(session, :login, ApiEndPoint::LOGIN, verified_params)
           req.send
       end
