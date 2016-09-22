@@ -11,8 +11,6 @@ class Spred < Sinatra::Application
   set :public_folder, 'public'
 
   configure do
-    set :api_url, 'http://api.sharemyscreen.fr:3000'
-    set :login_url, 'http://login.sharemyscreen.fr:3000'
     set :client_key, 'r5cfOscd6CZAZ8XQ'
     set :client_secret, 'G2jkNVDUqFcPCI4e6nia3w6UOMCaryPX'
   end

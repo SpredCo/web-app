@@ -1,3 +1,3 @@
-require_relative 'api_end_point'
+require_relative 'api'
 require_relative 'user'
 require_relative 'authentication'

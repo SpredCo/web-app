@@ -1,4 +1,4 @@
-class Request
+class BaseRequest
   require 'net/http'
   require 'json'
 
@@ -6,9 +6,8 @@ class Request
   ## request_type: Symbol(:login || :api)
   ## endpoint: String (ex: '/v1/oauth2/token')
   ## params: Hash (parameters for the request)
-  def initialize(session, request_type, endpoint, params = nil)
-    @session = session
-    @uri = URI.parse(Spred.settings.send("#{request_type.to_s}_url") + endpoint)
+  def initialize(endpoint)
+    @uri = URI.parse(endpoint)
   end
 
   def body
@@ -19,14 +18,7 @@ class Request
     @response = Net::HTTP.new(@uri.host, @uri.port).start do |http|
       http.request(@request)
     end
-    parse_response
   end
-
-  def response
-    @response
-  end
-
-  private
 
   def parse_response
     begin
@@ -41,6 +33,8 @@ class Request
     end
     @response
   end
+
+  private
 
   def refresh_token
     req = PostRequest.new(@session, :login, ApiEndPoint::LOGIN, {'grant_type' => 'password', 'refresh_token' => session[:current_user]['refresh_token']})

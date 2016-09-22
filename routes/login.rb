@@ -15,15 +15,19 @@ class Spred < Sinatra::Application
     haml :profile
   end
 
+  # post '/login' do
+  #   Authentication.login()
+  # end
+
   post '/google_login' do
-    response = User.login(session, 'google_token', params)
+    response = Authentication.login(session, 'google_token', params)
     set_error_and_redirect if response.is_a?(APIError)
     keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
     haml :main
   end
 
   post '/facebook_login' do
-    response = User.login(session, 'facebook_token', params)
+    response = Authentication.login(session, 'facebook_token', params)
     set_error_and_redirect if response.is_a?(APIError)
     keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
     haml :main
