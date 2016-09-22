@@ -31,8 +31,6 @@ class Spred < Sinatra::Application
 
 
   get '/logout' do
-    session[:current_user][:access_token] = nil
-    session[:current_user][:refresh_token] = nil
     session[:current_user] = nil
     redirect '/'
   end
