@@ -15,9 +15,14 @@ class Spred < Sinatra::Application
     haml :profile
   end
 
-  # post '/login' do
-  #   Authentication.login()
-  # end
+  post '/login' do
+    response = Authentication.login(params)
+    unless response
+      @errors = {default: APIError::INVALID_LOGIN}
+      haml :login
+    end
+    haml :profile
+  end
 
   post '/google_login' do
     response = Authentication.login(session, 'google_token', params)
