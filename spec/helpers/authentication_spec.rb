@@ -6,6 +6,59 @@ describe Authentication do
     BaseRequest.any_instance.stubs(:send).returns(nil)
   end
 
+  describe 'login' do
+    it 'should return error on invalid credentials' do
+      params = {email: 'test@test.fr', password: 'test', grant_type: 'password'}
+      SpredLoginRequest.any_instance.stubs(:parse_response).returns(nil)
+      response = Authentication.login(params)
+
+      response.must_be_nil
+    end
+
+    it 'should return error on invalid google token' do
+      params = {email: 'test@test.fr', password: 'test', grant_type: 'google_token'}
+      GoogleLoginRequest.any_instance.stubs(:parse_response).returns(nil)
+      response = Authentication.login(params)
+
+      response.must_be_nil
+    end
+
+    it 'should return error on invalid facebook token' do
+      params = {email: 'test@test.fr', password: 'test', grant_type: 'facebook_token'}
+      FacebookLoginRequest.any_instance.stubs(:parse_response).returns(nil)
+      response = Authentication.login(params)
+
+      response.must_be_nil
+    end
+
+    it 'should return access and refresh tokens on valid credentials' do
+      params = {email: 'test@test.fr', password: 'test', grant_type: 'password'}
+      SpredLoginRequest.any_instance.stubs(:parse_response).returns({access_token: 'access_token', refresh_token: 'refresh_token'})
+      response = Authentication.login(params)
+
+      response[:access_token].must_be_instance_of String
+      response[:refresh_token].must_be_instance_of String
+    end
+
+    it 'should return access and refresh tokens on valid google_token' do
+      params = {access_token: 'google_token', grant_type: 'google_token'}
+      GoogleLoginRequest.any_instance.stubs(:parse_response).returns({access_token: 'access_token', refresh_token: 'refresh_token'})
+      response = Authentication.login(params)
+
+      response[:access_token].must_be_instance_of String
+      response[:refresh_token].must_be_instance_of String
+    end
+
+    it 'should return access and refresh tokens on valid facebook_token' do
+      params = {access_token: 'google_token', grant_type: 'facebook_token'}
+      FacebookLoginRequest.any_instance.stubs(:parse_response).returns({access_token: 'access_token', refresh_token: 'refresh_token'})
+      response = Authentication.login(params)
+
+      response[:access_token].must_be_instance_of String
+      response[:refresh_token].must_be_instance_of String
+    end
+  end
+
   describe 'signup_step1' do
     it 'should returns error if some fields are missing' do
       params = {email: 'toto@titi.fr', password: 'password', 'confirm-password' => 'password', first_name: '', last_name: ''}

@@ -3,18 +3,17 @@
       redirect '/' unless session[:current_user]
     end
 
-    def self.login(login_type, user)
-      case login_type
-        when 'google_token'
-          req = GoogleLoginRequest.new(user[:access_token])
-          req.send
-        when 'facebook_token'
-          req = FacebookLoginRequest.new(user[:access_token])
-          req.send
-        else
-          req = SpredLoginRequest.new(user[:email], user[:password])
-          req.send
-      end
+    def self.login(user)
+      req = case user[:grant_type]
+              when 'google_token'
+                GoogleLoginRequest.new(user[:access_token])
+              when 'facebook_token'
+                FacebookLoginRequest.new(user[:access_token])
+              else
+                SpredLoginRequest.new(user[:email], user[:password])
+            end
+      req.send
+      req.parse_response
     end
 
    def self.signup_step1(params)
