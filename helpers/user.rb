@@ -19,19 +19,20 @@ module User
     def self.check_new_account_validity(email, password, confirm_password)
       response = {}
       response[:password] = PASSWORD_DOES_NOT_MATCH if password != confirm_password
-      response[:email] = EMAIL_ALREADY_USED unless is_email_available?(email)
+      email_validity = check_email_availability(email)
+      response[:email] = email_validity.message if email_validity.is_a? APIError
       response.empty? ? nil : response
     end
 
-    def self.is_email_available?(email)
+    def self.check_email_availability(email)
       req = CheckEmailRequest.new(email)
       req.send
-      !req.parse_response.is_a?(APIError)
+      req.parse_response
     end
 
-    def self.is_pseudo_available?(pseudo)
+    def self.check_pseudo_availability(pseudo)
       req = CheckPseudoRequest.new(pseudo)
       req.send
-      !req.parse_response.is_a?(APIError)
+      req.parse_response
     end
   end

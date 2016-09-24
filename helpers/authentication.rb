@@ -36,6 +36,8 @@
       if user[:pseudo].empty?
         return APIError.new(403, 2, 2)
       end
+      pseudo_validity = User.check_pseudo_availability(user[:pseudo])
+      return pseudo_validity if pseudo_validity.is_a? APIError
       req = request.send(:new, user)
       req.send
       req.parse_response
@@ -49,7 +51,9 @@
           {request: FacebookSignupRequest, access_token: params[:access_token], signup_type: params['signup-type']}
         when 'password'
           @errors = User.check_new_account_validity(params[:email], params[:password], params['confirm-password'])
-          unless @errors
+          if @errors
+            @errors
+          else
             {request: SpredSignupRequest, email: params[:email], password: params[:password],
              first_name: params['first-name'], last_name: params['last-name'],
              signup_type: params['signup-type']}
