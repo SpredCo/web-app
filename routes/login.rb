@@ -5,34 +5,24 @@ class Spred < Sinatra::Application
   end
 
   post '/login' do
-    response = User.login(session, 'password', params)
-    unless response
-      @errors = {default: APIError::INVALID_LOGIN}
-      haml :login
-    end
-    keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
-    @user = session[:current_user]
-    haml :profile
-  end
-
-  post '/login' do
     response = Authentication.login(params)
     unless response
       @errors = {default: APIError::INVALID_LOGIN}
       haml :login
     end
+    keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
     haml :profile
   end
 
   post '/google_login' do
-    response = Authentication.login(session, 'google_token', params)
+    response = Authentication.login(params)
     set_error_and_redirect if response.is_a?(APIError)
     keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
     haml :main
   end
 
   post '/facebook_login' do
-    response = Authentication.login(session, 'facebook_token', params)
+    response = Authentication.login(params)
     set_error_and_redirect if response.is_a?(APIError)
     keep_user_in_session(response.body['access_token'], response.body['refresh_token'])
     haml :main
