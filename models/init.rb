@@ -16,3 +16,11 @@ require_relative 'requests/spred_login_request'
 require_relative 'requests/facebook_signup_request'
 require_relative 'requests/google_signup_request'
 require_relative 'requests/spred_signup_request'
+
+require_relative 'requests/get_user_request'
+
+require_relative 'users/base_user'
+require_relative 'users/remote_user'
+require_relative 'users/current_user'
+
+require_relative 'token_box'

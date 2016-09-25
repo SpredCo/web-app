@@ -1,4 +1,4 @@
-class Spred < Sinatra::Application
+class Spred
   get '/' do
     @title = 'Spred'
     haml :index

@@ -1,6 +1,6 @@
- module Authentication
+module Authentication
     def authenticate!
-      redirect '/' unless session[:current_user]
+      redirect '/' unless session[:current_user].is_a? CurrentUser
     end
 
     def self.login(user)
@@ -10,7 +10,7 @@
               when 'facebook_token'
                 FacebookLoginRequest.new(user[:access_token])
               else
-                SpredLoginRequest.new(user[:email], user[:password])
+                SpredLoginRequest.new(user[:username], user[:password])
             end
       req.send
       req.parse_response
@@ -25,7 +25,7 @@
        end
      end
      if response[:errors]
-       response[:errors]
+       response
      else
        fill_future_user(params)
      end
@@ -49,9 +49,9 @@
         when 'facebook_token'
           {request: FacebookSignupRequest, access_token: params[:access_token], signup_type: params['signup-type']}
         when 'password'
-          @errors = User.check_new_account_validity(params[:email], params[:password], params['confirm-password'])
-          if @errors
-            @errors
+          response = User.check_new_account_validity(params[:email], params[:password], params['confirm-password'])
+          if response
+            {errors: response}
           else
             {request: SpredSignupRequest, email: params[:email], password: params[:password],
              first_name: params['first-name'], last_name: params['last-name'],

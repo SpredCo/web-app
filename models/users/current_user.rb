@@ -1,9 +1,7 @@
 class CurrentUser < BaseUser
-  attr_accessor :access_token, :refresh_token
 
   def initialize(email, first_name, last_name, picture, access_token, refresh_token)
-    @access_token = access_token
-    @refresh_token = refresh_token
+    @token_box = TokenBox.new(access_token, refresh_token)
     super('me', email, first_name, last_name, picture)
   end
 
@@ -13,5 +11,17 @@ class CurrentUser < BaseUser
 
   def delete
 
+  end
+
+  def reload_tokens
+    @token_box.reload!
+  end
+
+  def access_token
+    @token_box.access_token
+  end
+
+  def refresh_token
+    @token_box.refresh_token
   end
 end

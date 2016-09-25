@@ -11,8 +11,10 @@ module Api
     GOOGLE_LOGIN = '/v1/oauth2/google-connect'
     FACEBOOK_LOGIN = '/v1/oauth2/facebook-connect'
 
-    CHECK_PSEUDO = '/v1/users/pseudo/check'
-    CHECK_EMAIL = '/v1/users/email/check'
+    CHECK_PSEUDO = '/v1/users/check/pseudo'
+    CHECK_EMAIL = '/v1/users/check/email'
+    CHECK_FACEBOOK_TOKEN = '/v1/users/check/facebook-token'
+    CHECK_GOOGLE_TOKEN = '/v1/users/check/google-token'
 
     # API Service
     USER = '/v1/users'
@@ -35,6 +37,8 @@ module Api
     
     CHECK_EMAIL = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::CHECK_EMAIL}"}
     CHECK_PSEUDO = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::CHECK_PSEUDO}"}
+    CHECK_FACEBOOK_TOKEN = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::CHECK_FACEBOOK_TOKEN}"}
+    CHECK_GOOGLE_TOKEN = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::CHECK_GOOGLE_TOKEN}"}
 
     USER_GET = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::USER}"}
     USER_EDIT = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::USER}"}

@@ -8,7 +8,7 @@ describe Authentication do
 
   describe 'login' do
     it 'should return error on invalid credentials' do
-      params = {email: 'test@test.fr', password: 'test', grant_type: 'password'}
+      params = {username: 'test@test.fr', password: 'test', grant_type: 'password'}
       SpredLoginRequest.any_instance.stubs(:parse_response).returns(nil)
       response = Authentication.login(params)
 
@@ -16,7 +16,7 @@ describe Authentication do
     end
 
     it 'should return error on invalid google token' do
-      params = {email: 'test@test.fr', password: 'test', grant_type: 'google_token'}
+      params = {username: 'test@test.fr', password: 'test', grant_type: 'google_token'}
       GoogleLoginRequest.any_instance.stubs(:parse_response).returns(nil)
       response = Authentication.login(params)
 
@@ -24,7 +24,7 @@ describe Authentication do
     end
 
     it 'should return error on invalid facebook token' do
-      params = {email: 'test@test.fr', password: 'test', grant_type: 'facebook_token'}
+      params = {username: 'test@test.fr', password: 'test', grant_type: 'facebook_token'}
       FacebookLoginRequest.any_instance.stubs(:parse_response).returns(nil)
       response = Authentication.login(params)
 
@@ -32,7 +32,7 @@ describe Authentication do
     end
 
     it 'should return access and refresh tokens on valid credentials' do
-      params = {email: 'test@test.fr', password: 'test', grant_type: 'password'}
+      params = {username: 'test@test.fr', password: 'test', grant_type: 'password'}
       SpredLoginRequest.any_instance.stubs(:parse_response).returns({access_token: 'access_token', refresh_token: 'refresh_token'})
       response = Authentication.login(params)
 
@@ -64,8 +64,8 @@ describe Authentication do
       params = {email: 'toto@titi.fr', password: 'password', 'confirm-password' => 'password', first_name: '', last_name: ''}
       errors = Authentication.signup_step1(params)
 
-      errors[:first_name].must_be_instance_of String
-      errors[:last_name].must_be_instance_of String
+      errors[:errors][:first_name].must_be_instance_of String
+      errors[:errors][:last_name].must_be_instance_of String
     end
 
     it 'should returns future_user with token on google_signup' do
@@ -111,7 +111,7 @@ describe Authentication do
         CheckEmailRequest.any_instance.stubs(:parse_response).returns({})
         errors = Authentication.fill_future_user(params)
 
-        errors[:password].must_be_instance_of String
+        errors[:errors][:password].must_be_instance_of String
       end
 
       it 'should verify and returns error if email is already used' do
@@ -120,7 +120,7 @@ describe Authentication do
         CheckEmailRequest.any_instance.stubs(:parse_response).returns(expected_error)
         errors = Authentication.fill_future_user(params)
 
-        errors[:email].must_equal expected_error.message
+        errors[:errors][:email].must_equal expected_error.message
       end
 
       it 'should verify and returns future user if account is valid' do

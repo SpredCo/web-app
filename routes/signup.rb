@@ -1,4 +1,4 @@
-class Spred < Sinatra::Application
+class Spred
   # Multiple step sign up
   get '/signup-step1' do
     haml :signup_step1, layout: :sign_layout
@@ -28,17 +28,18 @@ class Spred < Sinatra::Application
 
   post '/signup-step2' do
     request = session[:future_user].delete(:request)
-    signup_type = session[:future_user].delete(:signup_type)
+    session[:future_user].delete(:signup_type)
     user = session[:future_user]
     user[:pseudo] = @pseudo = params[:pseudo]
     response = Authentication.signup_step2(request, user)
     if response.is_a?(APIError)
       @errors = {pseudo: response.message}
-      haml :signup_step2
+      haml :signup_step2, layout: :sign_layout
+    else
+      user[:username] = user.delete(:email)
+      Authentication.login(user)
+      redirect '/signup-step3'
     end
-    r = Authentication.login(signup_type, user)
-    puts r
-    redirect '/signup-step3'
   end
 
   post '/signup-step3' do

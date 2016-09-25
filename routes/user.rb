@@ -1,4 +1,4 @@
-class Spred < Sinatra::Application
+class Spred
   include Authentication
 
   get '/user/:id/show' do

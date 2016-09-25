@@ -16,7 +16,7 @@ class Spred < Sinatra::Application
   end
 
   configure :production do
-    set :haml, { :ugly=>true }
+    set :haml, ugly: true
     set :clean_trace, true
   end
 
