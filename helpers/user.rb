@@ -39,7 +39,7 @@ module User
     req = GetUserRequest.new('me')
     req.send
     response = req.parse_response.body
-    CurrentUser.new(response[:email], response[:first_name], response[:last_name], response[:picture],
+    CurrentUser.new(response[:id], response[:email], response[:first_name], response[:last_name], response[:picture],
                     $session[:current_user].access_token, $session[:current_user].refresh_token)
   end
 end

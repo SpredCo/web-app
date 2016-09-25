@@ -1,12 +1,12 @@
 class CurrentUser < BaseUser
 
-  def initialize(email, first_name, last_name, picture, access_token, refresh_token)
+  def initialize(id, email, first_name, last_name, picture, access_token, refresh_token)
     @token_box = TokenBox.new(access_token, refresh_token)
-    super('me', email, first_name, last_name, picture)
+    super(id, email, first_name, last_name, picture)
   end
 
-  def edit
-
+  def edit!(params)
+    EditUserRequest.new(params)
   end
 
   def delete

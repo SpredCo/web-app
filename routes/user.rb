@@ -30,14 +30,13 @@ class Spred
       User.save_profile_picture(new_pic, params['picture'][:tempfile])
       verified_params.merge!({picture_url: "#{request.base_url}/#{User.build_profile_picture_url(new_pic)}"})
     end
-    req = PatchRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}",  verified_params)
-    response = req.send
+    @user = session[:current_user]
+    response = @user.edit!(verified_params)
     if response.is_a?(APIError)
       @errors = {default: response.message}
       haml :user_edit
     end
-    keep_user_in_session(session[:current_user].fetch(:access_token, nil), session[:current_user].fetch(:refresh_token, nil))
-    @user = session[:current_user]
+    session[:current_user] = @user
     haml :profile
   end
 
