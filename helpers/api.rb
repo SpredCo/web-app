@@ -32,6 +32,7 @@ module Api
     GOOGLE_SIGNUP = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::GOOGLE_SIGNUP}"}
 
     SPRED_LOGIN = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::SPRED_LOGIN}"}
+    RELOAD_TOKENS = SPRED_LOGIN
     FACEBOOK_LOGIN = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::FACEBOOK_LOGIN}"}
     GOOGLE_LOGIN = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::GOOGLE_LOGIN}"}
     
@@ -46,5 +47,7 @@ module Api
     USER_FOLLOW = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::USER}"}
     USER_UNFOLLOW = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::USER}"}
     USER_REPORT = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::USER}"}
+
+    SEARCH_USER = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::SEARCH_BY_EMAIL}"}
   end
 end

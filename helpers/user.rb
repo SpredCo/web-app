@@ -35,11 +35,10 @@ module User
     req.parse_response
   end
 
-  def self.get_current
-    req = GetUserRequest.new('me')
+  def self.get_current(tokens)
+    req = GetUserRequest.new('me', tokens)
     req.send
     response = req.parse_response.body
-    CurrentUser.new(response[:id], response[:email], response[:first_name], response[:last_name], response[:picture],
-                    $session[:current_user].access_token, $session[:current_user].refresh_token)
+    CurrentUser.new(response[:id], response[:email], response[:first_name], response[:last_name], response[:picture])
   end
 end

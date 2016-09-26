@@ -7,6 +7,15 @@ class TokenBox
   end
 
   def reload!
-
+    request = RefreshTokenRequest(@refresh_token)
+    request.send
+    response = request.parse_response
+    if response.is_a? APIError
+      response
+    else
+      @access_token = response.body['access_token']
+      @refresh_token = response.body['refresh_token']
+      true
+    end
   end
 end

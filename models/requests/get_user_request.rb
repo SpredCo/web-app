@@ -1,6 +1,6 @@
 class GetUserRequest < GetRequest
-  def initialize(id)
+  def initialize(tokens, id)
     req = Api::Request::USER_GET
-    super(req[:service], "#{req[:end_point]}/#{id}")
+    super(tokens, req[:service], "#{req[:end_point]}/#{id}")
   end
 end

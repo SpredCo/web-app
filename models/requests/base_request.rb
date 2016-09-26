@@ -2,12 +2,9 @@ class BaseRequest
   require 'net/http'
   require 'json'
 
-  ## session: Sinatra session
-  ## request_type: Symbol(:login || :api)
-  ## endpoint: String (ex: '/v1/oauth2/token')
-  ## params: Hash (parameters for the request)
-  def initialize(endpoint)
+  def initialize(tokens, endpoint)
     @uri = URI.parse(endpoint)
+    @tokens = tokens
   end
 
   def body
@@ -26,8 +23,8 @@ class BaseRequest
     begin
       @response.body = JSON.parse(@response.body)
     rescue JSON::ParserError => e
-      # refresh_token
-      # retry
+      @tokens.reload!
+      retry
     end
     if APIError::ERRORS.has_key?(@response.code)
       return nil unless @response.body['code']

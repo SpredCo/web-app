@@ -1,6 +1,6 @@
 class PatchRequest < BaseRequest
-  def initialize(session, request_type, endpoint, params = nil)
-    super(session, request_type, endpoint, params)
+  def initialize(tokens, session, request_type, endpoint, params = nil)
+    super(tokens, session, request_type, endpoint, params)
     begin
       initialize_request(request_type)
     rescue => e
@@ -17,7 +17,7 @@ class PatchRequest < BaseRequest
         @request = Net::HTTP::Patch.new(@uri.path, 'Content-type' => 'application/json')
         @request.basic_auth(Spred.settings.client_key, Spred.settings.client_secret)
       when :api
-        @request = Net::HTTP::Patch.new(@uri.path, 'Content-type' => 'application/json', 'Authorization' => "Bearer #{$session[:current_user].access_token}")
+        @request = Net::HTTP::Patch.new(@uri.path, 'Content-type' => 'application/json', 'Authorization' => "Bearer #{@tokens.access_token}")
       else
         raise "Cannot initialize request: bad request type - #{request_type}."
     end

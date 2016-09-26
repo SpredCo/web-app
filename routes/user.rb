@@ -3,14 +3,12 @@ class Spred
 
   get '/user/:id/show' do
     authenticate!
-    req = GetRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}")
-    response = req.response
-    if response.is_a?(APIError)
+    @user = User.find_by_id(params[:id])
+    if @user.is_a?(APIError)
       @errors = {default: response.message}
       haml :main
     end
-    @user = response.body[:user]
-    @following_user = session[:current_user]['following'].include?(@user['id'])
+    @following_user = session[:current_user].following.include?(@user['id'])
     haml :user_show
   end
 
@@ -31,7 +29,7 @@ class Spred
       verified_params.merge!({picture_url: "#{request.base_url}/#{User.build_profile_picture_url(new_pic)}"})
     end
     @user = session[:current_user]
-    response = @user.edit!(verified_params)
+    response = @user.edit!(session[:spred_tokens], verified_params)
     if response.is_a?(APIError)
       @errors = {default: response.message}
       haml :user_edit
@@ -42,8 +40,7 @@ class Spred
 
   post '/user/:id/follow' do
     authenticate!
-    req = PostRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}/follow")
-    response = req.send
+    response = RemoteUser.new(params[:id]).follow(session[:spred_tokens])
     if response.is_a?(APIError)
       @errors = {default: response.message}
       haml :user_show
@@ -52,8 +49,7 @@ class Spred
 
   post '/user/:id/unfollow' do
     authenticate!
-    req = PostRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}/unfollow")
-    response = req.send
+    response = RemoteUser.new(params[:id]).unfollow(session[:spred_tokens])
     if response.is_a?(APIError)
       @errors = {default: response.message}
       haml :user_show
@@ -61,7 +57,8 @@ class Spred
   end
 
   get '/user/pseudo/check/:pseudo' do
-    if User.is_pseudo_available?(session, params[:pseudo])
+    response = User.check_pseudo_availability(paramas[:pseudo])
+    if response.is_a? APIError
       JSON.generate(result: 'ko')
     else
       JSON.generate(result: 'ok')
@@ -69,7 +66,8 @@ class Spred
   end
 
   get '/user/email/check/:email' do
-    if User.is_email_available?(session, params[:email])
+    response = User.check_email_availability(params[:email])
+    if response.is_a? APIError
       JSON.generate(result: 'ko')
     else
       JSON.generate(result: 'ok')
@@ -77,8 +75,8 @@ class Spred
   end
 
   get '/user/search/:partial_email' do
-    authenticate!
-    req = GetRequest.new(session, :api, ApiEndPoint::SEARCH_BY_EMAIL + "/#{params[:email]}")
-    req.send
+    request = SearchUserRequest(session[:spred_tokens], params[:partial_email])
+    request.send
+    request.parse_response
   end
 end
