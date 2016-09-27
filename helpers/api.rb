@@ -19,6 +19,9 @@ module Api
     # API Service
     USER = '/v1/users'
     SEARCH_BY_EMAIL = '/v1/users/search'
+
+    INBOX = '/v1/inbox'
+    CONVERSATION = '/v1/inbox/conversation'
   end
 
   module Service
@@ -47,6 +50,12 @@ module Api
     USER_FOLLOW = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::USER}"}
     USER_UNFOLLOW = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::USER}"}
     USER_REPORT = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::USER}"}
+
+    INBOX = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::INBOX}"}
+    CONVERSATION_GET = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::CONVERSATION}"}
+    CONVERSATION_REPLY = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::CONVERSATION}"}
+    CONVERSATION_CREATE = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::CONVERSATION}"}
+    MESSAGE_GET = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::CONVERSATION}"}
 
     SEARCH_USER = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::SEARCH_BY_EMAIL}"}
   end

@@ -1,6 +1,7 @@
 class CurrentUser < BaseUser
 
   def initialize(id, email, first_name, last_name, picture)
+    @inbox
     super(id, email, first_name, last_name, picture)
   end
 
