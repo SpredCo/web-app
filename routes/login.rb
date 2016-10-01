@@ -6,7 +6,7 @@ class Spred
 
   post '/login' do
     response = AuthenticationHelper.login(params)
-    unless response
+    if response.nil? || response.is_a?(APIError)
       @errors = {default: APIError::INVALID_LOGIN}
       haml :login
     end
