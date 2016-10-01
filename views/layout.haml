@@ -8,6 +8,8 @@
     %link{ rel:'stylesheet', type:'text/css', href:'css/bootstrap.min.css' }
     %link{ rel:'stylesheet', type:'text/css', href:'css/common.css' }
   %body.body-main
+    - unless session[:current_user]
+      = haml :login_modal
     = haml :navbar
     %div
       = yield

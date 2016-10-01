@@ -1,0 +1,29 @@
+%div#login-modal.modal.fade{:role => 'dialog', :aria => {:labelledby => 'modal-label'}}
+  %div.modal-dialog.login-modal{:role => 'document'}
+    %div.modal-content
+      %div.modal-header
+        %button.close{:type => 'button', :data => {:dismiss => 'modal'}, :aria => {:label => 'Close'}}
+          %span{:aria => {:hidden => 'true'}} x
+        %h5#modal-label.modal-title Connexion
+      %div.modal-body
+        %div.row
+          %div.col-sm-10.col-sm-offset-1
+            %form{:method => 'post', :action => '/login', :name => 'login'}
+              %input.form-control.login-field{:name => 'email', :type => 'email', :placeholder => 'Email'}
+              %input.form-control.login-field{:name => 'password', :type => 'password', :placeholder => 'Mot de passe'}
+              %input.form-control.btn.btn-success.login-field{:name => 'submit', :value => 'Se connecter'}
+        %div.row
+          %div.col-xs-5
+            %hr.signup-hr
+          %div.col-xs-2.or
+            %span OU
+          %div.col-xs-5
+            %hr.signup-hr
+        %div.row
+          %div.col-xs-5.col-sm-offset-1
+            %button.btn.login-btn.signup-facebook.center-text{:onclick => 'fbLogin()'}
+              %i.fa.fa-facebook{:aria => {:hidden => 'true'}}
+          %div.col-xs-5
+            %button#googleLogin.btn.login-btn.signup-google.center-text
+              %i.fa.fa-google-plus{:aria => {:hidden => 'true'}}
+      %div.modal-footer

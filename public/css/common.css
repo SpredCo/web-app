@@ -161,6 +161,18 @@
 .validate-interest {
     margin-top: 300px;
 }
+.login-modal {
+    width: 300px;
+}
+.login-field {
+    margin-bottom: 20px;
+}
+.login-btn {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
 @media (max-width: 1200px) {
     .navbar-default .navbar-brand.logo {
         width: inherit;
