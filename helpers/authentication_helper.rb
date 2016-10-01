@@ -70,7 +70,7 @@ module AuthenticationHelper
     elsif token_type == 'facebook_token'
       validate_token = verify_facebook_token(token)
       if validate_token.is_a? APIError
-        {errors: {google_token: validate_token.message}}
+        {errors: {facebook_token: validate_token.message}}
       else
         {request: FacebookSignupRequest, access_token: token, signup_type: params['signup-type']}
       end
