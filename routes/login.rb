@@ -11,22 +11,8 @@ class Spred
       haml :login
     else
       set_user_and_tokens(response.body['access_token'], response.body['refresh_token'])
-      haml :index
+      redirect '/'
     end
-  end
-
-  post '/google_login' do
-    response = AuthenticationHelper.login(params)
-    set_error_and_redirect if response.is_a?(APIError)
-    set_user_and_tokens(response.body['access_token'], response.body['refresh_token'])
-    haml :main
-  end
-
-  post '/facebook_login' do
-    response = AuthenticationHelper.login(params)
-    set_error_and_redirect if response.is_a?(APIError)
-    set_user_and_tokens(response.body['access_token'], response.body['refresh_token'])
-    haml :main
   end
 
   get '/logout' do
