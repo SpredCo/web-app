@@ -6,12 +6,14 @@ class Spred
 
   post '/login' do
     response = AuthenticationHelper.login(params)
+    p response
     if response.nil? || response.is_a?(APIError)
       @errors = {default: APIError::INVALID_LOGIN}
       haml :login
+    else
+      set_user_and_tokens(response.body['access_token'], response.body['refresh_token'])
+      haml :main
     end
-    set_user_and_tokens(response.body['access_token'], response.body['refresh_token'])
-    haml :main
   end
 
   post '/google_login' do

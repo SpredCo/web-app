@@ -4,13 +4,14 @@ module AuthenticationHelper
     end
 
     def self.login(user)
+      p user
       req = case user[:login_type]
               when 'google_token'
                 GoogleLoginRequest.new(user[:access_token])
               when 'facebook_token'
                 FacebookLoginRequest.new(user[:access_token])
               else
-                SpredLoginRequest.new(user[:username], user[:password])
+                SpredLoginRequest.new(user[:email], user[:password])
             end
       req.send
       req.parse_response
