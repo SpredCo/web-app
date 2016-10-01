@@ -5,7 +5,7 @@ class Spred < Sinatra::Application
   end
 
   post '/login' do
-    response = User.login(session, 'password', params)
+    response = User.login(session, params['login-type'], params)
     unless response
       @errors = {default: APIError::INVALID_LOGIN}
       haml :login
