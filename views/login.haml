@@ -6,10 +6,10 @@
           %span Connexion
         %div.row
           %div.col-sm-10.col-sm-offset-1
-            %form#login-form{:method => 'post', :action => '/login', :name => 'login'}
+            %form#login-form{:method => 'post', :name => 'login'}
               %input.form-control.login-field{:name => 'email', :type => 'email', :placeholder => 'Email'}
               %input.form-control.login-field{:name => 'password', :type => 'password', :placeholder => 'Mot de passe'}
-              %input.form-control.btn.btn-success{:name => 'submit', :value => 'Se connecter'}
+              %input.form-control.btn.btn-success{:name => 'connect', :type => 'submit', :value => 'Se connecter'}
               %input#login-type{:name => 'login_type', :type => 'hidden', :value => 'password'}
               %input#token{:name => 'token', :type => 'hidden'}
         %div.row
