@@ -36,9 +36,9 @@ module UserHelper
   end
 
   def self.get_current(tokens)
-    req = GetUserRequest.new('me', tokens)
+    req = GetUserRequest.new(tokens, 'me')
     req.send
     response = req.parse_response.body
-    CurrentUser.new(response[:id], response[:email], response[:first_name], response[:last_name], response[:picture])
+    CurrentUser.from_hash(response)
   end
 end

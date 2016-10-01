@@ -19,6 +19,7 @@ class Spred
     @signup = params
     response = AuthenticationHelper.signup_step1(params)
     response[:errors] ? @errors = response[:errors] : session[:future_user] = response
+    p session[:future_user]
     if @errors
       haml :signup_step1, layout: :sign_layout
     else

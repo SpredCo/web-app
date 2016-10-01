@@ -1,6 +1,6 @@
 class RemoteUser < BaseUser
 
-  def initialize(id, email, first_name, last_name, picture_url, updated_at, created_at)
+  def initialize(id, email, first_name, last_name, picture_url, updated_at, created_at, following)
     @following = following
     super(id, email, first_name, last_name, picture_url,  updated_at, created_at)
   end
@@ -17,12 +17,6 @@ class RemoteUser < BaseUser
     request.parse_response
   end
 
-  def to_hash
-    hash = super
-    hash[:following] = @following.map(&:to_hash)
-    hash
-  end
-
   def self.find_by_id(tokens, id)
     request = GetUserRequest(tokens, id)
     request.send
@@ -34,13 +28,18 @@ class RemoteUser < BaseUser
     end
   end
 
+  def to_hash
+    hash = super
+    hash[:following] = @following.map(&:to_hash)
+    hash
+  end
+
   def self.from_hash(user_hashed)
-    user = RemoteUser.new(user_hashed[:id], user_hashed[:email],
-                          user_hashed[:first_name], user_hashed[:last_name],
-                          user_hashed[:picture_url], user_hashed[:updated_at], user_hashed[:created_at])
-    user_hashed[:following].each do |follower|
-      user.following << BaseUser.from_hash(follower)
+    following = user_hashed['following'].each_with_object([]) do |follower, array|
+      array << BaseUser.from_hash(follower)
     end
-    user
+    RemoteUser.new(user_hashed['id'], user_hashed['email'],
+                    user_hashed['first_name'], user_hashed['last_name'],
+                    user_hashed['picture_url'], user_hashed['updated_at'], user_hashed['created_at'], following)
   end
 end

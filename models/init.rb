@@ -5,6 +5,7 @@ require_relative 'api_error'
 require_relative 'requests/base_request'
 require_relative 'requests/get_request'
 require_relative 'requests/post_request'
+require_relative 'requests/patch_request'
 
 require_relative 'requests/check_email_request'
 require_relative 'requests/check_pseudo_request'
