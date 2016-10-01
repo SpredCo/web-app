@@ -1,5 +1,5 @@
 class Spred
-  include Authentication
+  include AuthenticationHelper
 
   get '/inbox' do
     request = GetInboxRequest.new(session[:spred_tokens])

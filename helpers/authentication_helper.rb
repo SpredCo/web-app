@@ -1,4 +1,4 @@
-module Authentication
+module AuthenticationHelper
     def authenticate!
       redirect '/' unless session[:current_user].is_a? CurrentUser
     end
@@ -35,7 +35,7 @@ module Authentication
       if user[:pseudo].empty?
         return APIError.new(403, 2, 2)
       end
-      pseudo_validity = User.check_pseudo_availability(user[:pseudo])
+      pseudo_validity = UserHelper.check_pseudo_availability(user[:pseudo])
       return pseudo_validity if pseudo_validity.is_a? APIError
       req = request.send(:new, user)
       req.send
@@ -49,7 +49,7 @@ module Authentication
         when 'facebook_token'
           {request: FacebookSignupRequest, access_token: params[:access_token], signup_type: params['signup-type']}
         when 'password'
-          response = User.check_new_account_validity(params[:email], params[:password], params['confirm-password'])
+          response = UserHelper.check_new_account_validity(params[:email], params[:password], params['confirm-password'])
           if response
             {errors: response}
           else

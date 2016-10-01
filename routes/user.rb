@@ -1,5 +1,5 @@
 class Spred
-  include Authentication
+  include AuthenticationHelper
 
   get '/user/:id/show' do
     authenticate!
@@ -25,8 +25,8 @@ class Spred
     verified_params = verified_params.delete_if{|k,v| session[:current_user][k] == verified_params[k]}
     if params['picture']
       new_pic = "public/profile_pictures/#{session[:current_user]['id']}.#{params['picture'][:type].split('/')[1]}"
-      User.save_profile_picture(new_pic, params['picture'][:tempfile])
-      verified_params.merge!({picture_url: "#{request.base_url}/#{User.build_profile_picture_url(new_pic)}"})
+      UserHelper.save_profile_picture(new_pic, params['picture'][:tempfile])
+      verified_params.merge!({picture_url: "#{request.base_url}/#{UserHelper.build_profile_picture_url(new_pic)}"})
     end
     @user = session[:current_user]
     response = @user.edit!(session[:spred_tokens], verified_params)
@@ -57,7 +57,7 @@ class Spred
   end
 
   get '/user/pseudo/check/:pseudo' do
-    response = User.check_pseudo_availability(paramas[:pseudo])
+    response = UserHelper.check_pseudo_availability(params[:pseudo])
     if response.is_a? APIError
       JSON.generate(result: 'ko')
     else
@@ -66,7 +66,7 @@ class Spred
   end
 
   get '/user/email/check/:email' do
-    response = User.check_email_availability(params[:email])
+    response = UserHelper.check_email_availability(params[:email])
     if response.is_a? APIError
       JSON.generate(result: 'ko')
     else

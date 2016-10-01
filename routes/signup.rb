@@ -17,7 +17,7 @@ class Spred
 
   post '/signup-step1' do
     @signup = params
-    response = Authentication.signup_step1(params)
+    response = AuthenticationHelper.signup_step1(params)
     response[:errors] ? @errors = response[:errors] : session[:future_user] = response
     if @errors
       haml :signup_step1, layout: :sign_layout
@@ -31,13 +31,13 @@ class Spred
     session[:future_user].delete(:signup_type)
     user = session[:future_user]
     user[:pseudo] = @pseudo = params[:pseudo]
-    response = Authentication.signup_step2(request, user)
+    response = AuthenticationHelper.signup_step2(request, user)
     if response.is_a?(APIError)
       @errors = {pseudo: response.message}
       haml :signup_step2, layout: :sign_layout
     else
       user[:username] = user.delete(:email)
-      response = Authentication.login(user)
+      response = AuthenticationHelper.login(user)
       set_user_and_tokens(response.body['access_token'], response.body['refresh_token']) unless response.is_a? APIError
       redirect '/signup-step3'
     end

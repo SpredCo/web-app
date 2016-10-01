@@ -5,7 +5,7 @@ class Spred
   end
 
   post '/login' do
-    response = Authentication.login(params)
+    response = AuthenticationHelper.login(params)
     unless response
       @errors = {default: APIError::INVALID_LOGIN}
       haml :login
@@ -15,14 +15,14 @@ class Spred
   end
 
   post '/google_login' do
-    response = Authentication.login(params)
+    response = AuthenticationHelper.login(params)
     set_error_and_redirect if response.is_a?(APIError)
     set_user_and_tokens(response.body['access_token'], response.body['refresh_token'])
     haml :main
   end
 
   post '/facebook_login' do
-    response = Authentication.login(params)
+    response = AuthenticationHelper.login(params)
     set_error_and_redirect if response.is_a?(APIError)
     set_user_and_tokens(response.body['access_token'], response.body['refresh_token'])
     haml :main
@@ -45,7 +45,7 @@ class Spred
   end
 
   def get_current_user_from_token(tokens)
-    User.get_current(tokens)
+    UserHelper.get_current(tokens)
   end
 
 end

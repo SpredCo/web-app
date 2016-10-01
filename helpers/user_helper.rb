@@ -1,4 +1,4 @@
-module User
+module UserHelper
   PASSWORD_DOES_NOT_MATCH = 'Les mots de passes ne correspondent pas'
   EMAIL_ALREADY_USED = 'L\'adresse email est déjà utilisée'
 
