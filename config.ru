@@ -1,3 +1,5 @@
+$session = {}
 root = ::File.dirname(__FILE__)
 require ::File.join( root, 'app' )
-run Spred.new
+$app = Spred.new
+run $app

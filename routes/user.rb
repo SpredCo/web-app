@@ -1,16 +1,14 @@
-class Spred < Sinatra::Application
-  include Authentication
+class Spred
+  include AuthenticationHelper
 
   get '/user/:id/show' do
     authenticate!
-    req = GetRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}")
-    response = req.response
-    if response.is_a?(APIError)
+    @user = User.find_by_id(params[:id])
+    if @user.is_a?(APIError)
       @errors = {default: response.message}
       haml :main
     end
-    @user = response.body[:user]
-    @following_user = session[:current_user]['following'].include?(@user['id'])
+    @following_user = session[:current_user].following.include?(@user['id'])
     haml :user_show
   end
 
@@ -27,24 +25,22 @@ class Spred < Sinatra::Application
     verified_params = verified_params.delete_if{|k,v| session[:current_user][k] == verified_params[k]}
     if params['picture']
       new_pic = "public/profile_pictures/#{session[:current_user]['id']}.#{params['picture'][:type].split('/')[1]}"
-      User.save_profile_picture(new_pic, params['picture'][:tempfile])
-      verified_params.merge!({picture_url: "#{request.base_url}/#{User.build_profile_picture_url(new_pic)}"})
+      UserHelper.save_profile_picture(new_pic, params['picture'][:tempfile])
+      verified_params.merge!({picture_url: "#{request.base_url}/#{UserHelper.build_profile_picture_url(new_pic)}"})
     end
-    req = PatchRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}",  verified_params)
-    response = req.send
+    @user = session[:current_user]
+    response = @user.edit!(session[:spred_tokens], verified_params)
     if response.is_a?(APIError)
       @errors = {default: response.message}
       haml :user_edit
     end
-    keep_user_in_session(session[:current_user].fetch(:access_token, nil), session[:current_user].fetch(:refresh_token, nil))
-    @user = session[:current_user]
+    session[:current_user] = @user
     haml :profile
   end
 
   post '/user/:id/follow' do
     authenticate!
-    req = PostRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}/follow")
-    response = req.send
+    response = RemoteUser.new(params[:id]).follow(session[:spred_tokens])
     if response.is_a?(APIError)
       @errors = {default: response.message}
       haml :user_show
@@ -53,8 +49,7 @@ class Spred < Sinatra::Application
 
   post '/user/:id/unfollow' do
     authenticate!
-    req = PostRequest.new(session, :api, ApiEndPoint::USER + "/#{params[:id]}/unfollow")
-    response = req.send
+    response = RemoteUser.new(params[:id]).unfollow(session[:spred_tokens])
     if response.is_a?(APIError)
       @errors = {default: response.message}
       haml :user_show
@@ -62,7 +57,8 @@ class Spred < Sinatra::Application
   end
 
   get '/user/pseudo/check/:pseudo' do
-    if User.is_pseudo_available?(session, params[:pseudo])
+    response = UserHelper.check_pseudo_availability(params[:pseudo])
+    if response.is_a? APIError
       JSON.generate(result: 'ko')
     else
       JSON.generate(result: 'ok')
@@ -70,7 +66,8 @@ class Spred < Sinatra::Application
   end
 
   get '/user/email/check/:email' do
-    if User.is_email_available?(session, params[:email])
+    response = UserHelper.check_email_availability(params[:email])
+    if response.is_a? APIError
       JSON.generate(result: 'ko')
     else
       JSON.generate(result: 'ok')
@@ -78,8 +75,8 @@ class Spred < Sinatra::Application
   end
 
   get '/user/search/:partial_email' do
-    authenticate!
-    req = GetRequest.new(session, :api, ApiEndPoint::SEARCH_BY_EMAIL + "/#{params[:email]}")
-    req.send
+    request = SearchUserRequest(session[:spred_tokens], params[:partial_email])
+    request.send
+    request.parse_response
   end
 end

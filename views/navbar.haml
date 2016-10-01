@@ -17,7 +17,7 @@
           %span.input-group-btn
             %button.btn.btn-default{:type => 'submit'}
               %span.fa.fa-search.search-btn
-      - unless session[:current_user]
+      - unless session[:current_user].is_a? CurrentUser
         %ul.nav.navbar-nav.navbar-right
           %li
             %p.navbar-btn

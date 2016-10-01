@@ -15,5 +15,4 @@ group :test do
   gem 'rack-test'
   gem 'minitest'
   gem 'mocha'
-  gem 'simplecov'
 end

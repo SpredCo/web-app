@@ -1,4 +1,6 @@
 class APIError < APIMessage
+  attr_reader :message
+
   UNAUTHORIZED = 'You are not able to do this action'
   USER_NOT_FOUND = 'User not found'
   USER_NOT_FOLLOWED = 'You are not following this user'
@@ -50,6 +52,7 @@ class APIError < APIMessage
     super(http_code)
     @code = code.to_s
     @sub_code = sub_code && sub_code.to_s
+    set_message
   end
 
   def set_message
