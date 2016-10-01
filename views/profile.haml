@@ -5,8 +5,8 @@
         %div.panel-body
           %div.col-xs-3.vmiddle
             %p.semibold
-              %img{ 'src' => session[:current_user]['picture_url'] || 'img/gary_gravatar.pgn', 'class' => 'profile-pic' }
-              #{session[:current_user]['first_name']} #{session[:current_user]['last_name']}
+              %img{ 'src' => session[:current_user].picture_url || 'img/gary_gravatar.pgn', 'class' => 'profile-pic' }
+              #{session[:current_user].first_name} #{session[:current_user].last_name}
           %div.col-xs-3.text-center.vmiddle
             %p.border-right-thin.margin-bottom-none
               %span.semibold
