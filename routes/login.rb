@@ -28,7 +28,6 @@ class Spred
     haml :main
   end
 
-
   get '/logout' do
     session[:current_user] = nil
     redirect '/'
@@ -47,5 +46,4 @@ class Spred
   def get_current_user_from_token(tokens)
     UserHelper.get_current(tokens)
   end
-
 end
