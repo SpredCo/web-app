@@ -11,7 +11,7 @@ class Spred
       haml :login
     else
       set_user_and_tokens(response.body['access_token'], response.body['refresh_token'])
-      haml :main
+      haml :index
     end
   end
 
