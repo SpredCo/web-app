@@ -4,7 +4,7 @@ module AuthenticationHelper
     end
 
     def self.login(user)
-      req = case user[:grant_type]
+      req = case user[:login_type]
               when 'google_token'
                 GoogleLoginRequest.new(user[:access_token])
               when 'facebook_token'
