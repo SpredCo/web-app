@@ -1,8 +1,8 @@
 class CurrentUser < BaseUser
 
-  def initialize(id, email, first_name, last_name, picture_url, updated_at, created_at, following)
+  def initialize(id, email, pseudo, first_name, last_name, picture_url, updated_at, created_at, following)
     @following = following
-    super(id, email, first_name, last_name, picture_url, updated_at, created_at)
+    super(id, email, pseudo, first_name, last_name, picture_url, updated_at, created_at)
   end
 
   def edit!(tokens, params)
@@ -23,7 +23,7 @@ class CurrentUser < BaseUser
     following = user_hashed['following'].each_with_object([]) do |follower, array|
       array << BaseUser.from_hash(follower)
     end
-    CurrentUser.new(user_hashed['id'], user_hashed['email'],
+    CurrentUser.new(user_hashed['id'], user_hashed['email'], user_hashed['pseudo'],
                    user_hashed['first_name'], user_hashed['last_name'],
                    user_hashed['picture_url'], user_hashed['updated_at'], user_hashed['created_at'], following)
   end
