@@ -1,7 +1,7 @@
 class BaseUser
   attr_reader :id, :email, :pseudo, :first_name, :last_name, :picture_url, :updated_at, :created_at
 
-  def initialize(id, emai, pseudol, first_name, last_name, picture_url, update_at, created_at)
+  def initialize(id, email, pseudo, first_name, last_name, picture_url, update_at, created_at)
     @id = id
     @email = email
     @pseudo = pseudo
