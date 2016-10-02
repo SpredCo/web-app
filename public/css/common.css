@@ -25,7 +25,6 @@
 }
 .main-content {
     background-color: #fff;
-    height: 100%;
 }
 .spredcast-grp h3 {
     font-size: 20px;
@@ -134,8 +133,6 @@
 .signup-google:focus {
     color: #fff;
 }
-
-
 .signup-form {
     margin-top: 10px;
 }
@@ -188,6 +185,83 @@
     font-weight: bold;
     margin-bottom: 40px;
 }
+.navbar-icon {
+    border-left: solid #777 1px;
+    width: 100px;
+    text-align: center;
+}
+.navbar-icon.last {
+    border-right: solid #777 1px;
+}
+.play-icon {
+    color: #55AA55;
+    font-size: 20px;
+}
+.inbox-icon {
+    color: #777;
+    font-size: 20px;
+}
+.inbox-badge {
+    font-size: 10px;
+    margin-top: -6px;
+    background-color: #55AA55;
+}
+.nav-profile-picture {
+    border-radius: 25px;
+    cursor: pointer;
+    margin-left: 100px;
+}
+.profile-header {
+    background-color: #55AA55;
+}
+.profile-cadre {
+    top: 90px;
+    position: relative;
+    width: 210px;
+    height: 210px;
+    background-color: #fff;
+    border-radius: 15px;
+}
+.profile-picture {
+    margin: 5px;
+    width: 200px;
+    border-radius: 15px;
+}
+.profile-name {
+    padding-left: 250px;
+}
+.profile-name h2 {
+    margin-bottom: 0;
+}
+.profile-name h3 {
+    margin-top: 5px;
+    color: #777;
+    font-style: italic;
+}
+.edit-profile-btn {
+    margin-top: 30px;
+}
+.profile-info-line {
+    margin-top: 20px;
+    text-align: center;
+    border-top: solid 1px #f1f1f1;
+}
+.profile-info-cell {
+    border-right: solid 2px #f1f1f1;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.profile-info-cell h4 {
+    text-transform: uppercase;
+    color: #777;
+    font-size: 14px;
+}
+.profile-info-cell span {
+    font-size: 20px;
+    color: #55AA55;
+    font-weight: bold;
+}
+
 @media (max-width: 1200px) {
     .navbar-default .navbar-brand.logo {
         width: inherit;
