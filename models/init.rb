@@ -37,4 +37,8 @@ require_relative 'users/base_user'
 require_relative 'users/remote_user'
 require_relative 'users/current_user'
 
+require_relative 'inbox/inbox'
+require_relative 'inbox/conversation'
+require_relative 'inbox/message'
+
 require_relative 'token_box'

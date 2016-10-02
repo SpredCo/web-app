@@ -31,7 +31,7 @@ class Spred
     end
   end
 
-  get '/:id' do
+  get '/@:id' do
     authenticate!
     @user = RemoteUser.find(session[:spred_tokens], params[:id])
     if @user.is_a?(APIError)
