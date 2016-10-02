@@ -3,12 +3,12 @@ class Spred
 
   get '/user/:id/show' do
     authenticate!
-    @user = User.find_by_id(params[:id])
+    @user = RemoteUser.find_by_id(session[:spred_tokens], params[:id])
     if @user.is_a?(APIError)
       @errors = {default: response.message}
       haml :main
     end
-    @following_user = session[:current_user].following.include?(@user['id'])
+    @following_user = session[:current_user].following.include?(@user.id)
     haml :user_show
   end
 
@@ -33,27 +33,28 @@ class Spred
     if response.is_a?(APIError)
       @errors = {default: response.message}
       haml :user_edit
+    else
+      session[:current_user] = @user
+      haml :profile
     end
-    session[:current_user] = @user
-    haml :profile
   end
 
   post '/user/:id/follow' do
     authenticate!
-    response = RemoteUser.new(params[:id]).follow(session[:spred_tokens])
+    response = RemoteUser.find_by_id(session[:spred_tokens], params[:id]).follow(session[:spred_tokens])
     if response.is_a?(APIError)
       @errors = {default: response.message}
-      haml :user_show
     end
+    haml :user_show
   end
 
   post '/user/:id/unfollow' do
     authenticate!
-    response = RemoteUser.new(params[:id]).unfollow(session[:spred_tokens])
+    response = RemoteUser.find_by_id(session[:spred_tokens], params[:id]).unfollow(session[:spred_tokens])
     if response.is_a?(APIError)
       @errors = {default: response.message}
-      haml :user_show
     end
+    haml :user_show
   end
 
   get '/user/pseudo/check/:pseudo' do
