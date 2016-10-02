@@ -1,4 +1,5 @@
 class CurrentUser < BaseUser
+  attr_reader :following
 
   def initialize(id, email, pseudo, first_name, last_name, picture_url, updated_at, created_at, following)
     @following = following
