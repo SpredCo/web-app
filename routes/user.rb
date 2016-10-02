@@ -40,7 +40,7 @@ class Spred
     end
   end
 
-  post '/user/:id/follow' do
+  get '/user/:id/follow' do
     authenticate!
     response = RemoteUser.find(session[:spred_tokens], params[:id]).follow(session[:spred_tokens])
     if response.is_a?(APIError)
@@ -49,7 +49,7 @@ class Spred
     haml :user_show
   end
 
-  post '/user/:id/unfollow' do
+  get '/user/:id/unfollow' do
     authenticate!
     response = RemoteUser.find(session[:spred_tokens], params[:id]).unfollow(session[:spred_tokens])
     if response.is_a?(APIError)
