@@ -18,6 +18,11 @@
           %label{:for => 'email'} Email
           %input#email.form-control{:name => 'email', :type => 'email', :value => session[:current_user].email}
         %div.form-group
+          %label{:for => 'pseudo'} Pseudo
+          %div.input-group
+            %span#pseudo-id.input-group-addon @
+            %input#pseudo.form-control{:type => 'text', :name => 'pseudo', :value => session[:current_user].pseudo, :aria  => {:describedby => 'pseudo-id'}}
+        %div.form-group
           %label{:for => 'first_name'} Prénom
           %input#first_name.form-control{:name => 'first_name', :type => 'text', :value => session[:current_user].first_name}
         %div.form-group
