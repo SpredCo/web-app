@@ -25,6 +25,10 @@ class CurrentUser < BaseUser
 
   end
 
+  def reload!
+
+  end
+
   def to_hash
     hash = super
     hash[:following] = @following.map(&:to_hash)
@@ -33,7 +37,7 @@ class CurrentUser < BaseUser
 
   def self.from_hash(user_hashed)
     following = user_hashed['following'].each_with_object([]) do |follower, array|
-      array << BaseUser.from_hash(follower)
+      #array << BaseUser.from_hash(follower)
     end
     CurrentUser.new(user_hashed['id'], user_hashed['email'], user_hashed['pseudo'],
                     user_hashed['first_name'], user_hashed['last_name'],

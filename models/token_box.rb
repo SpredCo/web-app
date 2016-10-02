@@ -7,7 +7,7 @@ class TokenBox
   end
 
   def reload!
-    request = RefreshTokenRequest(@refresh_token)
+    request = ReloadTokensRequest.new(@refresh_token)
     request.send
     response = request.parse_response
     if response.is_a? APIError

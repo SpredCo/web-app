@@ -7,13 +7,13 @@ class RemoteUser < BaseUser
   end
 
   def follow(tokens)
-    request = FollowUserRequest.new(tokens, self.id)
+    request = FollowUserRequest.new(tokens, @id)
     request.send
     request.parse_response
   end
 
   def unfollow(tokens)
-    request = UnFollowUserRequest.new(tokens, self.id)
+    request = UnFollowUserRequest.new(tokens, @id)
     request.send
     request.parse_response
   end

@@ -33,7 +33,7 @@ class Spred
 
   get '/@:id' do
     authenticate!
-    @user = RemoteUser.find(session[:spred_tokens], params[:id])
+    @user = RemoteUser.find(session[:spred_tokens], "@#{params[:id]}")
     if @user.is_a?(APIError)
       @errors = {default: @user.message}
       haml :index

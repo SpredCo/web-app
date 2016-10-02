@@ -45,8 +45,11 @@ class Spred
     response = RemoteUser.find(session[:spred_tokens], params[:id]).follow(session[:spred_tokens])
     if response.is_a?(APIError)
       @errors = {default: response.message}
+    else
+      session[:current_user] = get_current_user_from_token(session[:spred_tokens])
+      @user = session[:current_user]
+      haml :profile
     end
-    haml :user_show
   end
 
   get '/user/:id/unfollow' do
@@ -54,8 +57,11 @@ class Spred
     response = RemoteUser.find(session[:spred_tokens], params[:id]).unfollow(session[:spred_tokens])
     if response.is_a?(APIError)
       @errors = {default: response.message}
+    else
+      session[:current_user] = get_current_user_from_token(session[:spred_tokens])
+      @user = session[:current_user]
+      haml :profile
     end
-    haml :user_show
   end
 
   get '/user/pseudo/check/:pseudo' do
