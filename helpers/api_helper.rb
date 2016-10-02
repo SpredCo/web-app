@@ -1,4 +1,4 @@
-module Api
+module APIHelper
   SCHEME = 'http'
   URL = 'sharemyscreen.fr:3000'
   module EndPoint

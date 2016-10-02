@@ -7,19 +7,19 @@ class RemoteUser < BaseUser
   end
 
   def follow(tokens)
-    request = FollowUserRequest(tokens, self.id)
+    request = FollowUserRequest.new(tokens, self.id)
     request.send
     request.parse_response
   end
 
   def unfollow(tokens)
-    request = UnFollowUserRequest(tokens, self.id)
+    request = UnFollowUserRequest.new(tokens, self.id)
     request.send
     request.parse_response
   end
 
-  def self.find_by_id(tokens, id)
-    request = GetUserRequest(tokens, id)
+  def self.find(tokens, id)
+    request = GetUserRequest.new(tokens, id)
     request.send
     response = request.parse_response
     if response.is_a? APIError

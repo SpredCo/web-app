@@ -3,13 +3,14 @@ class Spred
 
   get '/user/:id/show' do
     authenticate!
-    @user = RemoteUser.find_by_id(session[:spred_tokens], params[:id])
+    @user = RemoteUser.find(session[:spred_tokens], params[:id])
     if @user.is_a?(APIError)
       @errors = {default: response.message}
-      haml :main
+      haml :index
+    else
+      @following_user = session[:current_user].following.include?(@user.id)
+      haml :user_show
     end
-    @following_user = session[:current_user].following.include?(@user.id)
-    haml :user_show
   end
 
   get '/user/:id/edit' do
@@ -41,7 +42,7 @@ class Spred
 
   post '/user/:id/follow' do
     authenticate!
-    response = RemoteUser.find_by_id(session[:spred_tokens], params[:id]).follow(session[:spred_tokens])
+    response = RemoteUser.find(session[:spred_tokens], params[:id]).follow(session[:spred_tokens])
     if response.is_a?(APIError)
       @errors = {default: response.message}
     end
@@ -50,7 +51,7 @@ class Spred
 
   post '/user/:id/unfollow' do
     authenticate!
-    response = RemoteUser.find_by_id(session[:spred_tokens], params[:id]).unfollow(session[:spred_tokens])
+    response = RemoteUser.find(session[:spred_tokens], params[:id]).unfollow(session[:spred_tokens])
     if response.is_a?(APIError)
       @errors = {default: response.message}
     end
