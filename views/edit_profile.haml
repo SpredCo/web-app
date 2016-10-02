@@ -8,12 +8,12 @@
       %div.profile-name
         %h2= session[:current_user].first_name + ' ' + session[:current_user].last_name
         %h3= '@' + session[:current_user].pseudo
-  %form{:method => 'post', :name => 'profile'}
+  %form{:method => 'post', :name => 'profile', enctype: 'multipart/form-data'}
     %div.row.profile-form
       %div.col-sm-6.col-sm-offset-3
         %div.form-group
           %label{:for => 'profile_picture'} Photo de profil
-          %input#profile_picture.form-control{:type => 'file', :name => 'profil_picture'}
+          %input#profile_picture.form-control{:type => 'file', :name => 'profile_picture', accept: 'image/*'}
         %div.form-group
           %label{:for => 'email'} Email
           %input#email.form-control{:name => 'email', :type => 'email', :value => session[:current_user].email}

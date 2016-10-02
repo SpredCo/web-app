@@ -1,6 +1,6 @@
 class PatchRequest < BaseRequest
-  def initialize(tokens, session, request_type, endpoint, params = nil)
-    super(tokens, session, request_type, endpoint, params)
+  def initialize(tokens, request_type, endpoint, params = nil)
+    super(tokens, endpoint)
     begin
       initialize_request(request_type)
     rescue => e

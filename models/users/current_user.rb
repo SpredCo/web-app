@@ -7,7 +7,18 @@ class CurrentUser < BaseUser
   end
 
   def edit!(tokens, params)
-    EditUserRequest.new(tokens, params)
+    req = EditUserRequest.new(tokens, params)
+    req.send
+    response = req.parse_response
+    unless response.is_a? APIError
+      @id = response['id']
+      @email = response['email']
+      @pseudo = response['pseudo']
+      @first_name = response['first_name']
+      @last_name = response['last_name']
+      @updated_at = response['updated_at']
+      self
+    end
   end
 
   def delete
@@ -25,7 +36,7 @@ class CurrentUser < BaseUser
       array << BaseUser.from_hash(follower)
     end
     CurrentUser.new(user_hashed['id'], user_hashed['email'], user_hashed['pseudo'],
-                   user_hashed['first_name'], user_hashed['last_name'],
-                   user_hashed['picture_url'], user_hashed['updated_at'], user_hashed['created_at'], following)
+                    user_hashed['first_name'], user_hashed['last_name'],
+                    user_hashed['picture_url'], user_hashed['updated_at'], user_hashed['created_at'], following)
   end
 end
