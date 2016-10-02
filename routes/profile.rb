@@ -5,5 +5,9 @@ class Spred
     authenticate!
     @user = session[:current_user]
     haml :profile
-    end
+  end
+
+  get '/profile/edit' do
+    haml :edit_profile
+  end
 end

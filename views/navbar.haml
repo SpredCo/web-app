@@ -39,7 +39,7 @@
               %img.nav-profile-picture.dropdown-toggle{:src => session[:current_user].picture_url, :type => 'button', :data => {:toggle => 'dropdown'}}
               %ul.dropdown-menu{:role => 'menu', :aria => {:labelledby => 'menu1'}}
                 %li{:role => 'presentation'}
-                  %a{:role => 'menuitem'} @Toto
+                  %a{:role => 'menuitem'}= '@' + session[:current_user].pseudo
                 %li.divider{:role => 'separator'}
                 %li{:role => 'presentation'}
                   %a{:href => '/profile'}

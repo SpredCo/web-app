@@ -1,0 +1,29 @@
+%div.container.main-content
+  %div.row.profile-header
+    %div.col-sm-4
+      %div.profile-cadre
+        %img.profile-picture{:src => session[:current_user].picture_url}
+  %div.row
+    %div.col-sm-8
+      %div.profile-name
+        %h2= session[:current_user].first_name + ' ' + session[:current_user].last_name
+        %h3= '@' + session[:current_user].pseudo
+  %form{:method => 'post', :name => 'profile'}
+    %div.row.profile-form
+      %div.col-sm-6.col-sm-offset-3
+        %div.form-group
+          %label{:for => 'profile_picture'} Photo de profil
+          %input#profile_picture.form-control{:type => 'file', :name => 'profil_picture'}
+        %div.form-group
+          %label{:for => 'email'} Email
+          %input#email.form-control{:name => 'email', :type => 'email', :value => session[:current_user].email}
+        %div.form-group
+          %label{:for => 'first_name'} Prénom
+          %input#first_name.form-control{:name => 'first_name', :type => 'text', :value => session[:current_user].first_name}
+        %div.form-group
+          %label{:for => 'last_name'} Nom
+          %input#last_name.form-control{:name => 'last_name', :type => 'text', :value => session[:current_user].last_name}
+        %input.form-control.btn.btn-success.profile-form{:type => 'submit', :value => 'Editer mon profil', :name => 'edit'}
+
+
+

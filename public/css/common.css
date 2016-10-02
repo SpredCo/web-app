@@ -261,6 +261,9 @@
     color: #55AA55;
     font-weight: bold;
 }
+.profile-form {
+    margin-top: 50px;
+}
 
 @media (max-width: 1200px) {
     .navbar-default .navbar-brand.logo {

@@ -7,13 +7,13 @@
     %div.col-sm-8
       %div.profile-name
         %h2= @user.first_name + ' ' + @user.last_name
-        %h3 @toto
+        %h3= '@' + @user.pseudo
     %div.col-sm-2.col-sm-offset-2.edit-profile-btn
       %a.btn.btn-default{:href => '/profile/edit'} Editer mon profile
   %div.row.profile-info-line
     %div.col-sm-2.profile-info-cell
       %h4 Following
-      %span 5
+      %span= @user.following.length
     %div.col-sm-2.profile-info-cell
       %h4 Follower
       %span 0
