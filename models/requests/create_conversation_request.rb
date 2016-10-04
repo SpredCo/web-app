@@ -1,6 +1,6 @@
 class CreateConversationRequest < PostRequest
-  def initialize(tokens, conversation)
+  def initialize(tokens, members, object, content)
     req = APIHelper::Request::CONVERSATION_CREATE
-    super(tokens, req[:service], req[:end_points], conversation.to_h)
+    super(tokens, req[:service], req[:end_point], {members: members, object: object, content: content})
   end
 end

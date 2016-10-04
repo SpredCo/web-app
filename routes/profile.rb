@@ -8,6 +8,7 @@ class Spred
   end
 
   get '/profile/edit' do
+    authenticate!
     haml :edit_profile
   end
 

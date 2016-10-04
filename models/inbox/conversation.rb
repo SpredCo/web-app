@@ -10,12 +10,25 @@ class Conversation
     @msg = msg
   end
 
-  def self.create
-
+  def push(tokens, message)
+    req = CreateMessageRequest.new(tokens, message)
+    req.send
+    response = req.parse_response
+    if response.is_a? APIError
+      response
+    else
+      response.body
+    end
   end
 
-  def self.find_by_id(tokens, id)
+  def unread?
+    unread = false
+    @msg.each {|message| unread = true if message.unread?}
+    unread
+  end
 
+  def read?
+    !unread?
   end
 
   def self.from_hash(conversation)

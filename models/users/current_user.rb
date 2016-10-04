@@ -11,21 +11,25 @@ class CurrentUser < BaseUser
     req.send
     response = req.parse_response
     unless response.is_a? APIError
-      @id = response['id']
-      @email = response['email']
-      @pseudo = response['pseudo']
-      @first_name = response['first_name']
-      @last_name = response['last_name']
-      @updated_at = response['updated_at']
+      @id = response.body['id']
+      @email = response.body['email']
+      @pseudo = response.body['pseudo']
+      @first_name = response.body['first_name']
+      @last_name = response.body['last_name']
+      @updated_at = response.body['updated_at']
       self
     end
   end
 
-  def delete
-
+  # TODO: Compare unread messages to be sure the update is mandatory
+  def inbox(tokens)
+    req = GetInboxRequest.new(tokens)
+    req.send
+    response = req.parse_response
+    response.is_a?(APIError) ? nil : Inbox.from_hash(response.body)
   end
 
-  def reload!
+  def delete
 
   end
 

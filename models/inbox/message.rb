@@ -1,7 +1,7 @@
 class Message
-  attr_reader :conversation, :from, :content, :read, :created_at
+  attr_reader :conversation, :from, :content, :created_at
 
-  def initialize(conversation, from, content, read, created_at)
+  def initialize(conversation, from, content, read=false, created_at=DateTime.now)
     @conversation = conversation
     @from = from
     @content = content
@@ -9,8 +9,12 @@ class Message
     @created_at = created_at
   end
 
-  def self.find_by_id(tokens, id)
+  def unread?
+    !@read
+  end
 
+  def read?
+    @read
   end
 
   def self.from_hash(message)

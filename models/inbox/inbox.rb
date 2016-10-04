@@ -1,22 +1,27 @@
 class Inbox
+  attr_reader :conversations
+
   def initialize(conversations=nil)
     @conversations = conversations || []
   end
 
-  def all_conversations(tokens)
-
+  def unread_conversations
+    @conversations.select {|conv| conv.unread?}
   end
 
-  def get_message(tokens, conv_id, msg_id)
-
+  def create_conversation(tokens, members, object, content)
+    req = CreateConversationRequest.new(tokens, members, object, content)
+    req.send
+    response = req.parse_response
+    if response.is_a? APIError
+      response
+    else
+      response.body
+    end
   end
 
-  def reply(conv_id)
-
-  end
-
-  def create_conversation
-
+  def conversation(id)
+    @conversations.select{|conv| conv.id == id}
   end
 
   def self.from_hash(inbox)
