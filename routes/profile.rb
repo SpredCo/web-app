@@ -4,12 +4,12 @@ class Spred
   get '/profile' do
     authenticate!
     @user = session[:current_user]
-    haml :profile
+    haml :'user/profile', layout: :'layout/layout'
   end
 
   get '/profile/edit' do
     authenticate!
-    haml :edit_profile
+    haml :'user/edit_profile', layout: :'layout/layout'
   end
 
   post '/profile/edit' do
@@ -25,10 +25,10 @@ class Spred
     response = @user.edit!(session[:spred_tokens], verified_params)
     if response.is_a?(APIError)
       @errors = {default: response.message}
-      haml :user_edit
+      haml :'user/edit_profile', layout: :'layout/layout'
     else
       session[:current_user] = @user
-      haml :profile
+      haml :'user/profile', layout: :'layout/layout'
     end
   end
 
@@ -37,10 +37,10 @@ class Spred
     @user = RemoteUser.find(session[:spred_tokens], "@#{params[:id]}")
     if @user.is_a?(APIError)
       @errors = {default: @user.message}
-      haml :index
+      haml :'home/index', layout: :'layout/layout'
     else
       @following_user = session[:current_user].following.include?(@user.id)
-      haml :profile
+      haml :'user/profile', layout: :'layout/layout'
     end
   end
 end

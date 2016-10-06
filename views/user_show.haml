@@ -1,7 +1,0 @@
-%h1 user
-%img{source: user['picture_url'], width: 50, height: 50}
-%td
-  %tr= user['email']
-  %tr= user['first_name']
-  %form{action: "/user/#{user['id']}/#{following_user ? 'unfollow' : 'follow'}", method: 'post'}
-    %input{type: 'submit', value: following_user ? 'unfollow' : 'follow'}

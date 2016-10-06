@@ -1,14 +1,14 @@
 class Spred
   get '/login' do
     @title = 'Login'
-    haml :login
+    haml :'login/login', layout: :'layout/layout'
   end
 
   post '/login' do
     response = AuthenticationHelper.login(params)
     if response.nil? || response.is_a?(APIError)
       @errors = {default: APIError::INVALID_LOGIN}
-      haml :login
+      haml :'login/login', layout: :'layout/layout'
     else
       set_user_and_tokens(response.body['access_token'], response.body['refresh_token'])
       redirect '/'
@@ -22,7 +22,7 @@ class Spred
 
   def set_error_and_redirect
     @errors = {default: response.message}
-    haml :login
+    haml :'login/login', layout: :'layout/layout'
   end
 
   def set_user_and_tokens(access_token, refresh_token)
