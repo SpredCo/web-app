@@ -37,7 +37,7 @@ class RemoteUser < BaseUser
 
   def self.from_hash(user_hashed)
     following = user_hashed['following'].each_with_object([]) do |follower, array|
-      array << BaseUser.from_hash(follower)
+     # array << BaseUser.from_hash(follower)
     end
     RemoteUser.new(user_hashed['id'], user_hashed['email'], user_hashed['pseudo'],
                     user_hashed['first_name'], user_hashed['last_name'],

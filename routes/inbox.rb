@@ -8,12 +8,9 @@ class Spred
     if response.is_a? APIError
       @errors = {default: response.message}
     else
-      inbox = Inbox.from_hash(response.body)
-      @inbox = {}
-      inbox.each do |conv|
-        @inbox[conv.id] = {read: conv.read?}
-      end
+      @inbox = Inbox.from_hash(response.body)
     end
+    haml :inbox
   end
 
   get '/inbox/conversation/:id' do

@@ -28,4 +28,15 @@ class BaseUser
         created_at: @created_at
     }
   end
+
+  def self.find(tokens, identifier)
+    req = GetUserRequest.new(tokens, identifier)
+    req.send
+    response = req.parse_response
+    if response.is_a? APIError
+      response
+    else
+      from_hash(response.body)
+    end
+  end
 end

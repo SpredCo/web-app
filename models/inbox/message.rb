@@ -18,7 +18,7 @@ class Message
   end
 
   def self.from_hash(message)
-    Message.new(message[:conversation], message[:from], message[:content], message[:read], message[:created_at])
+    Message.new(message['conversation'], message['from'], message['content'], message['read'], message['created_at'])
   end
 
   def to_hash

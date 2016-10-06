@@ -11,7 +11,7 @@ class Conversation
   end
 
   def push(tokens, message)
-    req = CreateMessageRequest.new(tokens, message)
+    req = CreateMessageRequest.new(tokens, @id, message)
     req.send
     response = req.parse_response
     if response.is_a? APIError
@@ -32,14 +32,14 @@ class Conversation
   end
 
   def self.from_hash(conversation)
-    members = conversation[:members].each_with_object([]) do |member, array|
+    members = conversation['members'].each_with_object([]) do |member, array|
       array << BaseUser.from_hash(member)
     end
-    msg = conversation[:msg].each_with_object([]) do |member, array|
+    msg = conversation['msg'].each_with_object([]) do |member, array|
       array << Message.from_hash(member)
     end
-    Conversation.new(conversation[:object], members, conversation[:can_answer],
-                     conversation[:last_msg], conversation[:created_at], msg)
+    Conversation.new(conversation['object'], members, conversation['can_answer'],
+                     conversation['last_msg'], conversation['created_at'], msg)
   end
 
   def to_hash
