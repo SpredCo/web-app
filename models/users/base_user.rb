@@ -13,8 +13,8 @@ class BaseUser
   end
 
   def self.from_hash(user)
-    BaseUser.new(user[:id], user[:email], user[:pseudo], user[:first_name], user[:last_name],
-                 user[:picture_url], user[:updated_at], user[:created_at])
+    BaseUser.new(user['id'], user['email'], user['pseudo'], user['first_name'], user['last_name'],
+                 user['picture_url'], user['updated_at'], user['created_at'])
   end
 
   def to_hash

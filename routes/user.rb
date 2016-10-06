@@ -43,9 +43,11 @@ class Spred
     end
   end
 
-  get '/user/search/:partial_email' do
-    request = SearchUserRequest(session[:spred_tokens], params[:partial_email])
-    request.send
-    request.parse_response
+  get '/user/search/email/:partial_email' do
+    @users = RemoteUser.find_all_by_email(session[:spred_tokens], params[:partial_email])
+  end
+
+  get '/user/search/pseudo/:partial_pseudo' do
+    @users = RemoteUser.find_all_by_pseudo(session[:spred_tokens], params[:partial_pseudo])
   end
 end
