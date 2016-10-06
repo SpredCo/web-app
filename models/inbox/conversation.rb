@@ -31,6 +31,10 @@ class Conversation
     end
   end
 
+  def read!(tokens)
+
+  end
+
   def unread?
     unread = false
     @msg.each {|message| unread = true if message.unread?}

@@ -48,6 +48,7 @@ class Spred
   end
 
   get '/user/search/pseudo/:partial_pseudo' do
-    @users = RemoteUser.find_all_by_pseudo(session[:spred_tokens], params[:partial_pseudo])
+    users = RemoteUser.find_all_by_pseudo(session[:spred_tokens], params[:partial_pseudo])
+    @users = JSON.generate(users.to_hash)
   end
 end
