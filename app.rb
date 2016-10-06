@@ -13,6 +13,7 @@ class Spred < Sinatra::Application
   configure do
     set :client_key, 'r5cfOscd6CZAZ8XQ'
     set :client_secret, 'G2jkNVDUqFcPCI4e6nia3w6UOMCaryPX'
+    #set :haml, layout: :'layout/layout'
   end
 
   configure :production do

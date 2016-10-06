@@ -35,9 +35,23 @@ class RemoteUser < BaseUser
     hash
   end
 
+  def self.find_all_by_email(tokens, partial_email)
+    request = SearchUserByEmailRequest.new(tokens, partial_email)
+    request.send
+    response = request.parse_response
+    response.body.map {|user| from_hash(user)}
+  end
+
+  def self.find_all_by_pseudo(tokens, partial_pseudo)
+    request = SearchUserByPseudoRequest.new(tokens, partial_pseudo)
+    request.send
+    response = request.parse_response
+    response.body.map {|user| from_hash(user)}
+  end
+
   def self.from_hash(user_hashed)
     following = user_hashed['following'].each_with_object([]) do |follower, array|
-     # array << BaseUser.from_hash(follower)
+     array << BaseUser.from_hash(follower)
     end
     RemoteUser.new(user_hashed['id'], user_hashed['email'], user_hashed['pseudo'],
                     user_hashed['first_name'], user_hashed['last_name'],

@@ -18,7 +18,8 @@ module APIHelper
 
     # API Service
     USER = '/v1/users'
-    SEARCH_BY_EMAIL = '/v1/users/search'
+    SEARCH_BY_EMAIL = '/v1/users/search/email'
+    SEARCH_BY_PSEUDO = '/v1/users/search/pseudo'
 
     INBOX = '/v1/inbox'
     CONVERSATION = '/v1/inbox/conversation'
@@ -58,6 +59,7 @@ module APIHelper
     MESSAGE_GET = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::CONVERSATION}"}
     MESSAGE_CREATE = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::CONVERSATION}"}
 
-    SEARCH_USER = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::SEARCH_BY_EMAIL}"}
+    SEARCH_USER_BY_EMAIL = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::SEARCH_BY_EMAIL}"}
+    SEARCH_USER_BY_PSEUDO = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::SEARCH_BY_PSEUDO}"}
   end
 end

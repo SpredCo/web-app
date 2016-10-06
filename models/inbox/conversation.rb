@@ -10,6 +10,16 @@ class Conversation
     @msg = msg
   end
 
+  def self.create(id, object, members, can_answer, last_msg, created_at, msg)
+    @id = id
+    @object = object
+    @members = members
+    @can_answer = can_answer
+    @last_msg = last_msg
+    @created_at = created_at
+    @msg = msg
+  end
+
   def push(tokens, message)
     req = CreateMessageRequest.new(tokens, @id, message)
     req.send
@@ -19,6 +29,10 @@ class Conversation
     else
       response.body
     end
+  end
+
+  def read!(tokens)
+
   end
 
   def unread?
@@ -38,7 +52,7 @@ class Conversation
     msg = conversation['msg'].each_with_object([]) do |member, array|
       array << Message.from_hash(member)
     end
-    Conversation.new(conversation['object'], members, conversation['can_answer'],
+    Conversation.create(conversation['id'], conversation['object'], members, conversation['can_answer'],
                      conversation['last_msg'], conversation['created_at'], msg)
   end
 

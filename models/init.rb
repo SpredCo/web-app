@@ -23,7 +23,8 @@ require_relative 'requests/spred_signup_request'
 
 require_relative 'requests/get_user_request'
 require_relative 'requests/edit_user_request'
-require_relative 'requests/search_user_request'
+require_relative 'requests/search_user_by_email_request'
+require_relative 'requests/search_user_by_pseudo_request'
 require_relative 'requests/follow_user_request'
 require_relative 'requests/unfollow_user_request'
 

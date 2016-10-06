@@ -10,7 +10,7 @@ class Spred
     else
       @inbox = Inbox.from_hash(response.body)
     end
-    haml :inbox, layout: :inbox_layout
+    haml :'inbox/inbox', layout: :'layout/layout'
   end
 
   get '/inbox/conversation/:conversation_id/message/:message_id' do
@@ -24,7 +24,18 @@ class Spred
     end  end
 
   get '/inbox/conversation/new' do
-    haml :create_conversation, layout: :inbox_layout
+    haml :create_conversation, layout: :'layout/layout'
+  end
+
+  post '/inbox/conversation/:id/reply' do
+    current_user = session[:current_user]
+    tokens = session[:spred_tokens]
+    response = Conversation.find(tokens, params[:id]).push(Message.new(conv_id, "@#{current_user.pseudo}", params[:content]))
+    if response.is_a? APIError
+      @errors = {default: response.message}
+    else
+      haml :'inbox/inbox', layout: :'layout/layout'
+    end
   end
 
   post '/inbox/conversation/new' do
@@ -36,7 +47,7 @@ class Spred
     if response.is_a? APIError
       @errors = {default: response.message}
     else
-      haml :inbox, layout: :inbox_layout
+      haml :'inbox/inbox', layout: :'layout/layout'
     end
   end
 
@@ -48,20 +59,7 @@ class Spred
       @errors = {default: response.message}
     else
       @conversation = Conversation.from_hash(response.body)
-    end
-  end
-
-  post '/inbox/conversation/:id' do
-    current_user = session[:current_user]
-    tokens = session[:spred_tokens]
-    conv_id = params[:id]
-    request = current_user.inbox(tokens).conversation(conv_id).push(tokens, Message.new(conv_id, "@#{current_user.pseudo}", params[:content]))
-    request.send
-    response = request.parse_response
-    if response.is_a? APIError
-      @errors = {default: response.message}
-    else
-      haml :inbox
+      #@conversation.read!(session[:spred_tokens]) if @conversation.unread?
     end
   end
 end
