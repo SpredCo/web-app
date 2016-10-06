@@ -10,7 +10,7 @@ class Spred
     else
       @inbox = Inbox.from_hash(response.body)
     end
-    haml :inbox
+    haml :inbox, layout: :inbox_layout
   end
 
   get '/inbox/conversation/:conversation_id/message/:message_id' do
@@ -24,7 +24,7 @@ class Spred
     end  end
 
   get '/inbox/conversation/new' do
-    haml :create_conversation
+    haml :create_conversation, layout: :inbox_layout
   end
 
   post '/inbox/conversation/new' do
@@ -36,7 +36,7 @@ class Spred
     if response.is_a? APIError
       @errors = {default: response.message}
     else
-      haml :inbox
+      haml :inbox, layout: :inbox_layout
     end
   end
 
