@@ -27,6 +27,17 @@ class Spred
     haml :create_conversation
   end
 
+  post '/inbox/conversation/:id/reply' do
+    current_user = session[:current_user]
+    tokens = session[:spred_tokens]
+    response = Conversation.find(tokens, params[:id]).push(Message.new(conv_id, "@#{current_user.pseudo}", params[:content]))
+    if response.is_a? APIError
+      @errors = {default: response.message}
+    else
+      haml :inbox
+    end
+  end
+
   post '/inbox/conversation/new' do
     current_user = session[:current_user]
     tokens = session[:spred_tokens]
@@ -48,20 +59,6 @@ class Spred
       @errors = {default: response.message}
     else
       @conversation = Conversation.from_hash(response.body)
-    end
-  end
-
-  post '/inbox/conversation/:id' do
-    current_user = session[:current_user]
-    tokens = session[:spred_tokens]
-    conv_id = params[:id]
-    request = current_user.inbox(tokens).conversation(conv_id).push(tokens, Message.new(conv_id, "@#{current_user.pseudo}", params[:content]))
-    request.send
-    response = request.parse_response
-    if response.is_a? APIError
-      @errors = {default: response.message}
-    else
-      haml :inbox
     end
   end
 end

@@ -16,9 +16,7 @@ class Spred
     tokens = session[:spred_tokens]
     users = params[:users].split(';')
     users << "@#{current_user.pseudo}"
-    p users
     users.map! {|user| RemoteUser.find(tokens, user).id}
-    p users
     response = current_user.inbox(tokens).create_conversation(tokens, users, params[:object], params[:msg])
     haml "#{response}"
   end
