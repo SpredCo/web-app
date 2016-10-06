@@ -1,9 +1,9 @@
 %div.container.main-inbox-content
   %div.row.toolbox
-    %div.col-sm-4.center-text
-      %a{:href => '/inbox/conversation/new'}
-        %i.fa.fa-envelope
-        %span Nouveau message
+    %div.col-sm-1.center-text.inbox-dest-label
+      %span À :
+    %div.col-sm-11
+
     %div.col-sm-4.col-sm-offset-4.center-text
       %div
         %i.fa.fa-reply
@@ -16,6 +16,3 @@
         %div.object Hello
         %div.members @toto, @titi, ...
     %div.row.inbox-content
-
-
-

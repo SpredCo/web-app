@@ -264,6 +264,53 @@
 .profile-form {
     margin-top: 50px;
 }
+.main-inbox-content {
+    background-color: #fff;
+    height: 100vh;
+}
+.toolbox {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.toolbox a {
+    color: #55AA55;
+}
+.inbox {
+    border-top: solid 1px #ccc;
+}
+.inbox-conversation {
+    border-right: solid 1px #ccc;
+    height: 100%;
+}
+.conversation {
+    height: 80px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    cursor: pointer;
+    border-bottom: solid 1px #ccc;
+}
+.conversation.active {
+    background-color: #f1f1f1;
+}
+.unread {
+    position: relative;
+    top: 25px;
+    color: #55AA55;
+}
+.object {
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 20px;
+}
+.members {
+    padding-left: 20px;
+    font-style: italic;
+    color: #777;
+}
+.inbox-dest-label {
+    color: #777;
+}
 
 @media (max-width: 1200px) {
     .navbar-default .navbar-brand.logo {
