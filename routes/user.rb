@@ -44,11 +44,14 @@ class Spred
   end
 
   get '/user/search/email/:partial_email' do
-    @users = RemoteUser.find_all_by_email(session[:spred_tokens], params[:partial_email])
+    users = RemoteUser.find_all_by_email(session[:spred_tokens], params[:partial_email])
+    users.map! {|user| user.to_hash}
+    @users = JSON.generate(users)
   end
 
   get '/user/search/pseudo/:partial_pseudo' do
     users = RemoteUser.find_all_by_pseudo(session[:spred_tokens], params[:partial_pseudo])
-    @users = JSON.generate(users.to_hash)
+    users.map! {|user| user.to_hash}
+    @users = JSON.generate(users)
   end
 end
