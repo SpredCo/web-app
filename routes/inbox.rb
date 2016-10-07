@@ -66,5 +66,6 @@ class Spred
       @conversation = Conversation.from_hash(response.body)
       #@conversation.read!(session[:spred_tokens]) if @conversation.unread?
     end
+    haml :'inbox/conversation'
   end
 end

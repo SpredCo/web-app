@@ -1,0 +1,4 @@
+- @conversation.msg.each do | msg |
+  %div.row
+    %div.col-sm-2
+      %img{:src => @conversation.get_user_by_id(msg.from).picture_url}

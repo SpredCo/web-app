@@ -13,5 +13,9 @@ function showConversation(id) {
     $('#' + id).addClass('active');
     lastActive = id;
 
-    $('#')
+    $('#loading').css('display', 'inherit');
+    $.get('/inbox/conversation/' + id, function (data) {
+        $('#loading').css('display', 'none');
+        $('#conversation-content').html(data);
+    });
 }
