@@ -45,13 +45,25 @@ class Spred
     authenticate!
     current_user = session[:current_user]
     tokens = session[:spred_tokens]
-    members = params[:members]
-    members << "@#{current_user.pseudo}"
-    response = current_user.inbox(tokens).create_conversation(tokens, members, params[:object], params[:content])
-    if response.is_a? APIError
-      @errors = {default: response.message}
+    members_pseudo = params[:members].split(', ')
+    members_pseudo << "@#{current_user.pseudo}"
+    members = {}
+    members_pseudo.each {|member| members[member] = RemoteUser.find(tokens, member)}
+    invalid_members = members_pseudo.select {|_, v| v.is_a? APIError}
+    if invalid_members.empty?
+      response = current_user.inbox(tokens).create_conversation(tokens, members.values.select{|member| !member.is_a?(APIError)}.map(&:id), params[:object], params[:content])
+      if response.is_a? APIError
+        @errors = {default: response.message}
+        haml :'inbox/create_conversation', layout: :'layout/inbox_layout'
+      else
+        redirect '/inbox'
+      end
     else
-      haml :'inbox/inbox', layout: :'layout/inbox_layout'
+      @errors = {}
+      invalid_members.each do |k, v|
+        @errors[k] = v.message
+      end
+      haml :'inbox/create_conversation', layout: :'layout/inbox_layout'
     end
   end
 

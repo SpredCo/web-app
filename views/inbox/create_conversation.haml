@@ -5,6 +5,11 @@
         %span À :
       %div.col-sm-11
         %input#tokenfield.form-control{:type => 'text', :name => 'members', :placeholder => 'Destinataire'}
+      - if @errors
+        %div.alert.alert-danger
+          %ul
+            - @errors.each do |k, v|
+              %li= "Erreur #{k}: #{v}"
     %div.row.toolbox.box-border.inbox-object-padding
       %div.col-sm-1.center-text.inbox-dest-label
         %span Objet :
