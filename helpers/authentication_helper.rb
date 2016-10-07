@@ -1,6 +1,6 @@
 module AuthenticationHelper
   def authenticate!
-    redirect '/' unless session[:spred_tokens].is_a? CurrentUser
+    redirect '/' unless session[:spred_tokens].is_a? TokenBox
   end
 
   def self.login(user)

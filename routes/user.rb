@@ -9,8 +9,8 @@ class Spred
     else
       session[:current_user] = get_current_user_from_token(session[:spred_tokens])
       @user = session[:current_user]
-      haml :'user/profile', layout: :'layout/layout'
     end
+    haml :"user/@#{params[:id]}", layout: :'layout/layout'
   end
 
   get '/user/:id/unfollow' do
@@ -21,8 +21,8 @@ class Spred
     else
       session[:current_user] = get_current_user_from_token(session[:spred_tokens])
       @user = session[:current_user]
-      haml :'user/profile', layout: :'layout/layout'
     end
+    haml :"user/@#{params[:id]}", layout: :'layout/layout'
   end
 
   get '/user/pseudo/check/:pseudo' do
