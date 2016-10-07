@@ -2,6 +2,7 @@ class Spred
   include AuthenticationHelper
 
   get '/inbox' do
+    authenticate!
     request = GetInboxRequest.new(session[:spred_tokens])
     request.send
     response = request.parse_response
@@ -24,10 +25,12 @@ class Spred
     end  end
 
   get '/inbox/conversation/new' do
+    authenticate!
     haml :'inbox/create_conversation', layout: :'layout/inbox_layout'
   end
 
   post '/inbox/conversation/:id/reply' do
+    authenticate!
     current_user = session[:current_user]
     tokens = session[:spred_tokens]
     response = Conversation.find(tokens, params[:id]).push(Message.new(conv_id, "@#{current_user.pseudo}", params[:content]))
@@ -39,6 +42,7 @@ class Spred
   end
 
   post '/inbox/conversation/new' do
+    authenticate!
     current_user = session[:current_user]
     tokens = session[:spred_tokens]
     members = params[:members]
@@ -52,6 +56,7 @@ class Spred
   end
 
   get '/inbox/conversation/:id' do
+    authenticate!
     request = GetConversationRequest.new(session[:spred_tokens], params[:id])
     request.send
     response = request.parse_response

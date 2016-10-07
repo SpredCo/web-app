@@ -5,6 +5,13 @@ class Inbox
     @conversations = conversations || []
   end
 
+  def self.reload(tokens)
+    req = GetInboxRequest.new(tokens)
+    req.send
+    response = req.parse_response
+    response.is_a?(APIError) ? nil : Inbox.from_hash(response.body)
+  end
+
   def unread_conversations
     @conversations.select {|conv| conv.unread?}
   end
