@@ -275,7 +275,7 @@
 .toolbox a {
     color: #55AA55;
 }
-.inbox {
+.box-border {
     border-top: solid 1px #ccc;
 }
 .inbox-conversation {
@@ -310,8 +310,14 @@
 }
 .inbox-dest-label {
     color: #777;
+    padding-top: 5px;
 }
-
+.inbox-object-padding {
+    padding-top: 10px;
+}
+.main-inbox-create-conv {
+    background-color: #fff;
+}
 @media (max-width: 1200px) {
     .navbar-default .navbar-brand.logo {
         width: inherit;
