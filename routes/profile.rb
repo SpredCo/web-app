@@ -40,8 +40,10 @@ class Spred
       haml :'home/index', layout: :'layout/layout'
     else
       @following_user = session[:current_user].following.include?(@user.id)
+      p session[:current_user].following
+      p @user.id
       p @following_user
-      redirect :"/@#{params[:id]}", layout: :'layout/layout'
+      haml :'user/profile', layout: :'layout/layout'
     end
   end
 end

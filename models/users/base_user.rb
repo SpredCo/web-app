@@ -39,4 +39,8 @@ class BaseUser
       from_hash(response.body)
     end
   end
+
+  def to_s
+    @pseudo
+  end
 end

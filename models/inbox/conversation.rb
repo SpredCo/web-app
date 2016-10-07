@@ -11,6 +11,15 @@ class Conversation
     @msg = msg
   end
 
+  def members_as_string
+    members = ''
+    @members.each do |member|
+      members += ',' unless members.empty
+      members += member.to_s
+    end
+    members
+  end
+
   def self.create(id, object, members, can_answer, last_msg, created_at, msg)
     c = Conversation.new(object, members, can_answer, last_msg, created_at, msg)
     c.id = id

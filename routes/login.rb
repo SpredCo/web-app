@@ -17,6 +17,7 @@ class Spred
 
   get '/logout' do
     session[:current_user] = nil
+    session[:spred_tokens] = nil
     redirect '/'
   end
 
