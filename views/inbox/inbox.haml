@@ -8,14 +8,19 @@
       %div
         %i.fa.fa-reply
         %span Répondre
-  %div.row.box-border
+  %div.row.box-border.inbox-display
     %div.col-sm-4.inbox-conversation
-      %div.row.conversation.active
-        %div.unread
-          %i.fa.fa-circle
-        %div.object Hello
-        %div.members @toto, @titi, ...
-    %div.row.inbox-content
+      - @inbox.conversations.each do | conv |
+        %div.row.conversation{:onclick => 'showConversation("' + conv.id + '");', :id => conv.id}
+          - if !conv.read?
+            %div.unread
+              %i.fa.fa-circle
+          %div.object
+            %span= conv.object
+          %div.members= conv.members_as_string()
+    %div#inbox-content.col-sm-8.inbox-content
+      %div#loading.loading
+        %img{:src => '/img/loading.gif'}
 
 
 

@@ -266,7 +266,7 @@
 }
 .main-inbox-content {
     background-color: #fff;
-    height: 100vh;
+    margin-bottom: 10px;
 }
 .toolbox {
     margin-top: 10px;
@@ -277,6 +277,9 @@
 }
 .box-border {
     border-top: solid 1px #ccc;
+}
+.inbox-display {
+    height: 700px;
 }
 .inbox-conversation {
     border-right: solid 1px #ccc;
@@ -290,8 +293,11 @@
     cursor: pointer;
     border-bottom: solid 1px #ccc;
 }
-.conversation.active {
+.conversation:hover {
     background-color: #f1f1f1;
+}
+.conversation.active {
+    background-color: #dedddd;
 }
 .unread {
     position: relative;
@@ -307,6 +313,9 @@
     padding-left: 20px;
     font-style: italic;
     color: #777;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .inbox-dest-label {
     color: #777;
@@ -317,6 +326,11 @@
 }
 .main-inbox-create-conv {
     background-color: #fff;
+}
+.loading {
+    display: none;
+    padding-top: 280px;
+    text-align: center;
 }
 @media (max-width: 1200px) {
     .navbar-default .navbar-brand.logo {

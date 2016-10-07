@@ -41,6 +41,6 @@ class BaseUser
   end
 
   def to_s
-    @pseudo
+    "@#{@pseudo}"
   end
 end

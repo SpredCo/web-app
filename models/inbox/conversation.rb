@@ -14,7 +14,7 @@ class Conversation
   def members_as_string
     members = ''
     @members.each do |member|
-      members += ',' unless members.empty
+      members += ', ' unless members.empty?
       members += member.to_s
     end
     members
