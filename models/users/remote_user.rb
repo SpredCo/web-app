@@ -29,6 +29,17 @@ class RemoteUser < BaseUser
     end
   end
 
+  def self.find_by_pseudo(tokens, pseudo)
+    request = GetUserRequest.new(tokens, "@#{pseudo}")
+    request.send
+    response = request.parse_response
+    if response.is_a? APIError
+      response
+    else
+      from_hash(response.body)
+    end
+  end
+
   def to_hash
     hash = super
     hash[:following] = @following.map(&:to_hash)
