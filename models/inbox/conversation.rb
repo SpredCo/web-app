@@ -1,5 +1,6 @@
 class Conversation
   attr_reader :object, :members, :can_answer, :last_msg, :created_at, :msg
+  attr_accessor :id
 
   def initialize(object, members, can_answer, last_msg, created_at, msg)
     @object = object
@@ -11,13 +12,9 @@ class Conversation
   end
 
   def self.create(id, object, members, can_answer, last_msg, created_at, msg)
-    @id = id
-    @object = object
-    @members = members
-    @can_answer = can_answer
-    @last_msg = last_msg
-    @created_at = created_at
-    @msg = msg
+    c = Conversation.new(object, members, can_answer, last_msg, created_at, msg)
+    c.id = id
+    c
   end
 
   def push(tokens, message)

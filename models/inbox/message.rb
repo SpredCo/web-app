@@ -1,5 +1,6 @@
 class Message
   attr_reader :conversation, :from, :content, :created_at
+  attr_accessor :id
 
   def initialize(conversation, from, content, read=false, created_at=DateTime.now)
     @conversation = conversation
@@ -10,12 +11,9 @@ class Message
   end
 
   def self.create(id, conversation, from, content, read=false, created_at=DateTime.now)
-    @id = id
-    @conversation = conversation
-    @from = from
-    @content = content
-    @read = read
-    @created_at = created_at
+    m = Message.new(conversation, from, content, read, created_at)
+    m.id = id
+    m
   end
 
   def unread?
