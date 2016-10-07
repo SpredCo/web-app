@@ -3,6 +3,7 @@ class CurrentUser < BaseUser
 
   def initialize(id, email, pseudo, first_name, last_name, picture_url, updated_at, created_at, following)
     @following = following
+    @inbox = nil
     super(id, email, pseudo, first_name, last_name, picture_url, updated_at, created_at)
   end
 
@@ -21,12 +22,15 @@ class CurrentUser < BaseUser
     end
   end
 
-  # TODO: Compare unread messages to be sure the update is mandatory
   def inbox(tokens)
-    req = GetInboxRequest.new(tokens)
-    req.send
-    response = req.parse_response
-    response.is_a?(APIError) ? nil : Inbox.from_hash(response.body)
+    # if @inbox
+    #   local_unread_convs = @inbox.unread_conversations.count
+    #   remote_unread_convs = GetUnreadConvversationRequest.new(tokens)
+    #   @inbox = Inbox.reload(tokens) if local_unread_convs != remote_unread_convs
+    # else
+    #   @inbox = Inbox.reload(tokens)
+    # end
+    @inbox = Inbox.reload(tokens)
   end
 
   def delete
