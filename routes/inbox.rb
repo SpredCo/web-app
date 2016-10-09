@@ -22,7 +22,8 @@ class Spred
       @errors = {default: response.message}
     else
       @message = Message.from_hash(response.body)
-    end  end
+    end
+  end
 
   get '/inbox/conversation/new' do
     authenticate!
@@ -76,7 +77,7 @@ class Spred
       @errors = {default: response.message}
     else
       @conversation = Conversation.from_hash(response.body)
-      #@conversation.read!(session[:spred_tokens]) if @conversation.unread?
+      @conversation.read!(session[:spred_tokens]) if @conversation.unread?
     end
   end
 end

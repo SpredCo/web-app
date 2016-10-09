@@ -38,7 +38,9 @@ class Conversation
   end
 
   def read!(tokens)
-
+    req = ReadConversationRequest(tokens, @id)
+    req.send
+    req.parse_response
   end
 
   def unread?

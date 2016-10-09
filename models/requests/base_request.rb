@@ -24,7 +24,8 @@ class BaseRequest
     begin
       @response.body = JSON.parse(@response.body)
     rescue JSON::ParserError => e
-      @tokens.reload!
+      p 'should reload'
+      #@tokens.reload!
       retry
     end
     if APIError::ERRORS.has_key?(@response.code)

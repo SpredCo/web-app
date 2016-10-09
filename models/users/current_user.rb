@@ -23,14 +23,14 @@ class CurrentUser < BaseUser
   end
 
   def inbox(tokens)
-    # if @inbox
-    #   local_unread_convs = @inbox.unread_conversations.count
-    #   remote_unread_convs = GetUnreadConvversationRequest.new(tokens)
-    #   @inbox = Inbox.reload(tokens) if local_unread_convs != remote_unread_convs
-    # else
-    #   @inbox = Inbox.reload(tokens)
-    # end
-    @inbox = Inbox.reload(tokens)
+    if @inbox
+      local_unread_convs = @inbox.unread_conversations.count
+      remote_unread_convs = InboxUnreadMessagesRequest.new(tokens)
+      @inbox = Inbox.reload(tokens) if local_unread_convs != remote_unread_convs
+    else
+      @inbox = Inbox.reload(tokens)
+    end
+    @inbox
   end
 
   def delete
