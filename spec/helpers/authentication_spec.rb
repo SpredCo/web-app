@@ -8,7 +8,7 @@ describe AuthenticationHelper do
 
   describe 'login' do
     it 'should return error on invalid credentials' do
-      params = {username: 'test@test.fr', password: 'test', grant_type: 'password'}
+      params = {username: 'test@test.fr', password: 'test', login_type: 'password'}
       SpredLoginRequest.any_instance.stubs(:parse_response).returns(nil)
       response = AuthenticationHelper.login(params)
 
@@ -16,7 +16,7 @@ describe AuthenticationHelper do
     end
 
     it 'should return error on invalid google token' do
-      params = {username: 'test@test.fr', password: 'test', grant_type: 'google_token'}
+      params = {username: 'test@test.fr', password: 'test', login_type: 'google_token'}
       GoogleLoginRequest.any_instance.stubs(:parse_response).returns(nil)
       response = AuthenticationHelper.login(params)
 
@@ -24,7 +24,7 @@ describe AuthenticationHelper do
     end
 
     it 'should return error on invalid facebook token' do
-      params = {username: 'test@test.fr', password: 'test', grant_type: 'facebook_token'}
+      params = {username: 'test@test.fr', password: 'test', login_type: 'facebook_token'}
       FacebookLoginRequest.any_instance.stubs(:parse_response).returns(nil)
       response = AuthenticationHelper.login(params)
 
@@ -32,7 +32,7 @@ describe AuthenticationHelper do
     end
 
     it 'should return access and refresh tokens on valid credentials' do
-      params = {username: 'test@test.fr', password: 'test', grant_type: 'password'}
+      params = {username: 'test@test.fr', password: 'test', login_type: 'password'}
       SpredLoginRequest.any_instance.stubs(:parse_response).returns({access_token: 'access_token', refresh_token: 'refresh_token'})
       response = AuthenticationHelper.login(params)
 
@@ -41,7 +41,7 @@ describe AuthenticationHelper do
     end
 
     it 'should return access and refresh tokens on valid google_token' do
-      params = {access_token: 'google_token', grant_type: 'google_token'}
+      params = {access_token: 'google_token', login_type: 'google_token'}
       GoogleLoginRequest.any_instance.stubs(:parse_response).returns({access_token: 'access_token', refresh_token: 'refresh_token'})
       response = AuthenticationHelper.login(params)
 
@@ -50,7 +50,7 @@ describe AuthenticationHelper do
     end
 
     it 'should return access and refresh tokens on valid facebook_token' do
-      params = {access_token: 'google_token', grant_type: 'facebook_token'}
+      params = {access_token: 'google_token', login_type: 'facebook_token'}
       FacebookLoginRequest.any_instance.stubs(:parse_response).returns({access_token: 'access_token', refresh_token: 'refresh_token'})
       response = AuthenticationHelper.login(params)
 
@@ -70,6 +70,8 @@ describe AuthenticationHelper do
 
     it 'should returns future_user with token on google_signup' do
       params = {access_token: 'google_token', 'signup-type' => 'google_token'}
+      expected_response = 'ok'
+      CheckGoogleTokenRequest.any_instance.stubs(:parse_response).returns(expected_response)
       future_user = AuthenticationHelper.signup_step1(params)
 
       future_user[:request].must_equal GoogleSignupRequest
@@ -79,6 +81,8 @@ describe AuthenticationHelper do
 
     it 'should returns future_user with token on facebbok_signup' do
       params = {access_token: 'facebook_token', 'signup-type' => 'facebook_token'}
+      expected_response = 'ok'
+      CheckFacebookTokenRequest.any_instance.stubs(:parse_response).returns(expected_response)
       future_user = AuthenticationHelper.signup_step1(params)
 
       future_user[:request].must_equal FacebookSignupRequest
