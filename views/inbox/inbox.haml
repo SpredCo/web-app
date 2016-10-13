@@ -13,7 +13,10 @@
       - @inbox.conversations.each do | conv |
         %div.row.conversation{:onclick => 'showConversation("' + conv.id + '");', :id => conv.id, :data => {:reply => conv.can_answer.to_s}}
           - if !conv.read?
-            %div.unread
+            %div.unread{:id => conv.id + '-read'}
+              %i.fa.fa-circle
+          - else
+            %div.read{:id => conv.id + '-read'}
               %i.fa.fa-circle
           %div.object
             %span= conv.object

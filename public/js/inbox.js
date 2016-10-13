@@ -23,5 +23,11 @@ function showConversation(id) {
     $.get('/inbox/conversation/' + id, function (data) {
         $('#loading').css('display', 'none');
         $('#conversation-content').html(data);
+        if ($('#' + id + '-read')) {
+            $('#' + id + '-read').css('opacity', '0');
+        }
+        setTimeout(function () {
+            document.getElementById("inbox-content").scrollTop = document.getElementById("inbox-content").scrollHeight;
+        }, 50);
     });
 }

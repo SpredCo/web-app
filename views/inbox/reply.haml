@@ -4,12 +4,12 @@
       %div.col-sm-1.center-text.inbox-dest-label
         %span À :
       %div.col-sm-11
-        %p.convers-dest= @conversation.members_as_string
+        %p.conversation-reply= @conversation.members_as_string
     %div.row.toolbox.box-border.inbox-object-padding
       %div.col-sm-1.center-text.inbox-dest-label
         %span Objet :
       %div.col-sm-11
-        %input.form-control{:type => 'text', :name => 'object', :placeholder => 'Sujet de votre message'}
+        %p.conversation-reply.object-fix=@conversation.object
     %div.row.box-border.inbox-object-padding
       %div.col-sm-12
         %textarea.form-control{:type => 'text', :name => 'content', :placeholder => 'Message ...', :rows => '30'}

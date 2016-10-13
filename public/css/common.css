@@ -204,12 +204,17 @@
 .inbox-badge {
     font-size: 10px;
     margin-top: -6px;
+    background-color: #777;
+}
+.inbox-badge.active {
     background-color: #55AA55;
 }
 .nav-profile-picture {
     border-radius: 25px;
     cursor: pointer;
     margin-left: 100px;
+    width: 50px;
+    height: 50px;
 }
 .profile-header {
     background-color: #55AA55;
@@ -268,6 +273,10 @@
     background-color: #fff;
     margin-bottom: 10px;
 }
+.inbox-content {
+    height: 100%;
+    overflow-y: auto;
+}
 .toolbox {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -309,6 +318,12 @@
     position: relative;
     top: 25px;
     color: #55AA55;
+}
+.read {
+    position: relative;
+    top: 25px;
+    color: #55AA55;
+    opacity: 0;
 }
 .object {
     font-size: 16px;
@@ -367,6 +382,13 @@
     pointer-events: none !important;
     cursor: default;
     color:Gray;
+}
+.conversation-reply {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.conversation-reply.object-fix {
+    font-weight: bold;
 }
 @media (max-width: 1200px) {
     .navbar-default .navbar-brand.logo {
