@@ -41,4 +41,28 @@ class Inbox
   def to_hash
     @conversations.map(&:to_hash)
   end
+
+  def synchronize(tokens)
+    if get_unread_messages(tokens) != unread_conversations.count
+      reload!(tokens)
+    end
+    self
+  end
+
+  def get_unread_messages(tokens)
+    req = InboxUnreadMessagesRequest.new(tokens)
+    req.send
+    response = req.parse_response
+    response.body['result']
+  end
+
+  def reload!(tokens)
+    req = GetInboxRequest.new(tokens)
+    req.send
+    response = req.parse_response
+    @conversations = response.body.each_with_object([]) do |conv, array|
+      array << Conversation.from_hash(conv)
+    end
+    self
+  end
 end

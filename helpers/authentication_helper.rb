@@ -3,6 +3,11 @@ module AuthenticationHelper
     redirect '/' unless session[:spred_tokens].is_a? TokenBox
   end
 
+  def synchronize_inbox!
+    tokens = session[:spred_tokens]
+    session[:current_user].inbox(tokens).get_unread_messages(tokens)
+  end
+
   def self.login(user)
     req = case user[:login_type]
             when 'google_token'
