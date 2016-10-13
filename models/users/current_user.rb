@@ -26,6 +26,7 @@ class CurrentUser < BaseUser
     if @inbox
       local_unread_convs = @inbox.unread_conversations.count
       remote_unread_convs = InboxUnreadMessagesRequest.new(tokens)
+      p "local #{local_unread_convs}", "remote #{remote_unread_convs}"
       @inbox = Inbox.reload(tokens) if local_unread_convs != remote_unread_convs
     else
       @inbox = Inbox.reload(tokens)

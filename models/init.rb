@@ -33,6 +33,7 @@ require_relative 'requests/get_conversation_request'
 require_relative 'requests/reply_conversation_request'
 require_relative 'requests/get_message_request'
 require_relative 'requests/create_conversation_request'
+require_relative 'requests/create_message_request'
 require_relative 'requests/read_conversation_request'
 require_relative 'requests/inbox_unread_messages_request'
 

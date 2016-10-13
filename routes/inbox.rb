@@ -3,13 +3,9 @@ class Spred
 
   get '/inbox' do
     authenticate!
-    request = GetInboxRequest.new(session[:spred_tokens])
-    request.send
-    response = request.parse_response
-    if response.is_a? APIError
-      @errors = {default: response.message}
-    else
-      @inbox = Inbox.from_hash(response.body)
+    @inbox = session[:current_user].inbox(session[:spred_tokens])
+    if @inbox.is_a? APIError
+      @errors = {default: @inbox.message}
     end
     haml :'inbox/inbox', layout: :'layout/inbox_layout'
   end
@@ -41,7 +37,7 @@ class Spred
     current_user = session[:current_user]
     tokens = session[:spred_tokens]
     conv_id = params[:id]
-    response = current_user.inbox(tokens).conversation(conv_id).push(Message.new(conv_id, "@#{current_user.pseudo}", params[:content]))
+    response = current_user.inbox(tokens).conversation(conv_id).push(tokens, Message.new(conv_id, "@#{current_user.pseudo}", params[:content]))
     if response.is_a? APIError
       @errors = {default: response.message}
     else

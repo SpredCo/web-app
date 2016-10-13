@@ -27,7 +27,7 @@ class Conversation
   end
 
   def push(tokens, message)
-    req = CreateMessageRequest.new(tokens, @id, message)
+    req = CreateMessageRequest.new(tokens, @id, message.content)
     req.send
     response = req.parse_response
     if response.is_a? APIError
@@ -38,7 +38,7 @@ class Conversation
   end
 
   def read!(tokens)
-    req = ReadConversationRequest(tokens, @id)
+    req = ReadConversationRequest.new(tokens, @id)
     req.send
     req.parse_response
   end
