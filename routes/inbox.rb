@@ -54,12 +54,19 @@ class Spred
     current_user = session[:current_user]
     tokens = session[:spred_tokens]
     members_pseudo = params[:members].split(', ')
-    members_pseudo << "@#{current_user.pseudo}"
     members = {}
-    members_pseudo.each {|member| members[member] = RemoteUser.find(tokens, member)}
-    invalid_members = members_pseudo.select {|_, v| v.is_a? APIError}
+    invalid_members = {}
+    members_pseudo.each do |member|
+      user = RemoteUser.find(tokens, member)
+      if user.is_a? APIError
+        invalid_members[member] = user
+      else
+        members[member] = user.id
+      end
+    end
+    members[current_user.pseudo] = current_user.id
     if invalid_members.empty?
-      response = current_user.inbox(tokens).create_conversation(tokens, members.values.select{|member| !member.is_a?(APIError)}.map(&:id), params[:object], params[:content])
+      response = current_user.inbox(tokens).create_conversation(tokens, members.values, params[:object], params[:content])
       if response.is_a? APIError
         @errors = {default: response.message}
         haml :'inbox/create_conversation', layout: :'layout/inbox_layout'
