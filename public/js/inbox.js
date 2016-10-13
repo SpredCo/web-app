@@ -12,7 +12,13 @@ function showConversation(id) {
     }
     $('#' + id).addClass('active');
     lastActive = id;
-
+    if (!($('#' + id).attr('data-reply'))) {
+        $("#reply-link").addClass('disabled');
+    } else {
+        $("#reply-link").removeClass('disabled');
+    }
+    $("#reply-link").attr('href', '/inbox/conversation/' + id + '/reply');
+    $('#conversation-content').html('');
     $('#loading').css('display', 'inherit');
     $.get('/inbox/conversation/' + id, function (data) {
         $('#loading').css('display', 'none');

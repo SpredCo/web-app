@@ -29,6 +29,12 @@ class Spred
     haml :'inbox/create_conversation', layout: :'layout/inbox_layout'
   end
 
+  get '/inbox/conversation/:id/reply' do
+    authenticate!
+    @conversation = session[:current_user].inbox(session[:spred_tokens]).conversation(params[:id])
+    haml :'inbox/reply', layout: :'layout/inbox_layout'
+  end
+
   post '/inbox/conversation/:id/reply' do
     authenticate!
     current_user = session[:current_user]
@@ -37,7 +43,7 @@ class Spred
     if response.is_a? APIError
       @errors = {default: response.message}
     else
-      haml :'inbox/inbox', layout: :'layout/inbox_layout'
+      haml :'inbox/reply', layout: :'layout/inbox_layout'
     end
   end
 
