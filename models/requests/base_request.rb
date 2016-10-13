@@ -3,7 +3,6 @@ class BaseRequest
   require 'json'
 
   def initialize(tokens, endpoint)
-    p endpoint
     @uri = URI.parse(endpoint)
     @tokens = tokens
   end
