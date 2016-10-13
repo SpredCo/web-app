@@ -40,7 +40,8 @@ class Spred
     authenticate!
     current_user = session[:current_user]
     tokens = session[:spred_tokens]
-    response = Conversation.find(tokens, params[:id]).push(Message.new(conv_id, "@#{current_user.pseudo}", params[:content]))
+    conv_id = params[:id]
+    response = current_user.inbox(tokens).conversation(conv_id).push(Message.new(conv_id, "@#{current_user.pseudo}", params[:content]))
     if response.is_a? APIError
       @errors = {default: response.message}
     else
