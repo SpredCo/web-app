@@ -64,6 +64,10 @@ class Conversation
                      conversation['last_msg'], conversation['created_at'], msg)
   end
 
+  def get_user_by_id(id)
+    @members.select{|m| m.id == id}.first
+  end
+
   def to_hash
     {
         object: @object,

@@ -1,0 +1,18 @@
+- unread = false
+- @conversation.msg.each do | msg |
+  - user = @conversation.get_user_by_id(msg.from)
+  %div{:id => (msg.unread? && !unread) ? 'unread' : ''}
+    - if (msg.unread? && !unread)
+      - unread = true
+    %div.row.message
+      %div.col-sm-1
+        %a{:href => '/@' + user.pseudo}
+          %img.message-picture{:src => user.picture_url}
+      %div.col-sm-11
+        %div
+          %span.message-author= user.first_name + ' ' + user.last_name
+          %span.message-date= DateTime.parse(msg.created_at).strftime("%d - %m - %Y %H:%M")
+        %div
+          %span.message-author-pseudo= "@#{user.pseudo}"
+    %div.row.message-content
+      %span= msg.content

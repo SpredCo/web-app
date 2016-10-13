@@ -1,26 +1,27 @@
 %div.container.main-inbox-content
   %div.row.toolbox
     %div.col-sm-4.center-text
-      %a{:href => '/inbox/conversation/new'}
+      %a.new-conversation-link{:href => '/inbox/conversation/new'}
         %i.fa.fa-envelope
         %span Nouveau message
     %div.col-sm-4.col-sm-offset-4.center-text
-      %div
+      %a.disabled.replylink#reply-link{:href => ''}
         %i.fa.fa-reply
         %span Répondre
   %div.row.box-border.inbox-display
     %div.col-sm-4.inbox-conversation
       - @inbox.conversations.each do | conv |
-        %div.row.conversation{:onclick => 'showConversation("' + conv.id + '");', :id => conv.id}
+        %div.row.conversation{:onclick => 'showConversation("' + conv.id + '");', :id => conv.id, :data => {:reply => conv.can_answer.to_s}}
           - if !conv.read?
             %div.unread
               %i.fa.fa-circle
           %div.object
             %span= conv.object
-          %div.members= conv.members_as_string()
+          %div.members= conv.members_as_string
     %div#inbox-content.col-sm-8.inbox-content
       %div#loading.loading
         %img{:src => '/img/loading.gif'}
+      %div#conversation-content
 
 
 

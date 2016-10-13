@@ -28,7 +28,7 @@ class Inbox
   end
 
   def conversation(id)
-    @conversations.select{|conv| conv.id == id}
+    @conversations.select{|conv| conv.id == id}.first
   end
 
   def self.from_hash(inbox)

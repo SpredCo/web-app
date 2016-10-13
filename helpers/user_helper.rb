@@ -39,6 +39,7 @@ module UserHelper
     req = GetUserRequest.new(tokens, 'me')
     req.send
     response = req.parse_response.body
+    puts response
     CurrentUser.from_hash(response)
   end
 end
