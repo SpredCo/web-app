@@ -39,7 +39,7 @@ class Spred
       @errors = {default: @user.message}
       haml :'home/index', layout: :'layout/layout'
     else
-      @following_user = session[:current_user].following.include?(@user.id)
+      @is_following = session[:current_user].is_following?(@user.pseudo)
       haml :'user/profile', layout: :'layout/layout'
     end
   end

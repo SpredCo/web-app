@@ -9,13 +9,23 @@ class RemoteUser < BaseUser
   def follow(tokens)
     request = FollowUserRequest.new(tokens, @id)
     request.send
-    request.parse_response
+    response = request.parse_response
+    if response.is_a? APIError
+      response
+    else
+      self
+    end
   end
 
   def unfollow(tokens)
     request = UnFollowUserRequest.new(tokens, @id)
     request.send
-    request.parse_response
+    response = request.parse_response
+    if response.is_a? APIError
+      response
+    else
+      self
+    end
   end
 
   def self.find(tokens, id)

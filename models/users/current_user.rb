@@ -33,6 +33,17 @@ class CurrentUser < BaseUser
     @inbox
   end
 
+  def is_following?(pseudo)
+    is_following = false
+    @following.each do |user|
+      if user.pseudo == pseudo
+        is_following = true
+        break
+      end
+    end
+    is_following
+  end
+
   def delete
 
   end

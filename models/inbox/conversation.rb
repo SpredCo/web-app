@@ -68,7 +68,7 @@ class Conversation
     {
         object: @object,
         can_answer: @can_answer,
-        late_msg: @late_msg,
+        last_msg: @last_msg,
         created_at: @created_at,
         members: @members.map(&:to_hash),
         msg: @msg.map(&:to_hash)

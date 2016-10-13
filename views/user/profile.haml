@@ -11,7 +11,7 @@
     %div.col-sm-2.col-sm-offset-2.edit-profile-btn
       - if @user.id == session[:current_user].id
         %a.btn.btn-default{:href => '/profile/edit'} Editer mon profil
-      - elsif @following
+      - elsif @is_following
         %a.btn.btn-danger{:href => '/user/' + @user.id + '/unfollow'} Se désabonner
       - else
         %a.btn.btn-success{:href => '/user/' + @user.id + '/follow'} S'abonner

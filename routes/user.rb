@@ -3,26 +3,32 @@ class Spred
 
   get '/user/:id/follow' do
     authenticate!
-    response = RemoteUser.find(session[:spred_tokens], params[:id]).follow(session[:spred_tokens])
+    user = RemoteUser.find(session[:spred_tokens], params[:id])
+    response = user.follow(session[:spred_tokens])
     if response.is_a?(APIError)
       @errors = {default: response.message}
+      @user = user
+      haml :'user/profile', layout: :'layout/layout'
     else
       session[:current_user] = get_current_user_from_token(session[:spred_tokens])
       @user = session[:current_user]
+      redirect :"/@#{response.pseudo}"
     end
-    redirect :"/@#{params[:id]}", layout: :'layout/layout'
   end
 
   get '/user/:id/unfollow' do
     authenticate!
-    response = RemoteUser.find(session[:spred_tokens], params[:id]).unfollow(session[:spred_tokens])
+    user = RemoteUser.find(session[:spred_tokens], params[:id])
+    response = user.unfollow(session[:spred_tokens])
     if response.is_a?(APIError)
       @errors = {default: response.message}
+      @user = user
+      haml :profile, layout: :'layout/layout'
     else
       session[:current_user] = get_current_user_from_token(session[:spred_tokens])
       @user = session[:current_user]
     end
-    redirect :"/@#{params[:id]}", layout: :'layout/layout'
+    redirect :"/@#{response.pseudo}"
   end
 
   get '/user/pseudo/check/:pseudo' do
