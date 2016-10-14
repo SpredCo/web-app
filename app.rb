@@ -4,7 +4,7 @@ require 'haml'
 require 'better_errors'
 
 class Spred < Sinatra::Application
-  enable :sessions
+  use Rack::Session::Pool
 
   set :static, true
   set :root, File.dirname(__FILE__)
