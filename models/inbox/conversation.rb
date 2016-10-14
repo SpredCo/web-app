@@ -1,56 +1,15 @@
-class Conversation
-  attr_reader :object, :members, :can_answer, :last_msg, :created_at, :msg
-  attr_accessor :id
+class Conversation < BaseConversation
+  attr_reader :msg
 
-  def initialize(object, members, can_answer, last_msg, created_at, msg)
-    @object = object
-    @members = members
-    @can_answer = can_answer
-    @last_msg = last_msg
-    @created_at = created_at
+  def initialize(object, members, can_answer, last_msg, created_at, msg, read)
+    super(object, members, can_answer, last_msg, created_at, read)
     @msg = msg
   end
 
-  def members_as_string
-    members = ''
-    @members.each do |member|
-      members += ', ' unless members.empty?
-      members += member.to_s
-    end
-    members
-  end
-
-  def self.create(id, object, members, can_answer, last_msg, created_at, msg)
-    c = Conversation.new(object, members, can_answer, last_msg, created_at, msg)
+  def self.create(id, object, members, can_answer, last_msg, created_at, msg, read)
+    c = Conversation.new(object, members, can_answer, last_msg, created_at, msg, read)
     c.id = id
     c
-  end
-
-  def push(tokens, message)
-    req = CreateMessageRequest.new(tokens, @id, message.content)
-    req.send
-    response = req.parse_response
-    if response.is_a? APIError
-      response
-    else
-      response.body
-    end
-  end
-
-  def read!(tokens)
-    req = ReadConversationRequest.new(tokens, @id)
-    req.send
-    req.parse_response
-  end
-
-  def unread?
-    unread = false
-    @msg.each {|message| unread = true if message.unread?}
-    unread
-  end
-
-  def read?
-    !unread?
   end
 
   def self.from_hash(conversation)
@@ -61,7 +20,7 @@ class Conversation
       array << Message.from_hash(member)
     end
     Conversation.create(conversation['id'], conversation['object'], members, conversation['can_answer'],
-                     conversation['last_msg'], conversation['created_at'], msg)
+                     conversation['last_msg'], conversation['created_at'], msg, conversation['read'])
   end
 
   def get_user_by_id(id)
@@ -75,7 +34,8 @@ class Conversation
         last_msg: @last_msg,
         created_at: @created_at,
         members: @members.map(&:to_hash),
-        msg: @msg.map(&:to_hash)
+        msg: @msg.map(&:to_hash),
+        read: @read
     }
   end
 end

@@ -33,7 +33,7 @@ class Inbox
 
   def self.from_hash(inbox)
     conversations = inbox.each_with_object([]) do |conv, array|
-      array << Conversation.from_hash(conv)
+      array << BaseConversation.from_hash(conv)
     end
     Inbox.new(conversations)
   end
@@ -61,7 +61,7 @@ class Inbox
     req.send
     response = req.parse_response
     @conversations = response.body.each_with_object([]) do |conv, array|
-      array << Conversation.from_hash(conv)
+      array << BaseConversation.from_hash(conv)
     end
     self
   end

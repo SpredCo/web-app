@@ -53,7 +53,7 @@ module APIHelper
     USER_UNFOLLOW = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::USER}"}
     USER_REPORT = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::USER}"}
 
-    INBOX = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::INBOX}"}
+    INBOX = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::CONVERSATION}"}
     INBOX_UNREAD_MESSAGES = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::INBOX_UNREAD_MESSAGES}"}
     CONVERSATION_GET = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::CONVERSATION}"}
     CONVERSATION_REPLY = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::CONVERSATION}"}
