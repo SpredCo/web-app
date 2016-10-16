@@ -22,8 +22,8 @@ class Spred < Sinatra::Application
   end
 
   configure :development do
-    use BetterErrors::Middleware
-    BetterErrors.application_root = __dir__
+    # use BetterErrors::Middleware
+    # BetterErrors.application_root = __dir__
   end
 end
 
