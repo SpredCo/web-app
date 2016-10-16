@@ -1,7 +1,6 @@
 require 'sinatra'
 require 'json'
 require 'haml'
-require 'better_errors'
 
 class Spred < Sinatra::Application
   use Rack::Session::Pool
@@ -22,6 +21,8 @@ class Spred < Sinatra::Application
   end
 
   configure :development do
+    require 'better_errors'
+    
     use BetterErrors::Middleware
     BetterErrors.application_root = __dir__
   end
