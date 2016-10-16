@@ -28,6 +28,14 @@ function showConversation(id) {
         }
         setTimeout(function () {
             document.getElementById("inbox-content").scrollTop = document.getElementById("inbox-content").scrollHeight;
+            if ($('.unread-msg')) {
+                var unreadCount = $('.unread-msg').length;
+                var cUnread = parseInt($('#unread-count').text());
+                $('#unread-count').text(cUnread - unreadCount);
+                if (cUnread - unreadCount === 0) {
+                    $('#unread-count').removeClass('active');
+                }
+            }
         }, 50);
     });
 }
