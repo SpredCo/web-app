@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'json'
 require 'haml'
-require 'better_errors' if ENV['RACK_ENV'] != :production
+#require 'better_errors' if ENV['RACK_ENV'] != :production
 
 class Spred < Sinatra::Application
   use Rack::Session::Pool
