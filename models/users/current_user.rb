@@ -23,12 +23,7 @@ class CurrentUser < BaseUser
   end
 
   def inbox(tokens)
-    if @inbox
-      @inbox.synchronize(tokens)
-    else
-      @inbox = Inbox.reload(tokens)
-    end
-    @inbox
+    @inbox = Inbox.reload(tokens)
   end
 
   def is_following?(pseudo)
