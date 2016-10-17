@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'json'
 require 'haml'
-#require 'better_errors' if ENV['RACK_ENV'] != :production
+require 'better_errors' if ENV['RACK_ENV'] == :development
 
 class Spred < Sinatra::Application
   use Rack::Session::Pool
@@ -22,8 +22,8 @@ class Spred < Sinatra::Application
   end
 
   configure :development do
-    # use BetterErrors::Middleware
-    # BetterErrors.application_root = __dir__
+    use BetterErrors::Middleware
+    BetterErrors.application_root = __dir__
   end
 end
 
