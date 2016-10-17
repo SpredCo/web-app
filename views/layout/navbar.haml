@@ -34,9 +34,9 @@
             %a.navbar-icon.last{:href => '/inbox'}
               %i.fa.fa-inbox.inbox-icon
               - if @unread_message_count > 0
-                %span.badge.inbox-badge.active=@unread_message_count
+                %span#unread-count.badge.inbox-badge.active=@unread_message_count
               - else
-                %span.badge.inbox-badge=@unread_message_count
+                %span#unread-count.badge.inbox-badge=@unread_message_count
           %li
             %div.dropdown
               %img.nav-profile-picture.dropdown-toggle{:src => session[:current_user].picture_url, :type => 'button', :data => {:toggle => 'dropdown'}}
