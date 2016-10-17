@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'json'
 require 'haml'
+puts ENV['RACK_ENV']
 require 'better_errors' if ENV['RACK_ENV'] == :development
 
 class Spred < Sinatra::Application
