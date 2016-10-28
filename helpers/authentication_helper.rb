@@ -49,17 +49,17 @@ module AuthenticationHelper
 
   def self.fill_future_user(params)
     signup_type = params['signup-type']
-      if  signup_type == 'password'
-        response = UserHelper.check_new_account_validity(params[:email], params[:password], params['confirm-password'])
-        if response
-          {errors: response}
-        else
-          {request: SpredSignupRequest, email: params[:email], password: params[:password],
-           first_name: params['first-name'], last_name: params['last-name'],
-           signup_type: params['signup-type']}
-        end
+    if  signup_type == 'password'
+      response = UserHelper.check_new_account_validity(params[:email], params[:password], params['confirm-password'])
+      if response
+        {errors: response}
       else
-        validate_token(signup_type, params)
+        {request: SpredSignupRequest, email: params[:email], password: params[:password],
+         first_name: params['first-name'], last_name: params['last-name'],
+         signup_type: params['signup-type']}
+      end
+    else
+      validate_token(signup_type, params)
     end
   end
 
