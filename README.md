@@ -34,5 +34,5 @@
    ```
 ## Running
 ```bash
-sh start.sh
+bundle exec ./start.sh
 ```
