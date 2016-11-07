@@ -37,6 +37,9 @@ require_relative 'requests/create_message_request'
 require_relative 'requests/read_conversation_request'
 require_relative 'requests/inbox_unread_messages_request'
 
+require_relative 'requests/create_cast_request'
+require_relative 'requests/get_cast_token_request'
+
 require_relative 'users/base_user'
 require_relative 'users/remote_user'
 require_relative 'users/current_user'
@@ -47,3 +50,6 @@ require_relative 'inbox/conversation'
 require_relative 'inbox/message'
 
 require_relative 'token_box'
+
+require_relative 'cast/cast_token'
+require_relative 'cast/spred_cast'

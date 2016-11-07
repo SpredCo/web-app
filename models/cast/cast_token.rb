@@ -1,0 +1,3 @@
+class CastToken
+
+end

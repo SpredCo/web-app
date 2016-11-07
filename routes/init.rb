@@ -4,5 +4,6 @@ require_relative 'signup'
 require_relative 'user'
 require_relative 'profile'
 require_relative 'inbox'
+require_relative 'cast'
 
 require_relative 'test' unless production?

@@ -1,0 +1,3 @@
+class SpredCast
+
+end
