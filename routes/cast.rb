@@ -11,9 +11,12 @@ post '/create-cast' do
   p response
 end
 
-get '/cast/:id' do
-  authenticate!
-  req = GetCastTokenRequest.new(session[:spred_tokens], params[:id], true)
+get '/join-cast/:id' do
+  if session[:spred_tokens].is_a? TokenBox
+    req = GetCastTokenRequest.new(session[:spred_tokens], params[:id], true)
+  else
+    req = GetGuestCastTokenRequest.new(session[:spred_tokens], params[:id])
+  end
   req.send
   response = req.parse_response
   p response
