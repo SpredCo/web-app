@@ -4,6 +4,6 @@ public/profile_pictures/*.jpg
 public/profile_pictures/*.jpeg
 public/profile_pictures/*.png
 coverage/
-node_modules/*
+public/node_modules/*
+public/bower_components/*
 npm-debug.log
-bower_components/*
