@@ -1,5 +1,4 @@
 class PostRequest < BaseRequest
-
   def initialize(tokens, service, endpoint, params = nil)
     super(tokens, endpoint)
     begin
