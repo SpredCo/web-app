@@ -16,7 +16,7 @@
  */
 
 var client = Charpy.Client;
-var room = client.createRoom();
+var room = client.createRoom("test", "145BGDHEYUF");
 
 room.join();
 
