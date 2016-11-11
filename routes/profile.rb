@@ -3,14 +3,12 @@ class Spred
 
   get '/profile' do
     authenticate!
-    @unread_message_count = synchronize_inbox!
     @user = session[:current_user]
     haml :'user/profile', layout: :'layout/layout'
   end
 
   get '/profile/edit' do
     authenticate!
-    @unread_message_count = synchronize_inbox!
     haml :'user/edit_profile', layout: :'layout/layout'
   end
 
@@ -36,7 +34,6 @@ class Spred
 
   get '/@:id' do
     authenticate!
-    @unread_message_count = synchronize_inbox!
     @user = RemoteUser.find(session[:spred_tokens], "@#{params[:id]}")
     if @user.is_a?(APIError)
       @errors = {default: @user.message}
