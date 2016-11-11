@@ -5,6 +5,7 @@ class Spred
   end
 
   post '/login' do
+    params['username'] = params.delete('email')
     response = AuthenticationHelper.login(params)
     if response.nil? || response.is_a?(APIError)
       @errors = {default: APIError::INVALID_LOGIN}

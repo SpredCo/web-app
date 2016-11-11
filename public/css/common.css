@@ -480,3 +480,28 @@
         padding-left: 10px;
     }
 }
+
+.cast-name {
+    color: #4cae4c;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.cast-creator {
+    color: Gray;
+    font-size: 14px;
+}
+
+.cast-picture {
+    width: 150px;
+    height: 150px;
+}
+
+#casts-row {
+    margin :20px;
+}
+
+.cast-nb-viewer {
+    font-size: 12px;
+    font-style: italic;
+}

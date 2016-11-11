@@ -41,6 +41,7 @@ require_relative 'requests/create_cast_request'
 require_relative 'requests/get_cast_token_request'
 require_relative 'requests/get_guest_cast_token_request'
 require_relative 'requests/find_available_cast_request'
+require_relative 'requests/get_cast_request'
 
 require_relative 'users/base_user'
 require_relative 'users/remote_user'
