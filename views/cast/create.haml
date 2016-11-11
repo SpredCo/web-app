@@ -26,7 +26,7 @@
           %div.row.cast-nb-user
             %div.col-sm-6.col-sm-push-3
               %label Nombre de participant maximum
-              %input.form-control#capacity{:type => 'number', :placeholder => '10'}
+              %input.form-control#capacity{:type => 'number', :placeholder => '10', :name => 'user_capacity'}
 
         %div.col-sm-6.cast-bloc.cast-type-bloc
           %div.form-group
@@ -57,7 +57,7 @@
               %div
                 %div.form-group
                   %div#datetime.input-group.data
-                    %input.form-control{:type => 'text'}
+                    %input.form-control{:type => 'text', :name => 'date-value'}
                     %span.input-group-addon
                       %span.glyphicon.glyphicon-calendar
           %div.col-sm-6.date-box

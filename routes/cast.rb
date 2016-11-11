@@ -7,7 +7,11 @@ end
 
 post '/create-cast' do
   authenticate!
-  req = CreateCastRequest.new(session[:spred_tokens], params.delete(:name), params.delete(:description), params.delete(:is_public), params.delete(:date), params)
+  is_public = params.delete('cast_type') == 'public'
+  cast_date = params.delete('date') == 'now' ? 'now' : DateTime.parse(params.delete('date-value')).to_s
+  params['tags'] = params['tags'].split(',')
+  puts params
+  req = CreateCastRequest.new(session[:spred_tokens], params.delete('name'), params.delete('description'), is_public, cast_date, params)
   req.send
   response = req.parse_response
   p response
