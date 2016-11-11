@@ -24,6 +24,9 @@ module APIHelper
     INBOX = '/v1/inbox'
     INBOX_UNREAD_MESSAGES = INBOX + '/unread'
     CONVERSATION = '/v1/inbox/conversation'
+
+    CAST = '/v1/spredcast'
+    CASTS = '/v1/spredcasts'
   end
 
   module Service
@@ -64,5 +67,9 @@ module APIHelper
 
     SEARCH_USER_BY_EMAIL = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::SEARCH_BY_EMAIL}"}
     SEARCH_USER_BY_PSEUDO = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::SEARCH_BY_PSEUDO}"}
+
+    CAST = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::CAST}"}
+    GUEST_CAST = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::CAST}"}
+    CASTS = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::CASTS}"}
   end
 end

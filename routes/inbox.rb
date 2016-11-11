@@ -3,7 +3,6 @@ class Spred
 
   get '/inbox' do
     authenticate!
-    @unread_message_count = synchronize_inbox!
     @inbox = session[:current_user].inbox(session[:spred_tokens])
     if @inbox.is_a? APIError
       @errors = {default: @inbox.message}
@@ -13,20 +12,17 @@ class Spred
 
   get '/inbox/conversation/new' do
     authenticate!
-    @unread_message_count = synchronize_inbox!
     haml :'inbox/create_conversation', layout: :'layout/inbox_layout'
   end
 
   get '/inbox/conversation/:id/reply' do
     authenticate!
-    @unread_message_count = synchronize_inbox!
     @conversation = session[:current_user].inbox(session[:spred_tokens]).conversation(params[:id])
     haml :'inbox/reply', layout: :'layout/inbox_layout'
   end
 
   post '/inbox/conversation/:id/reply' do
     authenticate!
-    @unread_message_count = synchronize_inbox!
     current_user = session[:current_user]
     tokens = session[:spred_tokens]
     conv_id = params[:id]
@@ -73,7 +69,6 @@ class Spred
 
   get '/inbox/conversation/:id' do
     authenticate!
-    @unread_message_count = synchronize_inbox!
     request = GetConversationRequest.new(session[:spred_tokens], params[:id])
     request.send
     response = request.parse_response

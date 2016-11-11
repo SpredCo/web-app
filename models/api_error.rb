@@ -14,6 +14,8 @@ class APIError < APIMessage
   JSON_PARSE_ERROR = 'API dev sucks'
   INVALID_LOGIN = 'Email and password does not match'
   INVALID_REFRESH_TOKEN = 'Please re-login'
+  UNABLE_TO_FIND_CAST = 'Unable to find cast'
+
 
   ERRORS = {
       '400' => {
@@ -34,11 +36,17 @@ class APIError < APIMessage
           '2' => {
               '1' => USER_EXISTS_EMAIL,
               '2' => USER_EXISTS_PSEUDO
+          },
+          '5' => {
+              '1' => UNAUTHORIZED
           }
       },
       '404' => {
           '2' => {
               '1' => USER_NOT_FOUND
+          },
+          '5' => {
+              '1' => UNABLE_TO_FIND_CAST
           }
       },
       '500' => {

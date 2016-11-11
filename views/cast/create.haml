@@ -1,0 +1,15 @@
+%form{:method => 'post', :name => 'create-cast'}
+  %div.form-group
+    %label.control-label{:for => 'name'} Nom du stream
+    %input#name.form-control{:name => 'name', :type => 'text-field'}
+  %div.form-group
+    %label.control-label{:for => 'description'} Description du stream
+    %input#description.form-control{:name => 'description', :type => 'description'}
+  %div.form-group
+    %label.control-label{:for => 'date'} Date (now pour streamer tout de suite)
+    %input#date.form-control{:name => 'date', :type => 'date'}
+  %div.form-group
+    %label.control-label{:for => 'is_public'} Le stream sera t'il public ?
+    %input#is_public.form-control{:name => 'is_public', :type => 'checkbox', :checked => true}
+  %div.form-group.btn-signup
+    %input.form-control.btn.btn-success{:type => 'submit', :value => 'submit'}
