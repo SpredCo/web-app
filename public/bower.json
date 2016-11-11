@@ -1,0 +1,27 @@
+{
+	"name": "spred-web-app",
+	"homepage": "https://github.com/SpredCo/web-app",
+	"authors": [
+		"Guillaume Galas <guillaume.galas@epitech.eu>"
+	],
+	"description": "",
+	"main": "",
+	"license": "MIT",
+	"private": true,
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"adapter.js": "v0.2.9",
+		"bootstrap": "~3.3.0",
+		"ekko-lightbox": "~3.3.0",
+		"demo-console": "1.5.1",
+		"kurento-utils": "6.6.0",
+		"socket.io": "^1.4.8",
+		"charpy-media-client": "^1.5.2"
+	}
+}
