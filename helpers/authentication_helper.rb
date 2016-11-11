@@ -9,7 +9,6 @@ module AuthenticationHelper
   end
 
   def self.login(user)
-    p user
     req = case user[:login_type]
             when 'google_token'
               GoogleLoginRequest.new(user[:token])
