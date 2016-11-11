@@ -15,7 +15,7 @@ module AuthenticationHelper
             when 'facebook_token'
               FacebookLoginRequest.new(user[:token])
             else
-              SpredLoginRequest.new(user[:email], user[:password])
+              SpredLoginRequest.new(user[:username], user[:password])
           end
     req.send
     req.parse_response
@@ -54,6 +54,7 @@ module AuthenticationHelper
       if response
         {errors: response}
       else
+        puts 'ok'
         {request: SpredSignupRequest, email: params[:email], password: params[:password],
          first_name: params['first-name'], last_name: params['last-name'],
          signup_type: params['signup-type']}
