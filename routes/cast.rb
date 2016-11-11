@@ -5,7 +5,7 @@ end
 
 post '/create-cast' do
   authenticate!
-  req = CreateCastRequest.new(session[:spred_tokens], params[:name], params[:description], params[:is_public], params[:date])
+  req = CreateCastRequest.new(session[:spred_tokens], params.delete(:name), params.delete(:description), params.delete(:is_public), params.delete(:date), params)
   req.send
   response = req.parse_response
   p response
