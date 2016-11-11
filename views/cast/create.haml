@@ -1,15 +1,77 @@
-%form{:method => 'post', :name => 'create-cast'}
-  %div.form-group
-    %label.control-label{:for => 'name'} Nom du stream
-    %input#name.form-control{:name => 'name', :type => 'text-field'}
-  %div.form-group
-    %label.control-label{:for => 'description'} Description du stream
-    %input#description.form-control{:name => 'description', :type => 'description'}
-  %div.form-group
-    %label.control-label{:for => 'date'} Date (now pour streamer tout de suite)
-    %input#date.form-control{:name => 'date', :type => 'date'}
-  %div.form-group
-    %label.control-label{:for => 'is_public'} Le stream sera t'il public ?
-    %input#is_public.form-control{:name => 'is_public', :type => 'checkbox', :checked => true}
-  %div.form-group.btn-signup
-    %input.form-control.btn.btn-success{:type => 'submit', :value => 'submit'}
+%div.container.main-content
+  %h3.spredcast-grp Création d'un spredcast
+  %div.create-cast-form
+    %form{:action => '/create-cast', :method => 'POST'}
+      %div.row.create-cast
+        %div.col-sm-3
+          %div.stream-pic
+            %p.stream-txt
+              Photo de présentation
+              %input.form-control.input-sm{:type => 'file', :name => 'picture'}
+        %div.col-sm-9
+          %div
+            %label{:for => 'name'} Sujet de la présentation
+            %input#name.form-control{:type => 'text', :name => 'name', :placeholder => 'Ex: Ruby is over ...'}
+          %div.stream-desc-margin
+            %label{:for => 'description'} Description
+            %textarea#description.form-control{:type => 'input', :rows => 4, :name => 'description', :placeholder => 'In this cast we will speak about ...'}
+      %hr
+      %div.row.create-cast.center-text
+        %h4.cast-title Configuration de la salle de conférence
+        %div.col-sm-6.cast-type-bloc
+          %div.form-group
+            %input{:type => 'radio', :name => 'cast_type', :value => 'public'}
+            %br
+            %span.cast-type Public
+          %div.row.cast-nb-user
+            %div.col-sm-6.col-sm-push-3
+              %label Nombre de participant maximum
+              %input.form-control#capacity{:type => 'number', :placeholder => '10'}
+
+        %div.col-sm-6.cast-bloc.cast-type-bloc
+          %div.form-group
+            %input{:type => 'radio', :name => 'cast_type', :value => 'private'}
+            %br
+            %span.cast-type Privé
+          %div
+            %div.input-group
+              %input.form-control{:type => 'text', :name => 'search', :placeholder => 'Nom du membre'}
+              %span.input-group-btn
+                %button.btn.btn-default{:type => 'submit'}
+                  %span.fa.fa-search.search-btn
+            %div
+              %label{:for => 'Membres'}
+              %div#mbr-list.mbr-list
+      %hr
+      %div.row.create-cast.center-text
+        %h4.cast-title Quand ?
+        %div.row
+          %div.col-sm-6.date-box
+            %div.date-box-part.date-box-part-up
+              %label{:for => 'now'} Tout de suite
+              %input#now.form-group{:type => 'radio', :name => 'date', :value => 'now'}
+            %div.date-box-part
+              %div
+                %label{:for => 'date'} Le
+                %input#date.form-group{:type => 'radio', :name => 'date', :value => 'date'}
+              %div
+                %div.form-group
+                  %div#datetime.input-group.data
+                    %input.form-control{:type => 'text'}
+                    %span.input-group-addon
+                      %span.glyphicon.glyphicon-calendar
+          %div.col-sm-6.date-box
+            %div.col-sm-6.col-sm-push-3.duration
+              %label{:for => 'duration'} Durée estimé (mins)
+              %input#duration.form-control{:type => 'number', :name => 'duration', :min => '0'}
+      %hr
+      %div.row.create-cast.center-text
+        %h4.cast-title #Hashtag
+        %div.row
+          %div.col-sm-6.col-sm-push-3
+            %input.form-control{:type => 'text', :name => 'tags'}
+      %hr
+        %div.col-sm-6
+          %a.btn.btn-default.form-control{:href => '/'} Annuler
+        %div.col-sm-6
+          %input.btn.btn-success.form-control{:type => 'submit', :value => 'Valider'}

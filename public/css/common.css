@@ -1,5 +1,6 @@
 .body-main {
     background-color: #f1f1f1;
+    padding-bottom: 50px;
 }
 .navbar-default {
     background-color: #fff;
@@ -25,6 +26,7 @@
 }
 .main-content {
     background-color: #fff;
+    padding-bottom: 25px;
 }
 .spredcast-grp h3 {
     font-size: 20px;
@@ -392,6 +394,74 @@
 .conversation-reply.object-fix {
     font-weight: bold;
 }
+.create-cast-form {
+    margin: 30px;
+}
+.stream-pic {
+    width: 200px;
+    height: 200px;
+    border: solid 1px #ddd;
+    text-align: center;
+    padding: 10px;
+}
+.stream-txt {
+    margin-top: 70px;
+    font-style: italic;
+}
+.stream-desc-margin {
+    margin-top: 23px;
+}
+.create-cast {
+    padding-bottom: 40px;
+}
+.cast-title {
+    font-style: italic;
+    margin-bottom: 40px;
+}
+.cast-bloc {
+    border-left: solid 1px #ddd;
+    padding: 20px;
+}
+.cast-type-bloc:hover {
+    background-color: #eee;
+    height: 336px;
+}
+.cast-type {
+    font-weight: bold;
+}
+.cast-member {
+    width: 450px;
+}
+.cast-nb-user {
+    margin-top: 120px;
+}
+.mbr-list {
+    width: 100%;
+    height: 200px;
+    border: solid 1px #ddd;
+}
+.date-box {
+    height: 200px;
+}
+.date-box-part {
+    height: 100px;
+    text-align: center;
+    padding: 20px;
+}
+.date-box-part:hover {
+    background-color: #eee;
+}
+.date-box-part-up {
+    border-bottom: solid 1px #ddd;
+    padding-top: 40px;
+}
+.duration {
+    margin-top: 50px;
+}
+.btn-line {
+    text-align: right;
+}
+
 @media (max-width: 1200px) {
     .navbar-default .navbar-brand.logo {
         width: inherit;
