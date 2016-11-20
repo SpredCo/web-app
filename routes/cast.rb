@@ -2,7 +2,7 @@ get '/create-cast' do
   authenticate!
   @unread_message_count = synchronize_inbox!
   @title = 'Spred'
-  haml :'cast/create', layout: :'layout/layout'
+  haml :'cast/create', layout: :'layout/create_cast_layout'
 end
 
 post '/create-cast' do

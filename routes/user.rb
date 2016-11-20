@@ -60,4 +60,11 @@ class Spred
     users.map! {|user| "@#{user.pseudo}"}
     @users = JSON.generate(users)
   end
+
+  get '/casts' do
+    authenticate!
+
+    haml :'user/cast', layout: :'layout/layout'
+  end
+
 end

@@ -188,13 +188,10 @@
     margin-bottom: 40px;
 }
 .navbar-icon {
-    border-left: solid #777 1px;
     width: 100px;
     text-align: center;
 }
-.navbar-icon.last {
-    border-right: solid #777 1px;
-}
+
 .play-icon {
     color: #55AA55;
     font-size: 20px;
@@ -286,6 +283,19 @@
 .new-conversation-link {
     color: #55AA55;
 }
+.new-conversation-link:hover {
+    color: #55AA55;
+}
+.new-conversation-link:active {
+    color: #55AA55;
+}
+.new-conversation-link:focus {
+    color: #55AA55;
+}
+.new-conversation-link:visited {
+    color: #55AA55;
+}
+
 .replylink {
     color: black;
 }
@@ -418,13 +428,12 @@
     font-style: italic;
     margin-bottom: 40px;
 }
-.cast-bloc {
+.cast-bloc-split {
     border-left: solid 1px #ddd;
-    padding: 20px;
+    padding-top: 20px;
 }
-.cast-type-bloc:hover {
-    background-color: #eee;
-    height: 336px;
+.cast-type-bloc {
+    padding-top: 20px;
 }
 .cast-type {
     font-weight: bold;
@@ -496,12 +505,50 @@
     width: 150px;
     height: 150px;
 }
-
-#casts-row {
+.casts-row {
     margin :20px;
 }
-
 .cast-nb-viewer {
     font-size: 12px;
     font-style: italic;
+}
+.cast-step-header {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #777;
+}
+.cast-step-header div {
+    margin-top: 20px;
+    height: 5px;
+    width: 100%;
+    background-color: #777;
+}
+.cast-step-header.active span {
+    color: #4cae4c;
+}
+.cast-step-header.active div {
+    background-color: #4cae4c;
+}
+.cast-step-content {
+    padding: 30px;
+}
+.disabled-div {
+    opacity: 0.5;
+    pointer-events: none;
+}
+.cast-step-button {
+    margin-top: 30px;
+}
+.cast-step-button-next {
+    text-align: right;
+}
+.cast-step-c {
+    height: 380px;
+}
+#when-c {
+    padding-top: 60px;
+}
+#tags-c {
+    padding-top: 80px;
 }
