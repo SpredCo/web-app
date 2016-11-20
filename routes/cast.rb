@@ -18,8 +18,8 @@ post '/create-cast' do
   redirect '/'
 end
 
-get '/casts/:name' do
-  cast_req = GetCastRequest.new(session[:spred_tokens], params[:name])
+get '/casts/:url' do
+  cast_req = GetCastRequest.new(session[:spred_tokens], params[:url])
   cast_req.send
   @cast = cast_req.parse_response
   puts @cast
