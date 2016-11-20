@@ -16,14 +16,13 @@ post '/create-cast' do
   p response
 end
 
-get '/casts/:name' do
-  cast_req = GetCastRequest.new(session[:spred_tokens], params[:name])
+get '/casts/:url' do
+  cast_req = GetCastRequest.new(session[:spred_tokens], params[:url])
   cast_req.send
-  @cast = cast_req.parse_response
-  unless @cast.is_a?(APIError)
-    token_req = CastHelper.get_cast_token(session[:spred_tokens], @cast.id)
-    token_req.send
-    @cast_token = CastToken.from_hash(token_req.parse_response)
+  @cast = cast_req.parse_response.body
+  unless @cast.nil? || @cast.is_a?(APIError)
+    token_req = CastHelper.get_cast_token(session[:spred_tokens], @cast['id'])
+    @cast_token = CastToken.from_hash(token_req.body)
+    haml :'cast/show'
   end
-  haml :'cast/show'
 end

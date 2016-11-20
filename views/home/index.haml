@@ -8,7 +8,7 @@
             %div
               %img.cast-picture{src: "#{request.base_url}/img/cast.png"}
             %div.cast-name
-              %a.cast-name{ href: "#{request.base_url}/casts/#{cast.name}", title: cast.name }
+              %a.cast-name{ href: "#{request.base_url}/casts/#{cast.url}", title: cast.name }
                 = cast.name
             %div.cast-creator
               %a.cast-creator{ href: "#{request.base_url}/@#{cast.creator.pseudo}", title: "@#{cast.creator.pseudo}" }
