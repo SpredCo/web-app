@@ -21,7 +21,6 @@ end
 get '/casts/:url' do
   cast_req = GetCastRequest.new(session[:spred_tokens], params[:url])
   cast_req.send
-  @cast = cast_req.parse_response
-  puts @cast
+  @cast = cast_req.parse_response.body
   haml :'cast/show', layout: :'layout/cast_layout'
 end

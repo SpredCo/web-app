@@ -1,3 +1,6 @@
+a, a:hover, a:active, a:visited {
+    color: #55AA55;
+}
 .body-main {
     background-color: #f1f1f1;
     padding-bottom: 50px;
@@ -551,4 +554,32 @@
 }
 #tags-c {
     padding-top: 80px;
+}
+.cast-header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.vcast-name {
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+.vcast-video {
+    background-color: black;
+    width: 100%;
+    height: 600px;
+}
+.vcast-panel {
+    margin-top: 20px;
+    height: 500px;
+}
+.question-box {
+    height: 400px;
+}
+.cast-info-title {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #777;
+}
+.chat-content {
+    height: 400px;
 }
