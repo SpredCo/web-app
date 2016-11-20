@@ -1,7 +1,7 @@
 %div.container.main-content
   %h3.spredcast-grp Création d'un spredcast
   %div.create-cast-form
-    %form{:action => '/create-cast', :method => 'POST'}
+    %form{:action => '/create-cast', :method => 'POST',  enctype: 'multipart/form-data'}
       %div.row.create-cast
         %div.col-sm-3
           %div.stream-pic

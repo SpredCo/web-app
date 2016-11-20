@@ -1,5 +1,5 @@
 class SpredCast
-  attr_reader :creator, :name, :description, :tags, :date, :members, :is_public, :duration, :user_capacity, :url, :cover_url
+  attr_reader :id, :creator, :name, :description, :tags, :date, :members, :is_public, :duration, :user_capacity, :url, :cover_url
 
   def initialize(id, creator, name, description, tags, date, members, is_public, duration, user_capacity, url, cover_url)
     @id = id

@@ -3,6 +3,9 @@
 public/profile_pictures/*.jpg
 public/profile_pictures/*.jpeg
 public/profile_pictures/*.png
+public/cast_covers/*.jpg
+public/cast_covers/*.jpeg
+public/cast_covers/*.png
 coverage/
 public/node_modules/*
 public/bower_components/*
