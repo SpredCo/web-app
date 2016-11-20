@@ -15,63 +15,84 @@
           %div.stream-desc-margin
             %label{:for => 'description'} Description
             %textarea#description.form-control{:type => 'input', :rows => 4, :name => 'description', :placeholder => 'In this cast we will speak about ...'}
-      %hr
-      %div.row.create-cast.center-text
-        %h4.cast-title Configuration de la salle de conférence
-        %div.col-sm-6.cast-type-bloc
-          %div.form-group
-            %input{:type => 'radio', :name => 'cast_type', :value => 'public'}
-            %br
-            %span.cast-type Public
-          %div.row.cast-nb-user
-            %div.col-sm-6.col-sm-push-3
-              %label Nombre de participant maximum
-              %input.form-control#capacity{:type => 'number', :placeholder => '10', :name => 'user_capacity'}
-
-        %div.col-sm-6.cast-bloc.cast-type-bloc
-          %div.form-group
-            %input{:type => 'radio', :name => 'cast_type', :value => 'private'}
-            %br
-            %span.cast-type Privé
-          %div
-            %div.input-group
-              %input.form-control{:type => 'text', :name => 'search', :placeholder => 'Nom du membre'}
-              %span.input-group-btn
-                %button.btn.btn-default{:type => 'submit'}
-                  %span.fa.fa-search.search-btn
+      %div
+        %div.row
+          %div#room.col-sm-4.cast-step-header.active
+            %span Configuration de la salle
             %div
-              %label{:for => 'Membres'}
-              %div#mbr-list.mbr-list
-      %hr
-      %div.row.create-cast.center-text
-        %h4.cast-title Quand ?
-        %div.row
-          %div.col-sm-6.date-box
-            %div.date-box-part.date-box-part-up
-              %label{:for => 'now'} Tout de suite
-              %input#now.form-group{:type => 'radio', :name => 'date', :value => 'now'}
-            %div.date-box-part
-              %div
-                %label{:for => 'date'} Le
-                %input#date.form-group{:type => 'radio', :name => 'date', :value => 'date'}
-              %div
+          %div#when.col-sm-4.cast-step-header
+            %span Quand ?
+            %div
+          %div#tags.col-sm-4.cast-step-header
+            %span Tags
+            %div
+        %div.tab-content.cast-step-content
+          %div#room-c.tab-pane.fade.cast-step-c.in.active
+            %div.row.center-text
+              %div.col-sm-6.cast-type-bloc
                 %div.form-group
-                  %div#datetime.input-group.data
-                    %input.form-control{:type => 'text', :name => 'date-value'}
-                    %span.input-group-addon
-                      %span.glyphicon.glyphicon-calendar
-          %div.col-sm-6.date-box
-            %div.col-sm-6.col-sm-push-3.duration
-              %label{:for => 'duration'} Durée estimé (mins)
-              %input#duration.form-control{:type => 'number', :name => 'duration', :min => '0'}
-      %hr
-      %div.row.create-cast.center-text
-        %h4.cast-title #Hashtag
-        %div.row
-          %div.col-sm-6.col-sm-push-3
-            %input.form-control{:type => 'text', :name => 'tags'}
-      %hr
-        %div.col-sm-6
-          %a.btn.btn-default.form-control{:href => '/'} Annuler
-        %div.col-sm-6
-          %input.btn.btn-success.form-control{:type => 'submit', :value => 'Valider'}
+                  %input{:type => 'radio', :name => 'cast-type', :value => 'public', :checked => true}
+                  %br
+                  %span.cast-type Public
+                %div.row.cast-nb-user
+                  %div.col-sm-6.col-sm-push-3
+                    %label Nombre de participant maximum
+                    %input.form-control#capacity{:type => 'number', :placeholder => '10', :name => 'user_capacity'}
+              %div.col-sm-6.cast-bloc-split.cast-type-bloc.disabled-div
+                %div.form-group
+                  %input{:type => 'radio', :name => 'cast-type', :value => 'private'}
+                  %br
+                  %span.cast-type Privé
+                %div
+                  %div.input-group
+                    %input.form-control{:type => 'text', :name => 'search', :placeholder => 'Nom du membre'}
+                    %span.input-group-btn
+                      %button.btn.btn-default{:type => 'submit'}
+                        %span.fa.fa-search.search-btn
+                  %div
+                    %label{:for => 'Membres'}
+                    %div#mbr-list.mbr-list
+            %div.row.cast-step-button
+              %div.col-sm-2.col-sm-push-10.cast-step-button-next
+                %a.btn.btn-success{:onclick => 'next("#room");'} Suivant >>
+
+          %div#when-c.tab-pane.fade.cast-step-c
+            %div.row.center-text
+              %div.col-sm-6.date-box
+                %div.date-box-part.date-box-part-up
+                  %label{:for => 'now'} Tout de suite
+                  %input#now.form-group{:type => 'radio', :name => 'date', :value => 'now', :checked => true}
+                %div.date-box-part.disabled-div
+                  %div
+                    %label{:for => 'date'} Le
+                    %input#date.form-group{:type => 'radio', :name => 'date', :value => 'date'}
+                  %div
+                    %div.form-group
+                      %div#datetime.input-group.data
+                        %input.form-control{:type => 'text', :name => 'date-value'}
+                        %span.input-group-addon
+                          %span.glyphicon.glyphicon-calendar
+              %div.col-sm-6.date-box
+                %div.col-sm-6.col-sm-push-3.duration
+                  %label{:for => 'duration'} Durée estimé (en minutes)
+                  %input#duration.form-control{:type => 'number', :name => 'duration', :min => '0', :placeholder => '10'}
+            %div.row.cast-step-button{:style => 'margin-top: 86px'}
+              %div.col-sm-2
+                %a.btn.btn-default{:onclick => 'prev("#when");'} << Précedent
+              %div.col-sm-2.col-sm-push-8.cast-step-button-next
+                %a.btn.btn-success{:onclick => 'next("#when");'} Suivant >>
+
+          %div#tags-c.tab-pane.face.cast-step-c
+            %div.row
+              %div.col-sm-6.col-sm-push-3
+                %div.alert.alert-success
+                  Les tags de votre spredcast ont une importance capitale dans la visibilité de celui-ci.
+                  %br
+                  Choisissez-en trois minimum !
+                %label{:for => '#tokenfield'} Tags :
+                %input#tokenfield.form-control{:type => 'text', :name => 'tags', :placeholder => 'coding, c++, life, ...'}
+            %div.row.cast-step-button{:style => 'margin-top: 95px'}
+              %div.col-sm-2
+                %a.btn.btn-default{:onclick => 'prev("#tags");'} << Précedent
+              %div.col-sm-2.col-sm-push-8.cast-step-button-next
+                %input.btn.btn-success{:type => 'submit', :value => 'Confirmer et valider >>', :name => 'validate'}
