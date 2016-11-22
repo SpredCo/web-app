@@ -42,6 +42,7 @@ class Spred
 
   get '/casts/token/:id' do
     token = CastHelper.get_cast_token(token, params[:id])
-    @cast_token = CastToken.from_hash(token.body)
+    JSON.generate(token.body)
+    # @cast_token = CastToken.from_hash(token.body)
   end
 end
