@@ -24,7 +24,7 @@ class Spred
     req = CreateCastRequest.new(session[:spred_tokens], params.delete('name'), params.delete('description'), is_public, cast_date, params.merge({cover_url: picture}))
     req.send
     req.parse_response
-    redirect '/'
+    redirect '/profile/casts'
   end
 
   get '/casts/:url' do
