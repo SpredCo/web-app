@@ -46,6 +46,7 @@ class Spred
   end
 
   get '/profile/casts' do
+    authenticate!
     req = GetUserCastsRequest.new(session[:spred_tokens])
     req.send
     response = req.parse_response

@@ -586,3 +586,8 @@ a, a:hover, a:active, a:visited {
 .chat-content {
     height: 400px;
 }
+.mine-description {
+    padding: 3px 10px;
+    color: #777;
+    height: 110px;
+}
