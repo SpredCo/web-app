@@ -50,14 +50,19 @@ class Spred
     req = GetUserCastsRequest.new(session[:spred_tokens])
     req.send
     response = req.parse_response
-    @casts_by_states = {}
+    @casts_by_states = {'0' => [], '1' => []}
     if response.is_a? APIError
       redirect '/'
     else
       @casts = response.body.each do |hashed_cast|
         cast = SpredCast.from_hash(session[:spred_tokens], hashed_cast)
-        @casts_by_states[cast.state.to_s] ||= []
-        @casts_by_states[cast.state.to_s] << cast
+        if cast.states < 2
+          if cast.date < Date.today
+            @casts_by_states['0'] << cast
+          else
+            @casts_by_states['1'] << cast
+          end
+        end
       end
       haml :'cast/mine', layout: :'layout/cast_layout'
     end
