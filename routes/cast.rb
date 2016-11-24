@@ -55,7 +55,8 @@ class Spred
     else
       @casts = response.body.each do |hashed_cast|
         cast = SpredCast.from_hash(session[:spred_tokens], hashed_cast)
-        @casts_by_states[cast.state.to_s] = cast
+        @casts_by_states[cast.state.to_s] ||= []
+        @casts_by_states[cast.state.to_s] << cast
       end
       haml :'cast/mine', layout: :'layout/cast_layout'
     end
