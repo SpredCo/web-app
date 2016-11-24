@@ -1,13 +1,16 @@
 a, a:hover, a:active, a:visited {
     color: #55AA55;
 }
+
 .body-main {
     background-color: #f1f1f1;
     padding-bottom: 50px;
 }
+
 .navbar-default {
     background-color: #fff;
 }
+
 .navbar-default .navbar-brand.logo {
     width: 250px;
     padding-left: 50px;
@@ -16,35 +19,44 @@ a, a:hover, a:active, a:visited {
     font-style: italic;
     font-weight: bold;
 }
+
 .search-bar {
     width: 600px;
 }
+
 .search-btn {
     font-size: 16px;
     padding-bottom: 2px;
     padding-top: 2px;
 }
+
 .btn-nav {
     margin-right: 30px;
 }
+
 .nav-btn-signup {
     color: white !important;
 }
+
 .main-content {
     background-color: #fff;
     padding-bottom: 25px;
 }
+
 .spredcast-grp h3 {
     font-size: 20px;
     padding-left: 10px;
 }
+
 .wrapper {
     padding-top: 35px;
 }
+
 .signup-bloc {
     margin: auto;
     max-width: 650px;
 }
+
 .signup-title {
     text-align: center;
     font-size: 35px;
@@ -53,39 +65,48 @@ a, a:hover, a:active, a:visited {
     font-weight: bold;
     margin-bottom: 40px;
 }
+
 .center-text {
     text-align: center;
 }
+
 .badge.active {
     background-color: #55AA55;
     margin-bottom: 5px;
 }
+
 .text-signup-info {
     color: #777;
     font-size: 16px;
     margin-bottom: 10px;
 }
+
 .text-signup-info.active {
     color: #55AA55;
 }
+
 .line-signup {
     margin-top: 20px;
     height: 5px;
     width: 100%;
     background-color: #777;
 }
+
 .line-signup.active {
     background-color: #55AA55;
 }
+
 .btn-space {
     margin-top: 50px;
 }
+
 .signup-btn {
     width: 100%;
     height: 50px;
     font-size: 20px;
     margin-bottom: 20px;
 }
+
 .signup-btn i {
     margin-right: 20px;
 }
@@ -95,15 +116,19 @@ a, a:hover, a:active, a:visited {
     background-color: #5cb85c;
     border-color: #4cae4c;
 }
+
 .signup-email:hover {
     color: #fff;
 }
+
 .signup-email:active {
     color: #fff;
 }
+
 .signup-email:visited {
     color: #fff;
 }
+
 .signup-email:focus {
     color: #fff;
 }
@@ -112,15 +137,19 @@ a, a:hover, a:active, a:visited {
     color: #fff;
     background-color: #4267b2;
 }
+
 .signup-facebook:hover {
     color: #fff;
 }
+
 .signup-facebook:active {
     color: #fff;
 }
+
 .signup-facebook:visited {
     color: #fff;
 }
+
 .signup-facebook:focus {
     color: #fff;
 }
@@ -129,62 +158,79 @@ a, a:hover, a:active, a:visited {
     color: #fff;
     background-color: #c53929;
 }
+
 .signup-google:hover {
     color: #fff;
 }
+
 .signup-google:active {
     color: #fff;
 }
+
 .signup-google:visited {
     color: #fff;
 }
+
 .signup-google:focus {
     color: #fff;
 }
+
 .signup-form {
     margin-top: 10px;
 }
+
 .btn-signup {
     margin-top: 40px;
 }
+
 .signup-hr {
     border-top-color: #777;
 }
+
 .or {
     text-align: center;
     font-weight: bold;
     padding-top: 10px;
     margin-bottom: 25px;
 }
+
 .hidden-feedback {
     display: none;
 }
+
 .info-pseudo {
     margin-top: 50px;
     margin-bottom: 40px;
 }
+
 .validate-interest {
     margin-top: 300px;
 }
+
 .modal-close {
     margin-right: 20px;
 }
+
 .login-modal {
     width: 500px;
 }
+
 .login-field {
     margin-bottom: 30px;
 }
+
 .login-btn {
     width: 100%;
     height: 50px;
     font-size: 20px;
     margin-bottom: 20px;
 }
+
 .login-block {
     background-color: white;
     border-radius: 5px;
 }
+
 .login-title {
     text-align: center;
     font-size: 35px;
@@ -193,6 +239,7 @@ a, a:hover, a:active, a:visited {
     font-weight: bold;
     margin-bottom: 40px;
 }
+
 .navbar-icon {
     width: 100px;
     text-align: center;
@@ -202,18 +249,22 @@ a, a:hover, a:active, a:visited {
     color: #55AA55;
     font-size: 20px;
 }
+
 .inbox-icon {
     color: #777;
     font-size: 20px;
 }
+
 .inbox-badge {
     font-size: 10px;
     margin-top: -6px;
     background-color: #777;
 }
+
 .inbox-badge.active {
     background-color: #55AA55;
 }
+
 .nav-profile-picture {
     border-radius: 25px;
     cursor: pointer;
@@ -221,9 +272,11 @@ a, a:hover, a:active, a:visited {
     width: 50px;
     height: 50px;
 }
+
 .profile-header {
     background-color: #55AA55;
 }
+
 .profile-cadre {
     top: 90px;
     position: relative;
@@ -232,72 +285,90 @@ a, a:hover, a:active, a:visited {
     background-color: #fff;
     border-radius: 15px;
 }
+
 .profile-picture {
     margin: 5px;
     width: 200px;
     border-radius: 15px;
 }
+
 .profile-name {
     padding-left: 250px;
 }
+
 .profile-name h2 {
     margin-bottom: 0;
 }
+
 .profile-name h3 {
     margin-top: 5px;
     color: #777;
     font-style: italic;
 }
+
 .edit-profile-btn {
     margin-top: 30px;
 }
+
 .profile-info-line {
     margin-top: 20px;
     text-align: center;
     border-top: solid 1px #f1f1f1;
 }
+
 .profile-info-cell {
     border-right: solid 2px #f1f1f1;
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
 .profile-info-cell h4 {
     text-transform: uppercase;
     color: #777;
     font-size: 14px;
 }
+
 .profile-info-cell span {
     font-size: 20px;
     color: #55AA55;
     font-weight: bold;
 }
+
 .profile-form {
     margin-top: 50px;
 }
+
 .main-inbox-content {
     background-color: #fff;
     margin-bottom: 10px;
 }
+
 .inbox-content {
     height: 100%;
     overflow-y: auto;
 }
+
 .toolbox {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
 .new-conversation-link {
     color: #55AA55;
 }
+
 .new-conversation-link:hover {
     color: #55AA55;
 }
+
 .new-conversation-link:active {
     color: #55AA55;
 }
+
 .new-conversation-link:focus {
     color: #55AA55;
 }
+
 .new-conversation-link:visited {
     color: #55AA55;
 }
@@ -305,19 +376,24 @@ a, a:hover, a:active, a:visited {
 .replylink {
     color: black;
 }
+
 .replylink:hover {
     color: black;
 }
+
 .box-border {
     border-top: solid 1px #ccc;
 }
+
 .inbox-display {
     height: 700px;
 }
+
 .inbox-conversation {
     border-right: solid 1px #ccc;
     height: 100%;
 }
+
 .conversation {
     height: 80px;
     padding-top: 5px;
@@ -326,28 +402,34 @@ a, a:hover, a:active, a:visited {
     cursor: pointer;
     border-bottom: solid 1px #ccc;
 }
+
 .conversation:hover {
     background-color: #f1f1f1;
 }
+
 .conversation.active {
     background-color: #dedddd;
 }
+
 .unread {
     position: relative;
     top: 25px;
     color: #55AA55;
 }
+
 .read {
     position: relative;
     top: 25px;
     color: #55AA55;
     opacity: 0;
 }
+
 .object {
     font-size: 16px;
     font-weight: bold;
     padding-left: 20px;
 }
+
 .members {
     padding-left: 20px;
     font-style: italic;
@@ -356,63 +438,78 @@ a, a:hover, a:active, a:visited {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
 .inbox-dest-label {
     color: #777;
     padding-top: 5px;
 }
+
 .inbox-object-padding {
     padding-top: 10px;
 }
+
 .main-inbox-create-conv {
     background-color: #fff;
 }
+
 .loading {
     display: none;
     padding-top: 280px;
     text-align: center;
 }
+
 .message-picture {
     border-radius: 25px;
     width: 50px;
     height: 50px;
 }
+
 .message {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
 .message-author {
     font-size: 14px;
     font-weight: bold;
 }
+
 .message-date {
     margin-left: 10px;
     font-size: 10px;
     color: #777;
 }
+
 .message-author-pseudo {
     font-size: 10px;
     color: #777;
     font-style: italic;
 }
+
 .message-content {
     padding-left: 15px;
     padding-right: 15px;
 }
+
 .disabled {
     pointer-events: none !important;
     cursor: default;
-    color:Gray;
+    color: Gray;
 }
+
 .conversation-reply {
     margin-top: 4px;
     margin-bottom: 4px;
 }
+
 .conversation-reply.object-fix {
     font-weight: bold;
 }
+
 .create-cast-form {
     margin: 30px;
 }
+
 .stream-pic {
     width: 200px;
     height: 200px;
@@ -420,59 +517,75 @@ a, a:hover, a:active, a:visited {
     text-align: center;
     padding: 10px;
 }
+
 .stream-txt {
     margin-top: 70px;
     font-style: italic;
 }
+
 .stream-desc-margin {
     margin-top: 23px;
 }
+
 .create-cast {
     padding-bottom: 40px;
 }
+
 .cast-title {
     font-style: italic;
     margin-bottom: 40px;
 }
+
 .cast-bloc-split {
     border-left: solid 1px #ddd;
     padding-top: 20px;
 }
+
 .cast-type-bloc {
     padding-top: 20px;
 }
+
 .cast-type {
     font-weight: bold;
 }
+
 .cast-member {
     width: 450px;
 }
+
 .cast-nb-user {
     margin-top: 120px;
 }
+
 .mbr-list {
     width: 100%;
     height: 200px;
     border: solid 1px #ddd;
 }
+
 .date-box {
     height: 200px;
 }
+
 .date-box-part {
     height: 100px;
     text-align: center;
     padding: 20px;
 }
+
 .date-box-part:hover {
     background-color: #eee;
 }
+
 .date-box-part-up {
     border-bottom: solid 1px #ddd;
     padding-top: 40px;
 }
+
 .duration {
     margin-top: 50px;
 }
+
 .btn-line {
     text-align: right;
 }
@@ -490,7 +603,6 @@ a, a:hover, a:active, a:visited {
     .search-bar {
         width: 250px;
     }
-
     .navbar-right {
         padding-left: 10px;
     }
@@ -511,81 +623,101 @@ a, a:hover, a:active, a:visited {
     width: 150px;
     height: 150px;
 }
+
 .casts-row {
-    margin :20px;
+    margin: 20px;
 }
+
 .cast-nb-viewer {
     font-size: 12px;
     font-style: italic;
 }
+
 .cast-step-header {
     text-align: center;
     font-size: 20px;
     font-weight: bold;
     color: #777;
 }
+
 .cast-step-header div {
     margin-top: 20px;
     height: 5px;
     width: 100%;
     background-color: #777;
 }
+
 .cast-step-header.active span {
     color: #4cae4c;
 }
+
 .cast-step-header.active div {
     background-color: #4cae4c;
 }
+
 .cast-step-content {
     padding: 30px;
 }
+
 .disabled-div {
     opacity: 0.5;
     pointer-events: none;
 }
+
 .cast-step-button {
     margin-top: 30px;
 }
+
 .cast-step-button-next {
     text-align: right;
 }
+
 .cast-step-c {
     height: 380px;
 }
+
 #when-c {
     padding-top: 60px;
 }
+
 #tags-c {
     padding-top: 80px;
 }
+
 .cast-header {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
 .vcast-name {
     font-size: 25px;
     letter-spacing: 2px;
 }
+
 .vcast-video {
-    background-color: black;
     width: 100%;
     height: 600px;
 }
+
 .vcast-panel {
     margin-top: 20px;
     height: 500px;
 }
+
 .question-box {
     height: 400px;
 }
+
 .cast-info-title {
     margin-top: 10px;
     font-size: 18px;
     color: #777;
 }
+
 .chat-content {
     height: 400px;
 }
+
 .mine-description {
     padding: 3px 10px;
     color: #777;
