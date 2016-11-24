@@ -56,7 +56,7 @@ class Spred
       @casts = response.body.each do |hashed_cast|
         cast = SpredCast.from_hash(session[:spred_tokens], hashed_cast)
         if cast.state < 2
-          if Date.parse(cast.date) < Date.today
+          if DateTime.parse(cast.date) < DateTime.now
             @casts_by_states['0'] << cast
           else
             @casts_by_states['1'] << cast
