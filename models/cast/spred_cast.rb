@@ -1,7 +1,7 @@
 class SpredCast
-  attr_reader :id, :creator, :name, :description, :tags, :date, :members, :is_public, :duration, :user_capacity, :url, :cover_url
+  attr_reader :id, :creator, :name, :description, :tags, :date, :members, :is_public, :duration, :user_capacity, :url, :cover_url, :state
 
-  def initialize(id, creator, name, description, tags, date, members, is_public, duration, user_capacity, url, cover_url)
+  def initialize(id, creator, name, description, tags, date, members, is_public, duration, user_capacity, url, cover_url, state)
     @id = id
     @creator = creator
     @name = name
@@ -14,6 +14,7 @@ class SpredCast
     @user_capacity = user_capacity
     @url = url
     @cover_url = cover_url
+    @state = state
   end
 
   def self.from_hash(tokens, cast)
@@ -22,7 +23,7 @@ class SpredCast
     end
     creator = BaseUser.from_hash(cast['creator'])
     SpredCast.new(cast['id'], creator, cast['name'], cast['description'], cast['tags'], cast['date'],
-                  members, cast['id_public'], cast['duration'], cast['user_capacity'], cast['url'], cast['cover_url'])
+                  members, cast['id_public'], cast['duration'], cast['user_capacity'], cast['url'], cast['cover_url'], cast['state'])
   end
 
   def to_hash
@@ -38,7 +39,8 @@ class SpredCast
       duration: @duration,
       user_capacity: @user_capacity,
       url: @url,
-      cover_url: @cover_url
+      cover_url: @cover_url,
+      state: @state
     }
   end
 end
