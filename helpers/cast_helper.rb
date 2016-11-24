@@ -2,6 +2,7 @@ module CastHelper
   require 'securerandom'
 
   def self.get_cast_token(tokens, id)
+    pp tokens
     if tokens.is_a? TokenBox
       req = GetCastTokenRequest.new(tokens, id)
     else

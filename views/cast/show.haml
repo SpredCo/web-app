@@ -3,7 +3,7 @@
     %span.vcast-name= @cast.name
     %span par
     %a{:href => '/@' + @cast.creator.pseudo}= '@' + @cast.creator.pseudo
-  %div.vcast-video
+  %video.vcast-video
   %div.vcast-panel
     %ul.nav.nav-tabs.nav-justified
       %li
@@ -31,4 +31,7 @@
             %input#chat-input.form-control{:type => 'input', :placeholder => 'Votre message ...'}
           %div.col-sm-2
             %button.form-control.btn.btn-success Envoyer
-
+%script{:type=>"text/javascript"}
+  alert("#{@cast.id}");
+  var client = new Spred.Client();
+  client.connect("#{@cast.id}");

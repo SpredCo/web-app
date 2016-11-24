@@ -41,7 +41,21 @@ class Spred
   end
 
   get '/casts/token/:id' do
-    token = CastHelper.get_cast_token(session[:spred_token], params[:id])
-    @cast_token = CastToken.from_hash(token.body)
+    token = CastHelper.get_cast_token(session[:spred_tokens], params[:id])
+    JSON.generate(token.body)
+  end
+
+  get '/profile/casts' do
+    req = GetUserCastsRequest.new(session[:spred_tokens])
+    req.send
+    response = req.parse_response
+    if response.is_a? APIError
+      redirect '/'
+    else
+      @casts = response.body.each_with_object([]) do |hashed_cast, array|
+        array << SpredCast.from_hash(session[:spred_tokens], hashed_cast)
+      end
+      haml :'cast/mine', layout: :'layout/cast_layout'
+    end
   end
 end
