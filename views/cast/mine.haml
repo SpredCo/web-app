@@ -2,8 +2,8 @@
   %div
     %h3 Live
     %hr
-      -if @casts_by_states['1'] != nil
-        - @casts_by_states['1'].each_slice(2) do |casts|
+      -if @casts_by_states['0'] != nil
+        - @casts_by_states['0'].each_slice(2) do |casts|
           %div.row.casts-row
             - casts.each do |cast|
               %div.col-sm-6
@@ -26,8 +26,8 @@
   %div
     %h3 A Venir
     %hr
-      -if @casts_by_states['0'] != nil
-        - @casts_by_states['0'].each_slice(2) do |casts|
+      -if @casts_by_states['1'] != nil
+        - @casts_by_states['1'].each_slice(2) do |casts|
           %div.row.casts-row
             - casts.each do |cast|
               %div.col-sm-6
