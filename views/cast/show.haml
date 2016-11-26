@@ -31,7 +31,9 @@
             %input#chat-input.form-control{:type => 'input', :placeholder => 'Votre message ...'}
           %div.col-sm-2
             %button.form-control.btn.btn-success Envoyer
-%script{:type=>"text/javascript"}
+:javascript
+  $(document).ready(function() {
   alert("#{@cast.id}");
   var client = new Spred.Client();
   client.connect("#{@cast.id}");
+  });
