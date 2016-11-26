@@ -3,7 +3,7 @@
     %span.vcast-name= @cast.name
     %span par
     %a{:href => '/@' + @cast.creator.pseudo}= '@' + @cast.creator.pseudo
-  %video.vcast-video
+  %video#video.vcast-video{ 'autoplay' => "true" }
   %div.vcast-panel
     %ul.nav.nav-tabs.nav-justified
       %li
