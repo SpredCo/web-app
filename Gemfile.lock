@@ -11,7 +11,7 @@ GEM
     daemons (1.2.4)
     debug_inspector (0.0.2)
     erubis (2.7.0)
-    eventmachine (1.2.0.1)
+    eventmachine (1.2.1)
     ffi (1.9.14)
     haml (4.0.7)
       tilt
@@ -23,7 +23,7 @@ GEM
     minitest (5.9.1)
     mocha (1.2.1)
       metaclass (~> 0.0.1)
-    rack (1.6.4)
+    rack (1.6.5)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
