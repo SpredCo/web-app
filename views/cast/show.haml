@@ -11,29 +11,28 @@
       %li.active
         %a{'data-toggle' => 'tab', :href => '#questions'} Questions
       %li
-        %a{'data-toggle' => 'tab', :href => '#tchat'} Tchat
+        %a{'data-toggle' => 'tab', :href => '#chat'} Chat
     %div.tab-content
       %div#info.tab-pane.fade
         %div.cast-info-title Description:
         %div= @cast.description
 
       %div#questions.tab-pane.fade.in.active
-        %div.question-box
+        %div#question-box.question-box
         %div.row
           %div.col-sm-10
             %input.form-control#question-input{:type => 'text', :placeholder => 'Posez votre question'}
           %div.col-sm-2
-            %button.form-control.btn.btn-success Envoyer
-      %div#tchat.tab-pane.fade
-        %div.chat-content
+            %button.form-control.btn.btn-success{:onclick => 'askQuestion();'} Envoyer
+      %div#chat.tab-pane.fade
+        %div#chat-box.chat-content
         %div.row
           %div.col-sm-10
             %input#chat-input.form-control{:type => 'input', :placeholder => 'Votre message ...'}
           %div.col-sm-2
-            %button.form-control.btn.btn-success Envoyer
+            %button.form-control.btn.btn-success{:onclick => 'sendMessage();'} Envoyer
 :javascript
   $(document).ready(function() {
-  alert("#{@cast.id}");
   var client = new Spred.Client();
   client.connect("#{@cast.id}");
   });

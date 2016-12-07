@@ -706,6 +706,7 @@ a, a:hover, a:active, a:visited {
 
 .question-box {
     height: 400px;
+    overflow-y: scroll;
 }
 
 .cast-info-title {
@@ -716,10 +717,34 @@ a, a:hover, a:active, a:visited {
 
 .chat-content {
     height: 400px;
+    overflow-y: scroll;
 }
 
 .mine-description {
     padding: 3px 10px;
     color: #777;
     height: 110px;
+}
+
+
+.question {
+    padding: 20px;
+    padding-top: 30px;
+    background-color: #fbfbfb;
+}
+
+.question-picture {
+    height: 70px;
+    width: 70px;
+}
+
+.question-info {
+    color: #777;
+    margin-bottom: 10px;
+}
+.message {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }

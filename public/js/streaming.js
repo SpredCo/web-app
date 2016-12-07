@@ -30,11 +30,11 @@ window.onload = function() {
 	document.getElementById('terminate').addEventListener('click', function() {
 		room.leave();
 	});
-}
+};
 
 window.onbeforeunload = function() {
 	room.leave();
-}
+};
 
 /**
  * Lightbox utility (to display media pipeline image in a modal dialog)
