@@ -57,7 +57,7 @@ class Spred
 
   get '/user/search/pseudo/:partial_pseudo' do
     users = RemoteUser.find_all_by_pseudo(session[:spred_tokens], params[:partial_pseudo])
-    users.map! {|user| "@#{user.pseudo}"}
+    users.map!(&:pseudo)
     @users = JSON.generate(users)
   end
 
@@ -66,5 +66,4 @@ class Spred
 
     haml :'user/cast', layout: :'layout/layout'
   end
-
 end
