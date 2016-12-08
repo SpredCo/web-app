@@ -1,6 +1,6 @@
 $(document).ready(function () {
     if ($('#tokenfield')) {
-        $('#tokenfield').tokenfield({ });
+        $('#tokenfield').tokenfield({});
     }
     handleCastTypeSelection('#public-select');
 
@@ -43,14 +43,15 @@ function handleCastTypeSelection(selected) {
         $('#public-cast-form').addClass('disabled-div');
         $('#private-cast-form').removeClass('disabled-div');
     } else {
-        console.log('Selected value:' + $(selected).vale())
+        console.log('Invalid selected value:' + $(selected).val())
     }
 }
 
-function loadPseudo() {
+function loadPseudoDelayed() {
     var dataList = $('#js-pseudo-list');
     var input = $('#js-autocomplete');
 
+    dataList.empty();
     $.ajax({
         dataType: "json",
         url: '/user/search/pseudo/' + input.val(),
@@ -59,11 +60,35 @@ function loadPseudo() {
 
     function success(data) {
         console.log(data);
-
-        data.forEach(function(item) {
-            var option = document.createElement('option');
-            option.value = item;
-            dataList.append(option);
+        data.forEach(function (item) {
+            dataList.append('<option>' + item + '</option>');
         });
     }
+}
+
+function loadPseudo() {
+    var canReplay = true;
+    var timeout = null;
+
+    if (canReplay == true) {
+        canReplay = false;
+        timeout = setTimeout(function () {
+            loadPseudoDelayed();
+            canReplay = true;
+        }, 500);
+    } else {
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+            loadPseudoDelayed();
+            canReplay = true;
+        }, 500);
+    }
+}
+
+function addToUserList() {
+    var input = $('#js-autocomplete');
+    var pseudo = '@' + input.val();
+    var div = $('#mbr-list');
+    div.append('<span>' + pseudo + '</span>');
+    input.val('');
 }
