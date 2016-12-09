@@ -12,6 +12,7 @@
           %div
             %label{:for => 'name'} Sujet de la présentation
             %input#name.form-control{:type => 'text', :name => 'name', :placeholder => 'Ex: Ruby is over ...'}
+            %input.form-control.hidden#mbr-ids{type: 'text', name: 'members'}
           %div.stream-desc-margin
             %label{:for => 'description'} Description
             %textarea#description.form-control{:type => 'input', :rows => 4, :name => 'description', :placeholder => 'In this cast we will speak about ...'}

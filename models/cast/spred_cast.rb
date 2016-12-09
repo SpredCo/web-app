@@ -17,9 +17,9 @@ class SpredCast
     @state = state
   end
 
-  def self.from_hash(tokens, cast)
-    members = cast['members'].each_with_object([]) do |member_id, array|
-      array << BaseUser.find(tokens, member_id)
+  def self.from_hash(cast)
+    members = cast['members'].each_with_object([]) do |member, array|
+      array << BaseUser.from_hash(member)
     end
     creator = BaseUser.from_hash(cast['creator'])
     SpredCast.new(cast['id'], creator, cast['name'], cast['description'], cast['tags'], cast['date'],

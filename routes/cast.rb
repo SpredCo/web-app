@@ -21,6 +21,7 @@ class Spred
               end
 
     params['tags'] = params['tags'].split(',')
+    params['members'] = params['members'].split(';') unless is_public
     req = CreateCastRequest.new(session[:spred_tokens], params.delete('name'), params.delete('description'), is_public, cast_date, params.merge({cover_url: picture}))
     req.send
     req.parse_response
@@ -33,7 +34,7 @@ class Spred
     cast_req.send
     @cast = cast_req.parse_response.body
     if @cast && !@cast.is_a?(APIError)
-      @cast = SpredCast.from_hash(tokens, @cast)
+      @cast = SpredCast.from_hash(@cast)
       haml :'cast/show', layout: :'layout/cast_layout'
     else
       redirect '/'
@@ -55,7 +56,7 @@ class Spred
       redirect '/'
     else
       @casts = response.body.each do |hashed_cast|
-        cast = SpredCast.from_hash(session[:spred_tokens], hashed_cast)
+        cast = SpredCast.from_hash(hashed_cast)
         if cast.state < 2
           if DateTime.parse(cast.date) < DateTime.now
             @casts_by_states['0'] << cast

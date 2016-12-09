@@ -60,8 +60,11 @@ function loadPseudoDelayed() {
 
     function success(data) {
         console.log(data);
-        data.forEach(function (item) {
-            dataList.append('<option>' + item + '</option>');
+        data.forEach(function (user) {
+            //var idAsString = "'" + user.id + "'";
+            //var pseudoAsString = "'" + user.pseudo + "'";
+            //var callback = 'onclick="addToUserList(' + idAsString + ', ' + pseudoAsString + ');"';
+            dataList.append('<option' + ' data-id=' + user.id + '>' + user.pseudo + '</option>');
         });
     }
 }
@@ -74,9 +77,24 @@ function loadPseudo() {
 }
 
 function addToUserList() {
+    console.log("adding user");
+    var opts = $('option');
     var input = $('#js-autocomplete');
-    var pseudo = '@' + input.val();
-    var div = $('#mbr-list');
-    div.append('<span>' + pseudo + '</span>');
+
+    for (var i = 0; i < opts.length; i++) {
+        if (opts[i].value === input.val()) {
+            console.log(opts[i].value);
+            var pseudo = '@' + opts[i].value;
+            var id = opts[i].attributes[0].value;
+            $('#mbr-list').append('<span' + ' data-id=' + id + '>' + pseudo + '</span>');
+            var idList = $('#mbr-ids');
+            if (idList.val()) {
+                idList.val(idList.val() + ';' + id);
+            } else {
+                idList.val(id);
+            }
+            break;
+        }
+    }
     input.val('');
 }
