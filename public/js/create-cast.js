@@ -65,24 +65,12 @@ function loadPseudoDelayed() {
         });
     }
 }
-
+var timeout = null;
 function loadPseudo() {
-    var canReplay = true;
-    var timeout = null;
-
-    if (canReplay == true) {
-        canReplay = false;
-        timeout = setTimeout(function () {
-            loadPseudoDelayed();
-            canReplay = true;
-        }, 500);
-    } else {
-        clearTimeout(timeout);
-        timeout = setTimeout(function () {
-            loadPseudoDelayed();
-            canReplay = true;
-        }, 500);
-    }
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+        loadPseudoDelayed();
+    }, 250);
 }
 
 function addToUserList() {
