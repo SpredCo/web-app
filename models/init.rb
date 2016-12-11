@@ -43,6 +43,7 @@ require_relative 'requests/get_guest_cast_token_request'
 require_relative 'requests/find_available_cast_request'
 require_relative 'requests/get_cast_request'
 require_relative 'requests/get_user_casts_request'
+require_relative 'requests/get_tags_request'
 
 require_relative 'users/base_user'
 require_relative 'users/remote_user'
@@ -57,3 +58,4 @@ require_relative 'token_box'
 
 require_relative 'cast/cast_token'
 require_relative 'cast/spred_cast'
+require_relative 'cast/tag'

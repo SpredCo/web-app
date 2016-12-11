@@ -27,6 +27,8 @@ module APIHelper
 
     CAST = '/v1/spredcast'
     CASTS = '/v1/spredcasts'
+
+    TAGS = '/v1/tags'
   end
 
   module Service
@@ -71,5 +73,7 @@ module APIHelper
     MY_CAST = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::CAST}"}
     GUEST_CAST = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::CAST}"}
     CASTS = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::CASTS}"}
+
+    TAGS = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::TAGS}"}
   end
 end

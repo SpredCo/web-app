@@ -13,6 +13,7 @@
             %label{:for => 'name'} Sujet de la présentation
             %input#name.form-control{:type => 'text', :name => 'name', :placeholder => 'Ex: Ruby is over ...'}
             %input.form-control.hidden#mbr-ids{type: 'text', name: 'members'}
+            %input.form-control.hidden#tag-list{type: 'text', name: 'tags'}
           %div.stream-desc-margin
             %label{:for => 'description'} Description
             %textarea#description.form-control{:type => 'input', :rows => 4, :name => 'description', :placeholder => 'In this cast we will speak about ...'}
@@ -91,8 +92,12 @@
                   Les tags de votre spredcast ont une importance capitale dans la visibilité de celui-ci.
                   %br
                   Choisissez-en trois minimum !
-                %label{:for => '#tokenfield'} Tags :
-                %input#tokenfield.form-control{:type => 'text', :name => 'tags', :placeholder => 'coding, c++, life, ...'}
+                %label Tags :
+                - @tags.each_slice(4) do |tags|
+                  %div.row
+                    - tags.each do |tag|
+                      %div.col-sm-3
+                        %input.js-tag{type: 'checkbox', 'data-id': tag.id, style: 'vertical-align: sub;'}= " #{tag.name}"
             %div.row.cast-step-button{:style => 'margin-top: 95px'}
               %div.col-sm-2
                 %a.btn.btn-default{:onclick => 'prev("#tags");'} << Précedent

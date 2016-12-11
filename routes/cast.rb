@@ -3,6 +3,12 @@ class Spred
     authenticate!
     @unread_message_count = synchronize_inbox!
     @title = 'Spred'
+    req = GetTagsRequest.new
+    req.send
+    response = req.parse_response.body
+    @tags = response.each_with_object([]) do |tag_hash, tags|
+      tags << Tag.from_hash(tag_hash)
+    end
     haml :'cast/create', layout: :'layout/create_cast_layout'
   end
 
@@ -13,15 +19,21 @@ class Spred
     is_public = params.delete('cast-type') == 'public'
     date_value = params.delete('date-value')
     cast_date = params.delete('date') == 'now' ? 'now' : DateTime.parse(date_value).to_s
-
+    
     picture = if params['picture']
                 pic_path = CastHelper.generate_uniq_cover_url(params['picture'][:type].split('/')[1])
                 CastHelper.save_cover(pic_path, params['picture'][:tempfile])
                 "#{request.base_url}/#{pic_path}"
+              else
+                "#{request.base_url}/img/cast.png"
               end
 
-    params['tags'] = params['tags'].split(',')
-    params['members'] = params['members'].split(';') unless is_public
+    params['tags'] = params['tags'].split(';')
+    if is_public
+      params.delete('members')
+    else
+      params['members'] = params['members'].split(';')
+    end
     req = CreateCastRequest.new(session[:spred_tokens], params.delete('name'), params.delete('description'), is_public, cast_date, params.merge({cover_url: picture}))
     req.send
     req.parse_response

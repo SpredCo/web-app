@@ -6,10 +6,28 @@ $(document).ready(function () {
 
     var input = document.getElementById('js-autocomplete');
     input.oninput = loadPseudo;
+
+    var tagList = $('#tag-list');
+
+    $('.js-tag').change(function(){
+        var checkBox = $(this);
+        if($(this).is(':checked')){
+            if (tagList.val()) {
+                tagList.val(tagList.val() + ';');
+            }
+            tagList.val(tagList.val() + checkBox.attr('data-id'));
+        } else {
+            var tags = tagList.val().split(';');
+            tags = tags.filter(function(tag){
+                return(tag != checkBox.attr('data-id'));
+            });
+            var cleanValue = tags.join(';');
+            tagList.val(cleanValue);
+        }
+    })
 });
 
 function next(current) {
-    console.log('ok');
     $(current).removeClass('active');
     $(current + '-c').removeClass('in');
     $(current + '-c').removeClass('active');
@@ -61,9 +79,6 @@ function loadPseudoDelayed() {
     function success(data) {
         console.log(data);
         data.forEach(function (user) {
-            //var idAsString = "'" + user.id + "'";
-            //var pseudoAsString = "'" + user.pseudo + "'";
-            //var callback = 'onclick="addToUserList(' + idAsString + ', ' + pseudoAsString + ');"';
             dataList.append('<option' + ' data-id=' + user.id + '>' + user.pseudo + '</option>');
         });
     }
@@ -86,7 +101,7 @@ function addToUserList() {
             console.log(opts[i].value);
             var pseudo = '@' + opts[i].value;
             var id = opts[i].attributes[0].value;
-            $('#mbr-list').append('<span' + ' data-id=' + id + '>' + pseudo + '</span>');
+            $('#mbr-list').append('<div' + ' data-id=' + id + '>' + pseudo + '</div>');
             var idList = $('#mbr-ids');
             if (idList.val()) {
                 idList.val(idList.val() + ';' + id);
