@@ -3,6 +3,8 @@
     %meta{ :charset => 'UTF-8' }
     %meta{ :name => 'viewport', 'content' => 'width=device-width, initial-scale=1.0'}
     %script{ :src => '/js/lib/jquery.min.js' }
+    %script{src: '/js/lib/algoliasearch.jquery.min.js'}
+    %script{src: '/js/lib/autocomplete.jquery.min.js'}
     %script{ :src => '/js/lib/bootstrap.min.js' }
     - unless session[:spred_tokens]
       %script{ :src => '/js/login.js' }

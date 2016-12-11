@@ -1,3 +1,4 @@
+%script{src: '/js/navbar.js'}
 %nav.navbar.navbar-default
   %div.container-fluid
     %div.navbar-header
@@ -12,8 +13,8 @@
 
     %div#nav-collapse.collapse.navbar-collapse
       %form.navbar-form.navbar-left
-        %div.input-group.search-bar
-          %input.form-control{:type => 'text', :name => 'search', :placeholder => 'Rechercher'}
+        %div.input-group.search-bar.aa-input-container#aa-input-container
+          %input.form-control.aa-input-search#global-search#aa-input-search{:type => 'text', :name => 'search', :placeholder => 'Rechercher', autocomplete: 'off'}
           %span.input-group-btn
             %button.btn.btn-default{:type => 'submit'}
               %span.fa.fa-search.search-btn
