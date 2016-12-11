@@ -273,6 +273,13 @@ a, a:hover, a:active, a:visited {
     height: 50px;
 }
 
+.following-profile-picture {
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    margin-left: 20px;
+}
+
 .profile-header {
     background-color: #55AA55;
 }
@@ -747,4 +754,8 @@ a, a:hover, a:active, a:visited {
     margin-top: 0;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+.followings-row {
+    margin: 20px;
 }

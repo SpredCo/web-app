@@ -7,6 +7,12 @@ class Spred
     haml :'user/profile', layout: :'layout/layout'
   end
 
+  get '/following' do
+    authenticate!
+    @followings = session[:current_user].following
+    haml :'user/following', layout: :'layout/layout'
+  end
+
   get '/profile/edit' do
     authenticate!
     haml :'user/edit_profile', layout: :'layout/layout'

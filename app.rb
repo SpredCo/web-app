@@ -2,6 +2,7 @@ require 'sinatra'
 require 'json'
 require 'haml'
 require 'better_errors'
+require 'sinatra/reloader'
 
 class Spred < Sinatra::Application
   use Rack::Session::Pool

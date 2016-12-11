@@ -1,0 +1,19 @@
+%div.container.main-content
+  %div
+    %h3 Les personnes que vous suivez
+    %br
+    %div.row
+      -if @followings
+        - @followings.each_slice(2) do |users|
+          %div.row.followings-row
+            - users.each do |user|
+              %div.col-sm-6
+                %div.row
+                  %div.col-sm-3
+                    %img.following-profile-picture{src: user.picture_url}
+                  %div.col-sm-9
+                    %b.following-name= "#{user.first_name.capitalize} #{user.last_name.capitalize}"
+                    %div
+                      %span
+                        %a{ href: "#{request.base_url}/@#{user.pseudo}"}
+                          = '@' + user.pseudo

@@ -18,7 +18,11 @@
   %div.row.profile-info-line
     %div.col-sm-2.profile-info-cell
       %h4 Following
-      %span= @user.following.length
+      - if @user.id == session[:current_user].id
+        %span
+          %a{href: '/following'}= @user.following.length
+      - else
+        %span= @user.following.length
     %div.col-sm-2.profile-info-cell
       %h4 Follower
       %span 0
