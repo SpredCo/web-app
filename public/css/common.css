@@ -749,6 +749,22 @@ a, a:hover, a:active, a:visited {
     color: #777;
     margin-bottom: 10px;
 }
+.question-vote-box {
+    height: 70px;
+    background-color: white;
+    border-radius: 5px;
+    border: solid 1px #ccc;
+    text-align: center;
+    color: #777;
+    padding-top: 4px;
+}
+.question-vote-nb {
+    font-size: 25px;
+}
+.question-btn-vote {
+    height: 30px;
+}
+
 .message {
     margin-bottom: 0;
     margin-top: 0;
