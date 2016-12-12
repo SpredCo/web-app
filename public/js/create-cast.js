@@ -2,6 +2,19 @@ $(document).ready(function () {
     if ($('#tokenfield')) {
         $('#tokenfield').tokenfield({});
     }
+    $('#date-input').pickadate({
+        today: false,
+        clear: false,
+        formatSubmit: 'yyyy/mm/dd',
+        monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+        monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jui', 'Jui', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+        weekdaysFull: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+        weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam']
+    });
+    $('#time-input').pickatime({
+        format: 'HH:i',
+        clear: false
+    });
     handleCastTypeSelection('#public-select');
 
     var input = document.getElementById('js-autocomplete');
@@ -112,4 +125,9 @@ function addToUserList() {
         }
     }
     input.val('');
+}
+
+function updateDateInput(enable) {
+    $('#date-input').attr('disabled', !enable);
+    $('#time-input').attr('disabled', !enable);
 }
