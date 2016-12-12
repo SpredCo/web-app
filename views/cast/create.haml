@@ -64,17 +64,24 @@
               %div.col-sm-6.date-box
                 %div.date-box-part.date-box-part-up
                   %label{:for => 'now'} Tout de suite
-                  %input#now.form-group{:type => 'radio', :name => 'date', :value => 'now', :checked => true}
-                %div.date-box-part.disabled-div
+                  %input#now.form-group{:type => 'radio', :name => 'date', :value => 'now', :checked => true, :onclick => 'updateDateInput(false);'}
+                %div.date-box-part
                   %div
                     %label{:for => 'date'} Le
-                    %input#date.form-group{:type => 'radio', :name => 'date', :value => 'date'}
-                  %div
-                    %div.form-group
-                      %div#datetime.input-group.data
-                        %input.form-control{:type => 'text', :name => 'date-value'}
-                        %span.input-group-addon
-                          %span.glyphicon.glyphicon-calendar
+                    %input#date.form-group{:type => 'radio', :name => 'date', :value => 'date', :onclick => 'updateDateInput(true);'}
+                  %div#datetime-input.row
+                    %div.col-sm-8
+                      %div.form-group
+                        %div.input-group.data
+                          %input#date-input.form-control{:type => 'text', :name => 'date-value', :placeholder => 'Date', :style => 'background-color: white', :disabled => true}
+                          %span.input-group-addon
+                            %span.glyphicon.glyphicon-calendar
+                    %div.col-sm-4
+                      %div.form-group
+                        %div.input-group.data
+                          %input#time-input.form-control{:type => 'text', :name => 'date-value', :placeholder => 'Time', :style => 'background-color: white', :disabled => true}
+                          %span.input-group-addon
+                            %span.glyphicon.glyphicon-time
               %div.col-sm-6.date-box
                 %div.col-sm-6.col-sm-push-3.duration
                   %label{:for => 'duration'} Durée estimé (en minutes)

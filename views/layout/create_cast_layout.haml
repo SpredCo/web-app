@@ -5,10 +5,16 @@
     %script{ :src => '/js/lib/jquery.min.js' }
     %script{ :src => '/js/lib/bootstrap.min.js' }
     %script{ :src => '/js/lib/bootstrap-tokenfield.min.js' }
+    %script{ :src => '/js/lib/picker.js' }
+    %script{ :src => '/js/lib/picker.date.js' }
+    %script{ :src => '/js/lib/picker.time.js' }
     %script{ :src => '/js/create-cast.js' }
     %link{ rel:'stylesheet', type:'text/css', href:'/fonts/font-awesome-4.2.0/css/font-awesome.min.css' }
     %link{ rel:'stylesheet', type:'text/css', href:'/css/bootstrap.min.css' }
     %link{ rel:'stylesheet', type:'text/css', href:'/css/bootstrap-tokenfield.min.css' }
+    %link{ rel:'stylesheet', type:'text/css', href:'/css/classic.css' }
+    %link{ rel:'stylesheet', type:'text/css', href:'/css/classic.date.css' }
+    %link{ rel:'stylesheet', type:'text/css', href:'/css/classic.time.css' }
     %link{ rel:'stylesheet', type:'text/css', href:'/css/common.css' }
   %body.body-main
     - if !session[:spred_tokens] && @title != 'Login'
