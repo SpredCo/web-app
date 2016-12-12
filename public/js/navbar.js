@@ -16,11 +16,31 @@ $( document ).ready(function() {
             displayKey: 'name',
             templates: {
                 suggestion: function (suggestion) {
-                    return suggestion._highlightResult.name.value;
+                    return '<span>' + suggestion._highlightResult.name.value + '</span>' + '<span style="color: darkgray"> ' + suggestion.type + '</span>';
                 }
             }
         }
     ]).on('autocomplete:selected', function (event, suggestion, dataset) {
-        console.log(suggestion, dataset);
+        console.log('ici');
+        switch(suggestion.type) {
+            case 'cast':
+                window.location.replace(window.location.origin + '/casts/' + suggestion.url);
+                break;
+            case 'tag':
+                window.location.replace(window.location.origin + suggestion.name);
+                break;
+            case 'user':
+                window.location.replace(window.location.origin + '/@' + suggestion.name);
+                break;
+            default:
+                console.log('Unknown suggestion type: ' + suggestion.type);
+        }
     })
 });
+
+window.performSearch = function() {
+    var value = $('#aa-input-search').val();
+    $('#aa-input-search').val('');
+    window.location.replace(window.location.origin + '/search/' + value);
+};
+

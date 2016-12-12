@@ -27,6 +27,7 @@ module APIHelper
 
     CAST = '/v1/spredcast'
     CASTS = '/v1/spredcasts'
+    CASTS_BY_TAG = CASTS + '/tag'
 
     TAGS = '/v1/tags'
   end

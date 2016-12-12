@@ -14,11 +14,11 @@
         Spred
 
     %div#nav-collapse.collapse.navbar-collapse
-      %form.navbar-form.navbar-left
+      %div.navbar-form.navbar-left
         %div.input-group.search-bar.aa-input-container#aa-input-container
           %input.form-control.aa-input-search#aa-input-search{:type => 'search', :name => 'search', :placeholder => 'Rechercher', autocomplete: 'off', style: 'width: inherit;'}
           %span.input-group-btn
-            %button.btn.btn-default{:type => 'submit'}
+            %button.btn.btn-default{onclick: 'performSearch();'}
               %span.fa.fa-search.search-btn
       - unless session[:current_user].is_a? CurrentUser
         %ul.nav.navbar-nav.navbar-right

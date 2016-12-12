@@ -6,6 +6,7 @@ gem 'sinatra'
 gem 'thin'
 gem 'haml'
 gem 'rake'
+gem 'algoliasearch'
 
 group :development do
   gem 'rerun'

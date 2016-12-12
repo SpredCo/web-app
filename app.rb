@@ -3,6 +3,7 @@ require 'json'
 require 'haml'
 require 'better_errors'
 require 'sinatra/reloader'
+require 'algoliasearch'
 
 class Spred < Sinatra::Application
   use Rack::Session::Pool
@@ -10,6 +11,8 @@ class Spred < Sinatra::Application
   set :static, true
   set :root, File.dirname(__FILE__)
   set :public_folder, 'public'
+
+  Algolia.init(application_id: 'KGZYQKI2SD', api_key: 'a8583e100dbd3bb6e5a64d76462d1f5b')
 
   configure do
     set :client_key, 'r5cfOscd6CZAZ8XQ'

@@ -44,6 +44,7 @@ require_relative 'requests/find_available_cast_request'
 require_relative 'requests/get_cast_request'
 require_relative 'requests/get_user_casts_request'
 require_relative 'requests/get_tags_request'
+require_relative 'requests/get_casts_from_tag_request'
 
 require_relative 'users/base_user'
 require_relative 'users/remote_user'
