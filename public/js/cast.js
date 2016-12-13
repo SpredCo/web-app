@@ -39,6 +39,7 @@ function voteQuestion(way, id) {
 }
 
 function receiveQuestion(question) {
+	client.sendNotification(question);
 	const questionHtml =
 		'<div id="question-' + question.id + '" class="question">' +
 		'<div class="row">' +
@@ -81,6 +82,7 @@ function receiveQuestionDown(question) {
 }
 
 function receiveMessage(message) {
+	client.sendNotification(message);
 	const messageHtml =
 		'<p id="message-' + message.id + '" class="message">' +
 		'<a href="/@' + message.sender + '">@' + message.sender + '</a> : ' + message.text +
