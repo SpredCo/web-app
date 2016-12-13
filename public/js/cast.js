@@ -43,7 +43,7 @@ function receiveQuestion(question) {
 		'<div id="question-' + question.id + '" class="question">' +
 		'<div class="row">' +
 		'<div class="col-sm-2">' +
-		'<img class="question-picture" src="' + "question.user_picture" + '"/>' +
+		'<img class="question-picture" src="' + question.user_picture + '"/>' +
 		'</div>' +
 		'<div class="col-sm-8">' +
 		'<div class="question-info">Posée par <a href="/@' + question.sender + '">@' + question.sender + '</a> à ' + question.date.getUTCHours() + ':' + question.date.getMinutes() + '</div>' +
