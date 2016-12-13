@@ -1,11 +1,12 @@
 var client = null;
-var questions = [];
 
 $(document).ready(function() {
 	client = new Spred.Client();
 	var castId = $("#castId").val();
 	client.on('messages', receiveMessage);
 	client.on('questions', receiveQuestion);
+	client.on('up_question', receiveQuestionUp);
+	client.on('down_question', receiveQuestionDown);
 	client.connect(castId);
 });
 
@@ -21,19 +22,23 @@ function sendMessage() {
 	const message = $("#chat-input").val();
 	if (message != '') {
 		client.sendMessage(message);
+		$("#chat-input").val('');
 	}
 }
 
 function voteQuestion(way, id) {
 	$('#question-' + id + '-up-btn').attr('disabled', true);
 	$('#question-' + id + '-down-btn').attr('disabled', true);
-	console.log('Galas');
-	console.log('vote ' + way + ' question ' + id);
+	client.spredCast.questions.forEach(function(q) {
+		if (q.id === id) {
+			if (way === 'up') q.up();
+			else q.down();
+			return;
+		}
+	});
 }
 
 function receiveQuestion(question) {
-	question.nbVote = 0;
-	questions.push(question);
 	const questionHtml =
 		'<div id="question-' + question.id + '" class="question">' +
 		'<div class="row">' +
@@ -57,21 +62,19 @@ function receiveQuestion(question) {
 	$('#question-box').append(questionHtml).scrollTop($('#question-' + question.id).offset().top);
 }
 
-function receiveQuestionUp(id) {
-	questions.forEach(function (q) {
-		if (q.id === id) {
-			q.nbVote++;
-			$('#question-' + id + '-nbvote').text(q.nbVote);
+function receiveQuestionUp(question) {
+	client.spredCast.questions.forEach(function(q) {
+		if (q.id === question.id) {
+			$('#question-' + q.id + '-nbvote').text(q.nbVote);
 			return;
 		}
 	});
 }
 
-function receiveQuestionDown(id) {
-	questions.forEach(function (q) {
-		if (q.id === id) {
-			q.nbVote--;
-			$('#question-' + id + '-nbvote').text(q.nbVote);
+function receiveQuestionDown(question) {
+	client.spredCast.questions.forEach(function(q) {
+		if (q.id === question.id) {
+			$('#question-' + question.id + '-nbvote').text(question.nbVote);
 			return;
 		}
 	});
