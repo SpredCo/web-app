@@ -52,7 +52,7 @@ class Spred
     @user = RemoteUser.find(tokens, "@#{params[:id]}")
     if @user.is_a?(APIError)
       @errors = {default: @user.message}
-      haml :'home/index', layout: :'layout/layout'
+      not_found
     else
       @is_following = session[:current_user].is_following?(tokens, @user.id)
       haml :'user/profile', layout: :'layout/layout'

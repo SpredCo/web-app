@@ -29,6 +29,11 @@ class Spred < Sinatra::Application
     use BetterErrors::Middleware
     BetterErrors.application_root = __dir__
   end
+
+  not_found do
+    status 404
+    haml :'error/404', layout: :'layout/layout'
+  end
 end
 
 require_relative 'models/init'
