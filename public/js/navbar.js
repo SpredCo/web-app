@@ -30,7 +30,7 @@ $( document ).ready(function() {
                 window.location.replace(window.location.origin + suggestion.name);
                 break;
             case 'user':
-                window.location.replace(window.location.origin + '/@' + suggestion.name);
+                window.location.replace(window.location.origin + '/' + suggestion.name);
                 break;
             default:
                 console.log('Unknown suggestion type: ' + suggestion.type);

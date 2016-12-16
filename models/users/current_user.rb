@@ -1,8 +1,6 @@
 class CurrentUser < BaseUser
-  attr_reader :following
 
-  def initialize(id, email, pseudo, first_name, last_name, picture_url, updated_at, created_at, following)
-    @following = following
+  def initialize(id, email, pseudo, first_name, last_name, picture_url, updated_at, created_at)
     @inbox = nil
     super(id, email, pseudo, first_name, last_name, picture_url, updated_at, created_at)
   end
@@ -26,33 +24,42 @@ class CurrentUser < BaseUser
     @inbox = Inbox.reload(tokens)
   end
 
-  def is_following?(pseudo)
-    is_following = false
-    @following.each do |user|
-      if user.pseudo == pseudo
-        is_following = true
-        break
-      end
-    end
-    is_following
+  def is_following?(tokens, id)
+    req = IsFollowingRequest.new(tokens, id)
+    req.send
+    response = req.parse_response
+    response.body['result']
   end
 
   def delete
 
   end
 
+  def following(tokens)
+    req = GetFollowingRequest.new(tokens)
+    req.send
+    response = req.parse_response
+    response.body.each_with_object([]) do |user, array|
+      array << BaseUser.from_hash(user['following'])
+    end
+  end
+
+  def followers(tokens)
+    req = GetFollowersRequest.new(tokens)
+    req.send
+    response = req.parse_response
+    response.body.each_with_object([]) do |user, array|
+      array << BaseUser.from_hash(user['user'])
+    end
+  end
+
   def to_hash
-    hash = super
-    hash[:following] = @following.map(&:to_hash)
-    hash
+    super
   end
 
   def self.from_hash(user_hashed)
-    following = user_hashed['following'].each_with_object([]) do |follower, array|
-      array << BaseUser.from_hash(follower)
-    end
     CurrentUser.new(user_hashed['id'], user_hashed['email'], user_hashed['pseudo'],
                     user_hashed['first_name'], user_hashed['last_name'],
-                    user_hashed['picture_url'], user_hashed['updated_at'], user_hashed['created_at'], following)
+                    user_hashed['picture_url'], user_hashed['updated_at'], user_hashed['created_at'])
   end
 end

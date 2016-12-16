@@ -12,20 +12,24 @@
       - if @user.id == session[:current_user].id
         %a.btn.btn-default{:href => '/profile/edit'} Editer mon profil
       - elsif @is_following
-        %a.btn.btn-danger{:href => '/user/' + @user.id + '/unfollow'} Se désabonner
+        %a.btn.btn-danger.follow-button{:href => '/user/' + @user.id + '/unfollow'} Se désabonner
       - else
-        %a.btn.btn-success{:href => '/user/' + @user.id + '/follow'} S'abonner
+        %a.btn.btn-success.follow-button{:href => '/user/' + @user.id + '/follow'} S'abonner
   %div.row.profile-info-line
     %div.col-sm-2.profile-info-cell
       %h4 Following
       - if @user.id == session[:current_user].id
         %span
-          %a{href: '/following'}= @user.following.length
+          %a{href: '/following'}= @user.following(session[:spred_tokens]).length
       - else
-        %span= @user.following.length
+        %span= @user.following(session[:spred_tokens]).length
     %div.col-sm-2.profile-info-cell
       %h4 Follower
-      %span 0
+      - if @user.id == session[:current_user].id
+        %span
+          %a{href: '/follower'}= @user.followers(session[:spred_tokens]).length
+      - else
+        %span= @user.followers(session[:spred_tokens]).length
     %div.col-sm-2.profile-info-cell
       %h4 Spredcast
       %span 0

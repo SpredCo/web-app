@@ -9,7 +9,15 @@ class Spred
 
   get '/following' do
     authenticate!
-    @followings = session[:current_user].following
+    @title = 'Les personnes que vous suivez'
+    @followings = session[:current_user].following(session[:spred_tokens])
+    haml :'user/following', layout: :'layout/layout'
+  end
+
+  get '/follower' do
+    authenticate!
+    @title = 'Les personnes qui vous suivent'
+    @followings = session[:current_user].followers(session[:spred_tokens])
     haml :'user/following', layout: :'layout/layout'
   end
 
@@ -40,12 +48,13 @@ class Spred
 
   get '/@:id' do
     authenticate!
-    @user = RemoteUser.find(session[:spred_tokens], "@#{params[:id]}")
+    tokens = session[:spred_tokens]
+    @user = RemoteUser.find(tokens, "@#{params[:id]}")
     if @user.is_a?(APIError)
       @errors = {default: @user.message}
       haml :'home/index', layout: :'layout/layout'
     else
-      @is_following = session[:current_user].is_following?(@user.pseudo)
+      @is_following = session[:current_user].is_following?(tokens, @user.id)
       haml :'user/profile', layout: :'layout/layout'
     end
   end

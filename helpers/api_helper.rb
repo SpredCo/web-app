@@ -18,6 +18,9 @@ module APIHelper
 
     # API Service
     USER = '/v1/users'
+    FOLLOWING = USER + '/follow'
+    FOLLOWER = USER + '/follower'
+    IS_FOLLOWING = USER
     SEARCH_BY_EMAIL = '/v1/users/search/email'
     SEARCH_BY_PSEUDO = '/v1/users/search/pseudo'
 
@@ -58,6 +61,8 @@ module APIHelper
     USER_FOLLOW = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::USER}"}
     USER_UNFOLLOW = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::USER}"}
     USER_REPORT = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::USER}"}
+    USER_FOLLOWING = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::FOLLOWING}"}
+    USER_FOLLOWER = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::FOLLOWER}"}
 
     INBOX = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::CONVERSATION}"}
     INBOX_UNREAD_MESSAGES = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::INBOX_UNREAD_MESSAGES}"}

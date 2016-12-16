@@ -803,3 +803,7 @@ a, a:hover, a:active, a:visited {
     font-weight: bold;
     font-style: normal;
 }
+
+.follow-button {
+    color: white !important;
+}
