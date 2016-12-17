@@ -27,7 +27,7 @@ $( document ).ready(function() {
                 window.location.replace(window.location.origin + '/casts/' + suggestion.url);
                 break;
             case 'tag':
-                window.location.replace(window.location.origin + suggestion.name);
+                window.location.replace(window.location.origin + '/tags/' + suggestion.name.slice(1));
                 break;
             case 'user':
                 window.location.replace(window.location.origin + '/' + suggestion.name);

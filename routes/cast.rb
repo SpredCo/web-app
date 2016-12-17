@@ -82,6 +82,7 @@ class Spred
   end
 
   get '/casts/:id/remind' do
+    authenticate!
     req = RemindCastRequest.new(session[:spred_tokens], params[:id])
     req.send
     response = req.parse_response
@@ -93,6 +94,7 @@ class Spred
   end
 
   get '/casts/:id/unremind' do
+    authenticate!
     req = UnremindCastRequest.new(session[:spred_tokens], params[:id])
     req.send
     response = req.parse_response

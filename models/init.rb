@@ -61,6 +61,7 @@ require_relative 'requests/check_cast_remind_request'
 require_relative 'requests/check_tag_subscription_request'
 require_relative 'requests/register_tag_request'
 require_relative 'requests/unregister_tag_request'
+require_relative 'requests/get_tag_by_name_request'
 
 require_relative 'users/base_user'
 require_relative 'users/remote_user'

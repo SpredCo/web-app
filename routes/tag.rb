@@ -1,13 +1,10 @@
 class Spred
   get '/tags/:name' do
+    name_without_hash = get_name_without_hash(params[:name])
     req = GetCastsFromTagRequest.new(params[:name])
     req.send
     response = req.parse_response
-    sub_req = CheckTagSubscriptionRequest.new(tokens, params[:name])
-    sub_req.send
-    sub_response = sub_req.parse_response
-    @is_following = sub_response.body['result']
-    @tag = params[:name]
+    @tag = Tag.find_by_name(name_without_hash)
     @casts_by_states = {'0' => [], '1' => []}
     if response.is_a? APIError
       not_found
@@ -26,25 +23,39 @@ class Spred
     end
   end
 
-  get 'tags/:name/subscribe' do
-    req = RegisterTagRequest.new(tokens, params[:name])
+  get '/tags/:name/subscribe' do
+    authenticate!
+    name_without_hash = get_name_without_hash(params[:name])
+    tag = Tag.find_by_name(name_without_hash)
+    req = RegisterTagRequest.new(session[:spred_tokens], tag.id)
     req.send
     response = req.parse_response
     if response.is_a? APIError
       not_found
     else
-      redirect "/tags/#{params[:name]}"
+      redirect "/tags/#{tag.name}"
     end
   end
 
-  get 'tags/:name/unsubscribe' do
-    req = UnregisterTagRequest.new(tokens, params[:name])
+  get '/tags/:name/unsubscribe' do
+    authenticate!
+    name_without_hash = get_name_without_hash(params[:name])
+    tag = Tag.find_by_name(name_without_hash)
+    req = UnregisterTagRequest.new(session[:spred_tokens], tag.id)
     req.send
     response = req.parse_response
     if response.is_a? APIError
       not_found
     else
-      redirect "/tags/#{params[:name]}"
+      redirect "/tags/#{tag.name}"
+    end
+  end
+
+  def get_name_without_hash(name)
+    if name.start_with?('#')
+      name[1..-1]
+    else
+      name
     end
   end
 end
