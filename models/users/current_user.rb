@@ -35,8 +35,8 @@ class CurrentUser < BaseUser
 
   end
 
-  def following(tokens)
-    req = GetFollowingRequest.new(tokens)
+  def following
+    req = GetUserFollowingRequest.new(@id)
     req.send
     response = req.parse_response
     response.body.each_with_object([]) do |user, array|
@@ -44,8 +44,8 @@ class CurrentUser < BaseUser
     end
   end
 
-  def followers(tokens)
-    req = GetFollowersRequest.new(tokens)
+  def followers
+    req = GetUserFollowerRequest.new(@id)
     req.send
     response = req.parse_response
     response.body.each_with_object([]) do |user, array|

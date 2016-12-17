@@ -26,8 +26,8 @@ class RemoteUser < BaseUser
     end
   end
 
-  def self.find(tokens, id)
-    request = GetUserRequest.new(tokens, id)
+  def self.find(id)
+    request = GetUserRequest.new(id)
     request.send
     response = request.parse_response
     if response.is_a? APIError
@@ -37,8 +37,8 @@ class RemoteUser < BaseUser
     end
   end
 
-  def self.find_by_pseudo(tokens, pseudo)
-    request = GetUserRequest.new(tokens, "@#{pseudo}")
+  def self.find_by_pseudo(pseudo)
+    request = GetUserRequest.new("@#{pseudo}")
     request.send
     response = request.parse_response
     if response.is_a? APIError
@@ -52,12 +52,22 @@ class RemoteUser < BaseUser
     super
   end
 
-  def following(tokens)
-    []
+  def following
+    req = GetUserFollowingRequest.new(@id)
+    req.send
+    response = req.parse_response
+    response.body.each_with_object([]) do |user, array|
+      array << BaseUser.from_hash(user['following'])
+    end
   end
 
-  def followers(tokens)
-    []
+  def followers
+    req = GetUserFollowerRequest.new(@id)
+    req.send
+    response = req.parse_response
+    response.body.each_with_object([]) do |user, array|
+      array << BaseUser.from_hash(user['user'])
+    end
   end
 
   def self.find_all_by_email(tokens, partial_email)

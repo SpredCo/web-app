@@ -3,7 +3,7 @@ class Spred
 
   get '/user/:id/follow' do
     authenticate!
-    user = RemoteUser.find(session[:spred_tokens], params[:id])
+    user = RemoteUser.find(params[:id])
     response = user.follow(session[:spred_tokens])
     if response.is_a?(APIError)
       @errors = {default: response.message}
@@ -18,7 +18,7 @@ class Spred
 
   get '/user/:id/unfollow' do
     authenticate!
-    user = RemoteUser.find(session[:spred_tokens], params[:id])
+    user = RemoteUser.find(params[:id])
     response = user.unfollow(session[:spred_tokens])
     if response.is_a?(APIError)
       @errors = {default: response.message}
@@ -61,9 +61,35 @@ class Spred
     @users = JSON.generate(users)
   end
 
+  get '/user/:id/following' do
+    @user = RemoteUser.find(params[:id])
+    @title = if me?(@user)
+               "<a href='#{request.base_url}/profile'>Vous</a> suivez"
+             else
+               "<a href='#{request.base_url}/@#{@user.pseudo}'>@#{@user.pseudo}</a> suit"
+             end
+    @followings = @user.following
+    haml :'user/following', layout: :'layout/layout'
+  end
+
+  get '/user/:id/follower' do
+    @user = RemoteUser.find(params[:id])
+    @title = if me?(@user)
+               "<a href='#{request.base_url}/profile'>Vous</a> êtes suivis"
+             else
+               "<a href='#{request.base_url}/@#{@user.pseudo}'>@#{@user.pseudo}</a> est suivis"
+             end
+    @followings = @user.followers
+    haml :'user/following', layout: :'layout/layout'
+  end
+
   get '/casts' do
     authenticate!
 
     haml :'user/cast', layout: :'layout/layout'
+  end
+
+  def me?(user)
+    session[:current_user] && user.id == session[:current_user].id
   end
 end

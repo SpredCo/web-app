@@ -49,7 +49,7 @@ class Spred
       @cast = SpredCast.from_hash(@cast)
       haml :'cast/show', layout: :'layout/cast_layout'
     else
-      redirect '/'
+      not_found
     end
   end
 

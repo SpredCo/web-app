@@ -47,14 +47,13 @@ class Spred
   end
 
   get '/@:id' do
-    authenticate!
-    tokens = session[:spred_tokens]
-    @user = RemoteUser.find(tokens, "@#{params[:id]}")
+    @current_user = session[:current_user]
+    @user = RemoteUser.find("@#{params[:id]}")
     if @user.is_a?(APIError)
       @errors = {default: @user.message}
       not_found
     else
-      @is_following = session[:current_user].is_following?(tokens, @user.id)
+      @is_following = @current_user.is_following?(session[:spred_tokens], @user.id) if @current_user
       haml :'user/profile', layout: :'layout/layout'
     end
   end

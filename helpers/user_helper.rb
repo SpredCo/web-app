@@ -36,7 +36,7 @@ module UserHelper
   end
 
   def self.get_current(tokens)
-    req = GetUserRequest.new(tokens, 'me')
+    req = GetMeRequest.new(tokens)
     req.send
     response = req.parse_response.body
     puts response

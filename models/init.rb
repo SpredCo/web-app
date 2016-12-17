@@ -31,6 +31,10 @@ require_relative 'requests/get_following_request'
 require_relative 'requests/is_following_request'
 require_relative 'requests/get_followers_request'
 
+require_relative 'requests/get_user_follower_request'
+require_relative 'requests/get_user_following_request'
+require_relative 'requests/get_me_request'
+
 require_relative 'requests/get_inbox_request'
 require_relative 'requests/get_conversation_request'
 require_relative 'requests/reply_conversation_request'
