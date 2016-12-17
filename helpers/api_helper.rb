@@ -33,6 +33,7 @@ module APIHelper
     CASTS_BY_TAG = CASTS + '/tag'
 
     TAGS = '/v1/tags'
+    TAG_FOLLOW = TAGS + ''
   end
 
   module Service
@@ -82,7 +83,9 @@ module APIHelper
     MY_CAST = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::CASTS}"}
     GUEST_CAST = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::CASTS}"}
     CASTS = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::CASTS}"}
+    CASTS_BY_TAG = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::CASTS_BY_TAG}"}
 
     TAGS = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::TAGS}"}
+    TAG_FOLLOW = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::TAG_FOLLOW}"}
   end
 end

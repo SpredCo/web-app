@@ -1,0 +1,60 @@
+%div.container.main-content
+  %div.row.profile-header
+    %div.col-sm-4
+      %h2{style: 'color: white;'}= "##{@tag.capitalize}"
+  %div.row
+    %div.col-sm-8
+      %div.profile-name
+    %div.col-sm-2.col-sm-offset-2.edit-profile-btn
+      - if @is_following
+        %a.btn.btn-danger.follow-button{:href => '/tags/' + @tag + '/unsubscribe'} Se désabonner
+      - else
+        %a.btn.btn-success.follow-button{:href => '/tags/' + @tag + '/subscribe'} S'abonner
+  %hr
+  %h3 Live
+  -if @casts_by_states['0'] != nil
+    - @casts_by_states['0'].each_slice(2) do |casts|
+      %div.row.casts-row
+        - casts.each do |cast|
+          %div.col-sm-6
+            %div.row
+              %div.col-sm-4
+                %div
+                  %img.cast-picture{src: cast.cover_url}
+              %div.col-sm-8
+                %div
+                  %div
+                    %span
+                      %a.cast-name{ href: "#{request.base_url}/casts/#{cast.url}", title: cast.name }
+                        = cast.name
+                        %span by
+                        %span
+                          %a{ href: "#{request.base_url}/@#{cast.creator.pseudo}"}
+                            = '@' + cast.creator.pseudo
+                    %div.mine-description
+                      %span= cast.description
+  %hr
+  %div
+    %h3 A Venir
+    -if @casts_by_states['1'] != nil
+      - @casts_by_states['1'].each_slice(2) do |casts|
+        %div.row.casts-row
+          - casts.each do |cast|
+            %div.col-sm-6
+              %div.row
+                %div.col-sm-4
+                  %div
+                    %img.cast-picture{src: "#{request.base_url}/img/cast.png"}
+                %div.col-sm-8
+                  %div
+                    %div
+                      %span
+                        %a.cast-name{ href: "#{request.base_url}/casts/#{cast.url}", title: cast.name }
+                          = cast.name
+                        %span by
+                        %span
+                          %a{ href: "#{request.base_url}/@#{cast.creator.pseudo}"}
+                            = '@' + cast.creator.pseudo
+                    %div.mine-description
+                      %span= cast.description
+
