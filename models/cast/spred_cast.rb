@@ -26,6 +26,24 @@ class SpredCast
                   members, cast['id_public'], cast['duration'], cast['user_capacity'], cast['url'], cast['cover_url'], cast['state'])
   end
 
+  def has_reminder?(tokens)
+    req = CheckCastRemindRequest.new(tokens, @id)
+    req.send
+    response = req.parse_response
+    response.body['result']
+  end
+
+  def set_reminder(tokens, activate)
+    req = if activate
+            RemindCastRequest.new(tokens, @id)
+          else
+            UnremindCastRequest.new(tokens, @id)
+          end
+    req.send
+    response = req.parse_response
+    response.body
+  end
+
   def to_hash
     {
       id: @id,

@@ -54,6 +54,10 @@ require_relative 'requests/get_user_casts_request'
 require_relative 'requests/get_tags_request'
 require_relative 'requests/get_casts_from_tag_request'
 
+require_relative 'requests/remind_cast_request'
+require_relative 'requests/unremind_cast_request'
+require_relative 'requests/check_cast_remind_request'
+
 require_relative 'requests/check_tag_subscription_request'
 require_relative 'requests/register_tag_request'
 require_relative 'requests/unregister_tag_request'

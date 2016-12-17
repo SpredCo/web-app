@@ -80,4 +80,26 @@ class Spred
       haml :'cast/mine', layout: :'layout/cast_layout'
     end
   end
+
+  get '/casts/:id/remind' do
+    req = RemindCastRequest.new(session[:spred_tokens], params[:id])
+    req.send
+    response = req.parse_response
+    if response.is_a? APIError
+      not_found
+    else
+      redirect '/'
+    end
+  end
+
+  get '/casts/:id/unremind' do
+    req = UnremindCastRequest.new(session[:spred_tokens], params[:id])
+    req.send
+    response = req.parse_response
+    if response.is_a? APIError
+      not_found
+    else
+      redirect '/'
+    end
+  end
 end

@@ -1,9 +1,16 @@
 %div.container.main-content
   %input#castId.hidden{ 'value' => @cast.id }
-  %div.cast-header
-    %span.vcast-name= @cast.name
-    %span par
-    %a{:href => '/@' + @cast.creator.pseudo}= '@' + @cast.creator.pseudo
+  %div.row
+    %div.cast-header.col-sm-8
+      %span.vcast-name= @cast.name
+      %span par
+      %a{:href => '/@' + @cast.creator.pseudo}= '@' + @cast.creator.pseudo
+    %div.col-sm-2.col-sm-offset-2.edit-profile-btn
+      - if session[:current_user]
+        - if @cast.has_reminder?(session[:spred_tokens])
+          %a.btn.btn-danger.follow-button{:href => '/casts/' + @cast.id + '/unremind'} Se désabonner
+        - else
+          %a.btn.btn-success.follow-button{:href => '/casts/' + @cast.id + '/remind'} S'abonner
   %video#video.vcast-video{ 'autoplay' => "true" }
   %div.vcast-panel
     %ul.nav.nav-tabs.nav-justified
