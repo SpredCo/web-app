@@ -807,3 +807,25 @@ a, a:hover, a:active, a:visited {
 .follow-button {
     color: white !important;
 }
+
+.tag-header {
+    background-color: #55AA55;
+    height: 230px;
+    padding-top: 50px;
+    padding-left: 80px;
+    color: white;
+    font-style: italic;
+}
+
+.tag-name {
+    font-weight: bold;
+    font-size: 40px;
+}
+.tag-description {
+    margin-left: 20px;
+    font-size: 20px;
+}
+.tag-subscribe-btn {
+    font-style: normal;
+    margin-top: 50px;
+}
