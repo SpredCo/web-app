@@ -8,5 +8,4 @@ public/cast_covers/*.jpeg
 public/cast_covers/*.png
 coverage/
 public/node_modules/*
-public/bower_components/*
 npm-debug.log

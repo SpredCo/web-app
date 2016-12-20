@@ -9,12 +9,12 @@ Rake::TestTask.new do |t|
 end
 
 task :default do
-    sh "RACK_ENV='development' thin -R config.ru start --ssl --ssl-key-file ./.ssl/spred.key --ssl-cert-file ./.ssl/spred.crt"
+    sh "RACK_ENV=#{RAKE_ENV} thin -R config.ru start --ssl --ssl-key-file ./.ssl/spred.key --ssl-cert-file ./.ssl/spred.crt"
 end
 
 task :install do
     sh 'bundle install'
-    sh 'cd public && npm install'
+    sh 'npm install'
 end
 
 namespace :vagrant do
