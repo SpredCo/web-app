@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'json'
 require 'haml'
-require 'better_errors'
+require 'better_errors' if ENV['RACK_ENV'] === 'development'
 require 'sinatra/reloader'
 require 'algoliasearch'
 
