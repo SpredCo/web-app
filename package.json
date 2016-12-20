@@ -1,0 +1,19 @@
+{
+  "name": "web-app",
+  "version": "1.0.0",
+  "description": "1. Install ruby   * From RVM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpredCo/web-app.git"
+  },
+  "author": "Hugo Fabre & Maxime Guedj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SpredCo/web-app/issues"
+  },
+  "homepage": "https://github.com/SpredCo/web-app#readme"
+}
