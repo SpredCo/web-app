@@ -1,8 +1,8 @@
 require 'rake/testtask'
 # require 'dotenv'
 #
-if !ENV['RAKE_ENV']
-  ENV['RAKE_ENV'] = 'development'
+if !ENV['RACK_ENV']
+  ENV['RACK_ENV'] = 'development'
 end
 # Dotenv.load("env/#{RAKE_ENV}/.env")
 
@@ -11,7 +11,7 @@ Rake::TestTask.new do |t|
 end
 
 task :default do
-    sh "RACK_ENV=#{ENV['RAKE_ENV']} thin -R config.ru start -p $PORT --ssl --ssl-key-file ./.ssl/spred.key --ssl-cert-file ./.ssl/spred.crt"
+    sh "RACK_ENV=#{ENV['RACK_ENV']} thin -R config.ru start -p $PORT --ssl --ssl-key-file ./.ssl/spred.key --ssl-cert-file ./.ssl/spred.crt"
 end
 
 task :install do
