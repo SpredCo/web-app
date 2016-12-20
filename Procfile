@@ -1,1 +1,1 @@
-web: bundle install exec rake
+web: bundle exec rake
