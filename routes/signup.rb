@@ -32,11 +32,9 @@ class Spred
   end
 
   post '/signup-step2' do
-    request = session[:future_user].delete(:request)
-    session[:future_user].delete(:signup_type)
     user = session[:future_user]
     user[:pseudo] = @pseudo = params[:pseudo]
-    response = AuthenticationHelper.signup_step2(request, user)
+    response = AuthenticationHelper.signup_step2(user)
     if response.is_a?(APIError)
       @errors = {pseudo: response.message}
       haml :'signup/signup_step2', layout: :'layout/sign_layout'

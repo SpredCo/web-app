@@ -36,13 +36,14 @@ module AuthenticationHelper
     end
   end
 
-  def self.signup_step2(request, user)
+  def self.signup_step2(user)
     if user[:pseudo].empty?
       return APIError.new(403, 2, 2)
     end
     pseudo_validity = UserHelper.check_pseudo_availability(user[:pseudo])
     return pseudo_validity if pseudo_validity.is_a? APIError
-    req = request.send(:new, user)
+    user.delete(:signup_type)
+    req = user.delete(:request).send(:new, user)
     req.send
     req.parse_response
   end
