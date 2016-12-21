@@ -829,3 +829,8 @@ a, a:hover, a:active, a:visited {
     font-style: normal;
     margin-top: 50px;
 }
+
+.item {
+    color: white !important;
+    background-color: #55AA55 !important;
+}

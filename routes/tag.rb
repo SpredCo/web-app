@@ -27,9 +27,7 @@ class Spred
     authenticate!
     name_without_hash = get_name_without_hash(params[:name])
     tag = Tag.find_by_name(name_without_hash)
-    req = RegisterTagRequest.new(session[:spred_tokens], tag.id)
-    req.send
-    response = req.parse_response
+    response = session[:current_user].add_tag(session[:spred_tokens], tag.id)
     if response.is_a? APIError
       not_found
     else
@@ -41,9 +39,7 @@ class Spred
     authenticate!
     name_without_hash = get_name_without_hash(params[:name])
     tag = Tag.find_by_name(name_without_hash)
-    req = UnregisterTagRequest.new(session[:spred_tokens], tag.id)
-    req.send
-    response = req.parse_response
+    response = session[:current_user].remove_tag(session[:spred_tokens], tag.id)
     if response.is_a? APIError
       not_found
     else

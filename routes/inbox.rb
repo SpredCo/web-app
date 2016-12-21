@@ -42,7 +42,7 @@ class Spred
     members = {}
     invalid_members = {}
     members_pseudo.each do |member|
-      user = RemoteUser.find(tokens, member)
+      user = RemoteUser.find(member)
       if user.is_a? APIError
         invalid_members[member] = user
       else

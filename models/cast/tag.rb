@@ -11,6 +11,14 @@ class Tag
     Tag.new(tag['name'], tag['description'], tag['id'])
   end
 
+  def to_hash
+    {
+        name: @name,
+        description: @description,
+        id: @id
+    }
+  end
+
   def self.find_by_name(name)
     tag_req = GetTagByNameRequest.new(name)
     tag_req.send

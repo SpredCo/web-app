@@ -3,7 +3,7 @@ class Spred
 
   get '/profile' do
     authenticate!
-    @user = session[:current_user]
+    @current_user = @user = session[:current_user]
     haml :'user/profile', layout: :'layout/layout'
   end
 

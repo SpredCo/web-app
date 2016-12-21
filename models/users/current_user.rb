@@ -53,6 +53,18 @@ class CurrentUser < BaseUser
     end
   end
 
+  def add_tag(tokens, tag_id)
+    req = RegisterTagRequest.new(tokens, tag_id)
+    req.send
+    req.parse_response
+  end
+
+  def remove_tag(tokens, tag_id)
+    req = UnregisterTagRequest.new(tokens, tag_id)
+    req.send
+    req.parse_response
+  end
+
   def to_hash
     super
   end

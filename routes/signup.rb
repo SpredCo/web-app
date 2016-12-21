@@ -12,6 +12,10 @@ class Spred
 
   get '/signup-step3' do
     @title = 'Register subject you like'
+    req = GetTagsRequest.new
+    req.send
+    response = req.parse_response
+    @tags = response.body.map {|tag| Tag.from_hash(tag)}
     haml :'signup/signup_step3', layout: :'layout/sign_layout'
   end
 
@@ -45,6 +49,10 @@ class Spred
   end
 
   post '/signup-step3' do
-    redirect '/'
+    if params['tag']
+      params['tags'].each do |tag|
+        session[:current_user].add_tag(session[:spred_tokens], tag.to_s)
+      end
+    end
   end
 end

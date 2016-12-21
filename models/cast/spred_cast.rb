@@ -17,6 +17,24 @@ class SpredCast
     @state = state
   end
 
+  def to_hash
+    {
+        id: @id,
+        creator: @creator,
+        name: @name,
+        description: @description,
+        tags: @tags,
+        date: @date,
+        members: @members.map(&:id),
+        id_public: @is_public,
+        duration: @duration,
+        user_capacity: @user_capacity,
+        url: @url,
+        cover_url: @cover_url,
+        state: @state
+    }
+  end
+
   def self.from_hash(cast)
     members = cast['members'].each_with_object([]) do |member, array|
       array << BaseUser.from_hash(member)
@@ -42,23 +60,5 @@ class SpredCast
     req.send
     response = req.parse_response
     response.body
-  end
-
-  def to_hash
-    {
-      id: @id,
-      creator: @creator,
-      name: @name,
-      description: @description,
-      tags: @tags,
-      date: @date,
-      members: @members.map(&:id),
-      id_public: @is_public,
-      duration: @duration,
-      user_capacity: @user_capacity,
-      url: @url,
-      cover_url: @cover_url,
-      state: @state
-    }
   end
 end
