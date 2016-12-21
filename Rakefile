@@ -1,9 +1,7 @@
 require 'rake/testtask'
 # require 'dotenv'
 #
-if !ENV['RACK_ENV']
-  ENV['RACK_ENV'] = 'development'
-end
+ENV['RACK_ENV'] = 'development' unless ENV['RACK_ENV']
 # Dotenv.load("env/#{RAKE_ENV}/.env")
 
 Rake::TestTask.new do |t|
