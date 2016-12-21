@@ -7,6 +7,7 @@ gem 'thin'
 gem 'haml'
 gem 'rake'
 gem 'algoliasearch'
+gem 'dotenv'
 
 group :development do
   gem 'rerun'
