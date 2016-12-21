@@ -55,7 +55,6 @@ module AuthenticationHelper
       if response
         {errors: response}
       else
-        puts 'ok'
         {request: SpredSignupRequest, email: params[:email], password: params[:password],
          first_name: params['first-name'], last_name: params['last-name'],
          signup_type: params['signup-type']}
