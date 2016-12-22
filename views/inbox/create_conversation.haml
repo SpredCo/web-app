@@ -1,10 +1,31 @@
+%script{src: '/js/create-conversation.js'}
+%div.modal.fade.bd-example-modal-lg{'aria-hidden': true, 'aria-labelledby': 'myLargeModalLabel', role: 'dialog', tabindex: '-1'}
+  %div.modal-dialog.modal-lg
+    %div.modal-content
+      %div.row
+      %button.close.modal-close{:type => 'button', :data => {:dismiss => 'modal'}, :aria => {:label => 'Close'}}
+        %span{:aria => {:hidden => 'true'}} x
+      %div.row
+        %div.col-sm-10.col-sm-offset-1
+          %div.signup-title
+            %span Rechercher un utilisateur
+          %div.input-group.search-bar.aa-input-container
+            %input.form-control.aa-input-search#aa-input-search{:type => 'search', :name => 'search', :placeholder => 'Rechercher', autocomplete: 'off', style: 'width: inherit;'}
+      %div
+        %br
+        %br
+
 %div.container.main-inbox-create-conv
   %form{:method => 'POST', :name => 'create-conversation'}
     %div.row.toolbox
       %div.col-sm-1.center-text.inbox-dest-label
         %span À :
       %div.col-sm-11
-        %input#tokenfield.form-control{:type => 'text', :name => 'members', :placeholder => 'Destinataire'}
+        %div.input-group
+          %input#tokenfield.form-control{:type => 'text', :name => 'members', :placeholder => 'Destinataire'}
+          %span.input-group-btn
+            %button.btn.btn-default{'data-toggle': 'modal', 'data-target': '.bd-example-modal-lg', type: 'button'}
+              %span.fa.fa-plus.search-btn
       - if @errors
         %div.alert.alert-danger
           %ul
