@@ -17,9 +17,13 @@ class Spred
     params.delete('validate')
     params.delete('search')
     is_public = params.delete('cast-type') == 'public'
-    date_value = params.delete('date-value')
-    cast_date = params.delete('date') == 'now' ? 'now' : DateTime.parse(date_value).to_s
-    
+    time_value = params.delete('date-value')
+    date_value = params.delete('date-value_submit')
+    cast_date = begin
+      params.delete('date') == 'now' ? 'now' : DateTime.new(*date_value.split('/').map(&:to_i), *time_value.split(':').map(&:to_i)).to_s
+    rescue ArgumentError
+      DateTime.now.to_s
+    end
     picture = if params['picture']
                 pic_path = CastHelper.generate_uniq_cover_url(params['picture'][:type].split('/')[1])
                 CastHelper.save_cover(pic_path, params['picture'][:tempfile])
