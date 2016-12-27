@@ -31,7 +31,7 @@ class Spred
     if response.is_a? APIError
       not_found
     else
-      redirect "/tags/#{tag.name}"
+      redirect request.base_url + "/tags/#{tag.name}"
     end
   end
 
@@ -43,7 +43,7 @@ class Spred
     if response.is_a? APIError
       not_found
     else
-      redirect "/tags/#{tag.name}"
+      redirect request.base_url + "/tags/#{tag.name}"
     end
   end
 

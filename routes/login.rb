@@ -12,14 +12,14 @@ class Spred
       haml :'login/login', layout: :'layout/layout'
     else
       set_user_and_tokens(response.body['access_token'], response.body['refresh_token'])
-      redirect '/'
+      redirect request.base_url + '/'
     end
   end
 
   get '/logout' do
     session[:current_user] = nil
     session[:spred_tokens] = nil
-    redirect '/'
+    redirect request.base_url + '/'
   end
 
   def set_error_and_redirect
