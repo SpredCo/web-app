@@ -6,7 +6,7 @@ class Spred
 
   get '/signup-step2' do
     @title = 'Get pseudo'
-    redirect '/signup-step1' unless session[:future_user]
+    redirect request.base_url + '/signup-step1' unless session[:future_user]
     haml :'signup/signup_step2', layout: :'layout/sign_layout'
   end
 
@@ -27,7 +27,7 @@ class Spred
       haml :'signup/signup_step1', layout: :'layout/sign_layout'
     else
       session[:future_user] = response
-      redirect '/signup-step2'
+      redirect request.base_url + '/signup-step2'
     end
   end
 
@@ -42,7 +42,7 @@ class Spred
       user[:username] = user.delete(:email)
       response = AuthenticationHelper.login(user)
       set_user_and_tokens(response.body['access_token'], response.body['refresh_token']) unless response.is_a? APIError
-      redirect '/signup-step3'
+      redirect request.base_url + '/signup-step3'
     end
   end
 

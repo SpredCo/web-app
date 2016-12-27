@@ -41,7 +41,7 @@ class Spred
     req = CreateCastRequest.new(session[:spred_tokens], params.delete('name'), params.delete('description'), is_public, cast_date, params.merge({cover_url: picture}))
     req.send
     req.parse_response
-    redirect '/profile/casts'
+    redirect request.base_url + '/profile/casts'
   end
 
   get '/casts/:url' do
@@ -93,7 +93,7 @@ class Spred
     if response.is_a? APIError
       not_found
     else
-      redirect '/'
+      redirect request.base_url + '/'
     end
   end
 
@@ -105,7 +105,7 @@ class Spred
     if response.is_a? APIError
       not_found
     else
-      redirect '/'
+      redirect request.base_url + '/'
     end
   end
 end
