@@ -36,7 +36,7 @@ class Spred
     if is_public
       params.delete('members')
     else
-      params['members'] = params['members'].split(';')
+      params['members'] = params['members'].split(', ')
     end
     req = CreateCastRequest.new(session[:spred_tokens], params.delete('name'), params.delete('description'), is_public, cast_date, params.merge({cover_url: picture}))
     req.send

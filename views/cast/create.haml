@@ -1,3 +1,20 @@
+%script{src: '/js/create-conversation.js'}
+%div.modal.fade.bd-example-modal-lg{'aria-hidden': true, 'aria-labelledby': 'myLargeModalLabel', role: 'dialog', tabindex: '-1'}
+  %div.modal-dialog.modal-lg
+    %div.modal-content
+      %div.row
+      %button.close.modal-close{:type => 'button', :data => {:dismiss => 'modal'}, :aria => {:label => 'Close'}}
+        %span{:aria => {:hidden => 'true'}} x
+      %div.row
+        %div.col-sm-10.col-sm-offset-1
+          %div.signup-title
+            %span Rechercher un utilisateur
+          %div.input-group.search-bar.aa-input-container
+            %input.form-control.aa-input-search#aa-input-search{:type => 'search', :name => 'search', :placeholder => 'Rechercher', autocomplete: 'off', style: 'width: inherit;'}
+      %div
+        %br
+        %br
+
 %div.container.main-content
   %h3.spredcast-grp Création d'un spredcast
   %div.create-cast-form
@@ -47,14 +64,11 @@
                   %span.cast-type Privé
                 %div
                   %div.input-group#private-cast-form
-                    %input.form-control#js-autocomplete{:type => 'text', :name => 'search', :placeholder => 'Nom du membre', oninput: 'loadPseudo();', list: 'js-pseudo-list'}
+                    %input#tokenfield.form-control{:type => 'text', :name => 'members', :placeholder => 'Membres'}
                     %datalist#js-pseudo-list
                     %span.input-group-btn
-                      %span.btn.btn-default{onclick: 'addToUserList();'}
+                      %button.btn.btn-default{'data-toggle': 'modal', 'data-target': '.bd-example-modal-lg', type: 'button'}
                         %span.fa.fa-plus.search-btn
-                  %div
-                    %label{:for => 'Membres'}
-                    %div#mbr-list.mbr-list
             %div.row.cast-step-button
               %div.col-sm-2.col-sm-push-10.cast-step-button-next
                 %a.btn.btn-success{:onclick => 'next("#room");'} Suivant >>
