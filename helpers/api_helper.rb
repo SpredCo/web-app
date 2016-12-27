@@ -1,6 +1,7 @@
 module APIHelper
-  SCHEME = 'http'
-  URL = 'sharemyscreen.fr:3000'
+  SCHEME = ENV['API_SCHEME'] || 'http'
+  URL = ENV['API_URL'] || 'sharemyscreen.fr:3000'
+
   module EndPoint
     # Login Service
     SPRED_SIGNUP = '/v1/users'

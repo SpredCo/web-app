@@ -12,11 +12,11 @@ class Spred < Sinatra::Application
   set :root, File.dirname(__FILE__)
   set :public_folder, 'public'
 
-  Algolia.init(application_id: 'KGZYQKI2SD', api_key: 'a8583e100dbd3bb6e5a64d76462d1f5b')
+  Algolia.init(application_id: ENV['ALGOLIA_APP_ID'] || 'KGZYQKI2SD', api_key: ENV['ALGOLIA_READ_KEY'] ||'a8583e100dbd3bb6e5a64d76462d1f5b')
 
   configure do
-    set :client_key, 'r5cfOscd6CZAZ8XQ'
-    set :client_secret, 'G2jkNVDUqFcPCI4e6nia3w6UOMCaryPX'
+    set :client_key, ENV['WEB_CLIENT_ID'] || 'r5cfOscd6CZAZ8XQ'
+    set :client_secret, ENV['WEB_CLIENT_SECRET'] || 'G2jkNVDUqFcPCI4e6nia3w6UOMCaryPX'
     #set :haml, layout: :'layout/layout'
   end
 
