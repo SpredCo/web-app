@@ -15,6 +15,7 @@ class APIError < APIMessage
   INVALID_LOGIN = 'Email and password does not match'
   INVALID_REFRESH_TOKEN = 'Please re-login'
   UNABLE_TO_FIND_CAST = 'Unable to find cast'
+  INVALID_PARAMETERS = 'Objet invalide'
 
 
   ERRORS = {
@@ -52,6 +53,9 @@ class APIError < APIMessage
       '500' => {
           '1' => {
               '1' => JSON_PARSE_ERROR
+          },
+          '2' => {
+              '1' => INVALID_PARAMETERS
           }
       }
   }

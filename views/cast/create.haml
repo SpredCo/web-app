@@ -18,6 +18,11 @@
 %div.container.main-content
   %h3.spredcast-grp Création d'un spredcast
   %div.create-cast-form
+    - if @errors
+      %div.alert.alert-danger
+        %ul
+          - @errors.each do |k, v|
+            %li= "Erreur #{k}: #{v}"
     %form{:action => '/create-cast', :method => 'POST',  enctype: 'multipart/form-data'}
       %div.row.create-cast
         %div.col-sm-3

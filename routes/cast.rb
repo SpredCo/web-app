@@ -3,12 +3,7 @@ class Spred
     authenticate!
     @unread_message_count = synchronize_inbox!
     @title = 'Spred'
-    req = GetTagsRequest.new
-    req.send
-    response = req.parse_response.body
-    @tags = response.each_with_object([]) do |tag_hash, tags|
-      tags << Tag.from_hash(tag_hash)
-    end
+    @tags = get_tags
     haml :'cast/create', layout: :'layout/create_cast_layout'
   end
 
@@ -25,12 +20,12 @@ class Spred
       DateTime.now.to_s
     end
     picture = if params['picture']
-                pic_path = CastHelper.generate_uniq_cover_url(params['picture'][:type].split('/')[1])
-                CastHelper.save_cover(pic_path, params['picture'][:tempfile])
-                "#{request.base_url}/#{pic_path}"
-              else
-                "#{request.base_url}/img/cast.png"
-              end
+      pic_path = CastHelper.generate_uniq_cover_url(params['picture'][:type].split('/')[1])
+      CastHelper.save_cover(pic_path, params['picture'][:tempfile])
+      "#{request.base_url}/#{pic_path}"
+    else
+      "#{request.base_url}/img/cast.png"
+    end
 
     params['tags'] = params['tags'].split(';')
     if is_public
@@ -38,10 +33,22 @@ class Spred
     else
       params['members'] = params['members'].split(', ')
     end
-    req = CreateCastRequest.new(session[:spred_tokens], params.delete('name'), params.delete('description'), is_public, cast_date, params.merge({cover_url: picture}))
-    req.send
-    req.parse_response
-    redirect request.base_url + '/profile/casts'
+
+    response = if params['name'].empty? || params['description'].empty?
+      APIError.new(500, 2, 1)
+    else
+      req = CreateCastRequest.new(session[:spred_tokens], params.delete('name'), params.delete('description'), is_public, cast_date, params.merge({cover_url: picture}))
+      req.send
+      req.parse_response
+    end
+
+    if response.is_a? APIError
+      @errors = {default: response.message}
+      @tags = get_tags
+      haml :'cast/create', layout: :'layout/create_cast_layout'
+    else
+      redirect request.base_url + '/profile/casts'
+    end
   end
 
   get '/casts/:url' do
@@ -111,6 +118,15 @@ class Spred
       not_found
     else
       redirect request.base_url + '/'
+    end
+  end
+
+  def get_tags
+    req = GetTagsRequest.new
+    req.send
+    response = req.parse_response.body
+    response.each_with_object([]) do |tag_hash, tags|
+      tags << Tag.from_hash(tag_hash)
     end
   end
 end
