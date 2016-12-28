@@ -1,3 +1,6 @@
+/ WHY: We put this script here so they are only load on this page.
+%script{ :src => '/node_modules/spred-media-client/spred.io.min.js'}
+%script{ :src => '/js/cast.js' }
 %div.container.main-content
   %input#castId.hidden{ 'value' => @cast.id }
   %div.row
