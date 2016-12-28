@@ -47,7 +47,7 @@ class Spred
   end
 
   post '/signup-step3' do
-    if params['tag']
+    if params['tags']
       params['tags'].each do |tag|
         session[:current_user].add_tag(session[:spred_tokens], tag.to_s)
       end
