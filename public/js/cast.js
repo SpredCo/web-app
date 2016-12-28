@@ -3,11 +3,17 @@ var client = null;
 $(document).ready(function() {
 	client = new Spred.Client();
 	var castId = $("#castId").val();
-	client.on('messages', receiveMessage);
-	client.on('questions', receiveQuestion);
-	client.on('up_question', receiveQuestionUp);
-	client.on('down_question', receiveQuestionDown);
-	client.connect(castId);
+	var castToken = $("#castToken").val();
+	if (!castToken) {
+		client.on('messages', receiveMessage);
+		client.on('questions', receiveQuestion);
+		client.on('up_question', receiveQuestionUp);
+		client.on('down_question', receiveQuestionDown);
+	}
+	client.connect({
+		castId: castId,
+		castToken: castToken
+	});
 });
 
 function askQuestion() {

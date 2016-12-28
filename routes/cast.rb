@@ -57,6 +57,11 @@ class Spred
     end
   end
 
+  get '/casts/:token/webview' do
+   @token = params[:token]
+   haml :'cast/show_webview', layout: :'layout/cast_layout'
+  end
+
   get '/casts/token/:id' do
     token = CastHelper.get_cast_token(session[:spred_tokens], params[:id])
     JSON.generate(token.body)
