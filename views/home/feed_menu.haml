@@ -1,0 +1,10 @@
+%div.feed-menu-container
+  %div.row
+    %div.col-sm-5
+    %div.col-sm-4.feed-menu
+      %div.row
+        - if session[:spred_tokens].is_a? TokenBox
+          %div.col-sm-2
+            %a{href: '/feed/subscriptions'} Abonnements
+        %div.col-sm-2
+          %a{href: '/feed/trending'} Tendances

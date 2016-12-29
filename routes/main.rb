@@ -24,6 +24,14 @@ class Spred
     haml :'home/search', layout: :'layout/layout'
   end
 
+  get '/feed/subscriptions' do
+    haml :'home/following', layout: :'layout/layout'
+  end
+
+  get '/feed/trending' do
+    haml :'home/trending', layout: :'layout/layout'
+  end
+
   def get_real_url(object)
      case object['type']
        when 'tag'
