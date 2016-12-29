@@ -9,7 +9,7 @@ Rake::TestTask.new do |t|
 end
 
 task :default do
-    sh "thin -R config.ru start -p $PORT --ssl --ssl-key-file ./.ssl/spred.key --ssl-cert-file ./.ssl/spred.crt"
+    sh "thin -R config.ru start -p $PORT"
 end
 
 task :install do
