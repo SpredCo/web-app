@@ -66,7 +66,7 @@ class Spred
 
   get '/casts/:token/webview' do
    @token = params[:token]
-   haml :'cast/show_webview', layout: :'layout/cast_layout'
+   haml :'cast/show_webview'
   end
 
   get '/casts/token/:id' do

@@ -1,6 +1,9 @@
 / WHY: We put this script here so they are only load on this page.
+%link{ rel:'stylesheet', type:'text/css', href:'/css/bootstrap.min.css' }
+%script{ :src => '/js/lib/jquery.min.js' }
+%script{ :src => '/js/lib/bootstrap.min.js' }
 %script{ :src => '/node_modules/spred-media-client/spred.io.min.js'}
 %script{ :src => '/js/cast.js' }
 %div.container.main-content
+  %video#video.vcast-video{ 'autoplay' => "true", 'style' => 'position: absolute; width: 100%; height: 100%;' }
   %input#castToken.hidden{ 'value' => @token }
-  %video#video.vcast-video{ 'autoplay' => "true" }
