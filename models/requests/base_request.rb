@@ -17,9 +17,9 @@ class BaseRequest
       http.request(@request)
     end
     if @response
-      puts '@response si null'
+      puts '@response is not null'
     else
-      puts 'not null'
+      puts 'null'
       puts @response
     end
     puts "Received #{@response.body}"
