@@ -71,7 +71,7 @@ class Spred
 
   get '/casts/token/:id' do
     token = CastHelper.get_cast_token(session[:spred_tokens], params[:id])
-    JSON.generate(token.body)
+    JSON.generate(token.body ? token.body : token.message)
   end
 
   get '/profile/casts' do
