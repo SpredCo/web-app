@@ -15,8 +15,8 @@ class Spred < Sinatra::Application
   Algolia.init(application_id: ENV['ALGOLIA_APP_ID'] || 'KGZYQKI2SD', api_key: ENV['ALGOLIA_READ_KEY'] ||'a8583e100dbd3bb6e5a64d76462d1f5b')
 
   configure do
-    set :client_key, ENV['WEB_CLIENT_ID'] || 'r5cfOscd6CZAZ8XQ'
-    set :client_secret, ENV['WEB_CLIENT_SECRET'] || 'G2jkNVDUqFcPCI4e6nia3w6UOMCaryPX'
+    set :client_key, ENV['WEB_CLIENT_ID'] || 'ob35JV0MlrSKlIw8'
+    set :client_secret, ENV['WEB_CLIENT_SECRET'] || 'IA5gjpiC6FkorT7ZNDVRZHumtvrTXC8l'
     #set :haml, layout: :'layout/layout'
   end
 

@@ -9,7 +9,7 @@ class Inbox
     req = GetInboxRequest.new(tokens)
     req.send
     response = req.parse_response
-    response.is_a?(APIError) ? nil : Inbox.from_hash(response.body)
+    response.is_a?(APIError) ? response : Inbox.from_hash(response.body)
   end
 
   def unread_conversations

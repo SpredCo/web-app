@@ -15,7 +15,7 @@ class TokenBox
     else
       @access_token = response.body['access_token']
       @refresh_token = response.body['refresh_token']
-      true
+      self
     end
   end
 end

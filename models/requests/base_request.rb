@@ -13,11 +13,12 @@ class BaseRequest
 
   def send
     puts "Send request to #{@uri} with body: #{body}"
+    puts "Tokens: #{@tokens.access_token if @tokens}"
     @response = Net::HTTP.new(@uri.host, @uri.port).start do |http|
       http.request(@request)
     end
     if @response
-      puts '@response is not null'
+      puts '@response is not null', @response.class
     else
       puts 'null'
       puts @response
@@ -30,8 +31,10 @@ class BaseRequest
       @response.body = JSON.parse(@response.body)
     rescue JSON::ParserError => e
       p "Error: #{e} while parsing response"
-      @tokens.reload!
-      self.send
+
+      req = self.class.send(:new, @tokens.reload!)
+      req.send
+      @response = req.parse_response
     end
     if APIError::ERRORS.has_key?(@response.code)
       return nil unless @response.body['code']

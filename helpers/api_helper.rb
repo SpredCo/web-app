@@ -1,6 +1,6 @@
 module APIHelper
   SCHEME = ENV['API_SCHEME'] || 'http'
-  URL = ENV['API_URL'] || 'sharemyscreen.fr:3000'
+  URL = ENV['API_URL'] || 'spred.tv'
 
   module EndPoint
     # Login Service
