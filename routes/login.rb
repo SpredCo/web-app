@@ -11,6 +11,7 @@ class Spred
       @errors = {default: APIError::INVALID_LOGIN}
       haml :'login/login', layout: :'layout/layout'
     else
+      flash[:success] = 'Logged in'
       set_user_and_tokens(response.body['access_token'], response.body['refresh_token'])
       redirect '/'
     end
@@ -19,6 +20,7 @@ class Spred
   get '/logout' do
     session[:current_user] = nil
     session[:spred_tokens] = nil
+    flash[:success] = 'Logged out'
     redirect '/'
   end
 

@@ -64,3 +64,18 @@
                   %a{:href => '/logout'}
                     %i.fa.fa-sign-out{:aria => {:hidden => 'true'}}
                     %span Se déconnecter
+  - if flash[:error]
+    %div.alert.alert-danger.fade.in{style: 'text-align: center !important;'}
+      %a.close{href: '#',  'data-dismiss': 'alert', 'aria-label': 'close'}
+        = 'X'
+      = flash[:error]
+  - if flash[:success]
+    %div.alert.alert-success.fade.in{style: 'text-align: center !important;'}
+      %a.close{href: '#',  'data-dismiss': 'alert', 'aria-label': 'close'}
+        = 'X'
+      = flash[:success]
+  - if flash[:info]
+    %div.alert.alert-warning.fade.in{style: 'text-align: center !important;'}
+      %a.close{href: '#',  'data-dismiss': 'alert', 'aria-label': 'close'}
+        = 'X'
+      = flash[:info]

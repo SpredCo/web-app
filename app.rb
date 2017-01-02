@@ -4,6 +4,7 @@ require 'haml'
 require 'better_errors' if ENV['RACK_ENV'] === 'development'
 require 'sinatra/reloader' if ENV['RACK_ENV'] === 'development'
 require 'algoliasearch'
+require 'sinatra/flash'
 
 class Spred < Sinatra::Application
   use Rack::Session::Pool
