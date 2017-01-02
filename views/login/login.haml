@@ -4,6 +4,10 @@
       %div.login-block
         %div.row.login-title
           %span Connexion
+        - if @errors
+          %div.alert.alert-danger
+            %ul
+              %li= @errors[:default]
         %div.row
           %div.col-sm-10.col-sm-offset-1
             %form#login-form{:method => 'post', :name => 'login'}
