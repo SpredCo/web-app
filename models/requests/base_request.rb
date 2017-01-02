@@ -16,7 +16,12 @@ class BaseRequest
     @response = Net::HTTP.new(@uri.host, @uri.port).start do |http|
       http.request(@request)
     end
-    puts @response
+    if @response
+      puts '@response si null'
+    else
+      puts 'not null'
+      puts @response
+    end
     puts "Received #{@response.body}"
   end
 
