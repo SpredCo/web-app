@@ -16,6 +16,7 @@ class BaseRequest
     @response = Net::HTTP.new(@uri.host, @uri.port).start do |http|
       http.request(@request)
     end
+    puts @response
     puts "Received #{@response.body}"
   end
 

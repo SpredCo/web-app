@@ -30,7 +30,7 @@ class Spred
     if response.is_a? APIError
       @errors = {default: response.message}
     else
-      redirect request.base_url + '/inbox'
+      redirect '/inbox'
     end
   end
 
@@ -56,7 +56,7 @@ class Spred
         @errors = {default: response.message}
         haml :'inbox/create_conversation', layout: :'layout/inbox_layout'
       else
-        redirect request.base_url + '/inbox'
+        redirect '/inbox'
       end
     else
       @errors = {}

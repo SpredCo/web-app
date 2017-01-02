@@ -4,7 +4,15 @@
     %div.col-sm-4.feed-menu
       %div.row
         - if session[:spred_tokens].is_a? TokenBox
-          %div.col-sm-2
-            %a{href: '/feed/subscriptions'} Abonnements
-        %div.col-sm-2
-          %a{href: '/feed/trending'} Tendances
+          - if @active == :subscription
+            %div.col-sm-3.feed-active
+              %a{href: '/feed/subscriptions'} Abonnements
+          - else
+            %div.col-sm-3
+              %a{href: '/feed/subscriptions'} Abonnements
+        - if @active == :trending
+          %div.col-sm-3.feed-active
+            %a{href: '/feed/trending'} Tendances
+        - else
+          %div.col-sm-3
+            %a{href: '/feed/trending'} Tendances

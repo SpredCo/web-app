@@ -9,6 +9,7 @@ a, a:hover, a:active, a:visited {
 
 .navbar-default {
     background-color: #fff;
+    margin-bottom: 0px;
 }
 
 .navbar-default .navbar-brand.logo {
@@ -41,6 +42,7 @@ a, a:hover, a:active, a:visited {
 .main-content {
     background-color: #fff;
     padding-bottom: 25px;
+    margin-top: 20px;
 }
 
 .spredcast-grp h3 {
@@ -833,4 +835,30 @@ a, a:hover, a:active, a:visited {
 .item {
     color: white !important;
     background-color: #55AA55 !important;
+}
+
+.feed-menu-container {
+    padding-top: 9px;
+    background-color: white;
+    padding-bottom: 9px;
+}
+
+.feed-menu, .feed-menu a{
+    font-size: 20px;
+    color: #777 !important;
+    text-decoration: none;
+}
+
+.feed-menu a:hover, .feed-menu a:active {
+    border-bottom: 5px solid;
+    border-color: #55AA55;
+    padding-bottom: 5px;
+    color: black !important;
+}
+
+.feed-active a {
+    border-bottom: 5px solid;
+    border-color: #55AA55;
+    color: black !important;
+    padding-bottom: 5px;
 }

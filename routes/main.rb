@@ -25,10 +25,12 @@ class Spred
   end
 
   get '/feed/subscriptions' do
+    @active = :subscription
     haml :'home/following', layout: :'layout/layout'
   end
 
   get '/feed/trending' do
+    @active = :trending
     haml :'home/trending', layout: :'layout/layout'
   end
 
