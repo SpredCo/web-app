@@ -47,7 +47,7 @@ class Spred
       @tags = get_tags
       haml :'cast/create', layout: :'layout/create_cast_layout'
     else
-      redirect request.base_url + '/profile/casts'
+      redirect '/profile/casts'
     end
   end
 
@@ -105,7 +105,7 @@ class Spred
     if response.is_a? APIError
       not_found
     else
-      redirect request.base_url + '/'
+      redirect '/'
     end
   end
 
@@ -117,7 +117,7 @@ class Spred
     if response.is_a? APIError
       not_found
     else
-      redirect request.base_url + '/'
+      redirect '/'
     end
   end
 
