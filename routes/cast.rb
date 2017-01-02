@@ -71,6 +71,7 @@ class Spred
 
   get '/casts/token/:id' do
     token = CastHelper.get_cast_token(session[:spred_tokens], params[:id])
+    puts "-", token, "-"
     JSON.generate(token.body)
   end
 
