@@ -55,9 +55,9 @@ class Spred
     tokens = session[:spred_tokens]
     cast_req = GetCastRequest.new(tokens, params[:url])
     cast_req.send
-    @cast = cast_req.parse_response.body
+    @cast = cast_req.parse_response
     if @cast && !@cast.is_a?(APIError)
-      @cast = SpredCast.from_hash(@cast)
+      @cast = SpredCast.from_hash(@cast.body)
       haml :'cast/show', layout: :'layout/cast_layout'
     else
       not_found
