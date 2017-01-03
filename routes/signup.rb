@@ -40,6 +40,8 @@ class Spred
       haml :'signup/signup_step2', layout: :'layout/sign_layout'
     else
       user[:username] = user.delete(:email)
+      user[:token] = user.delete(:access_token)
+      user[:login_type] = user.delete(:signup_type)
       response = AuthenticationHelper.login(user)
       set_user_and_tokens(response.body['access_token'], response.body['refresh_token']) unless response.is_a? APIError
       redirect '/signup-step3'

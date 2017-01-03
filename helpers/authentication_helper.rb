@@ -42,7 +42,6 @@ module AuthenticationHelper
     end
     pseudo_validity = UserHelper.check_pseudo_availability(user[:pseudo])
     return pseudo_validity if pseudo_validity.is_a? APIError
-    user.delete(:signup_type)
     req = user.delete(:request).send(:new, user)
     req.send
     req.parse_response
