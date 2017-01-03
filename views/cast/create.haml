@@ -1,4 +1,5 @@
 %script{src: '/js/create-conversation.js'}
+
 %div.modal.fade.bd-example-modal-lg{'aria-hidden': true, 'aria-labelledby': 'myLargeModalLabel', role: 'dialog', tabindex: '-1'}
   %div.modal-dialog.modal-lg
     %div.modal-content
@@ -53,7 +54,7 @@
         %div.tab-content.cast-step-content
           %div#room-c.tab-pane.fade.cast-step-c.in.active
             %div.row.center-text
-              %div.col-sm-6.cast-type-bloc
+              %div.col-sm-6.cast-type-bloc.cast-bloc-split
                 %div.form-group
                   %input#public-select{:type => 'radio', :name => 'cast-type', :value => 'public', onclick: 'handleCastTypeSelection("#public-select");', :checked => true}
                   %br
@@ -62,7 +63,7 @@
                   %div.col-sm-6.col-sm-push-3
                     %label Nombre de participant maximum
                     %input.form-control#capacity{:type => 'number', :placeholder => '10', :name => 'user_capacity'}
-              %div.col-sm-6.cast-bloc-split.cast-type-bloc
+              %div.col-sm-6.cast-type-bloc
                 %div.form-group
                   %input#private-select{:type => 'radio', :name => 'cast-type', :value => 'private', onclick: 'handleCastTypeSelection("#private-select");'}
                   %br

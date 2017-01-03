@@ -546,7 +546,7 @@ a, a:hover, a:active, a:visited {
 }
 
 .cast-bloc-split {
-    border-left: solid 1px #ddd;
+    border-right: solid 1px #ddd;
     padding-top: 20px;
 }
 

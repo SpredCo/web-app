@@ -17,9 +17,6 @@ $(document).ready(function () {
     });
     handleCastTypeSelection('#public-select');
 
-    var input = document.getElementById('js-autocomplete');
-    input.oninput = loadPseudo;
-
     var tagList = $('#tag-list');
 
     $('.js-tag').change(function(){
