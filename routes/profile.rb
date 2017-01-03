@@ -33,7 +33,7 @@ class Spred
     if params['profile_picture']
       new_pic = "public/profile_pictures/#{session[:current_user].id}.#{params['profile_picture'][:type].split('/')[1]}"
       UserHelper.save_profile_picture(new_pic, params['profile_picture'][:tempfile])
-      verified_params[:picture_url] = "#{request.base_url}/#{UserHelper.build_profile_picture_url(new_pic)}"
+      verified_params[:picture_url] = "https://#{request.host}/#{UserHelper.build_profile_picture_url(new_pic)}"
     end
     @user = session[:current_user]
     response = @user.edit!(session[:spred_tokens], verified_params)
