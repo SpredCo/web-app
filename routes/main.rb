@@ -1,10 +1,23 @@
 class Spred
   get '/' do
+    @active = :welcome
     req = FindAvailableCastRequest.new
     req.send
     response = req.parse_response
-    @casts = response.body.each_with_object([]) do |hashed_cast, array|
-      array << SpredCast.from_hash(hashed_cast)
+    @casts_by_states = {'0' => [], '1' => []}
+    if response.is_a? APIError
+      redirect '/'
+    else
+      @casts = response.body.each do |hashed_cast|
+        cast = SpredCast.from_hash(hashed_cast)
+        if cast.state < 2
+          if DateTime.parse(cast.date) < DateTime.now
+            @casts_by_states['0'] << cast
+          else
+            @casts_by_states['1'] << cast
+          end
+        end
+      end
     end
     haml :'home/index', layout: :'layout/layout'
   end

@@ -844,21 +844,21 @@ a, a:hover, a:active, a:visited {
 }
 
 .feed-menu, .feed-menu a{
-    font-size: 20px;
+    font-size: 15px;
     color: #777 !important;
     text-decoration: none;
 }
 
 .feed-menu a:hover, .feed-menu a:active {
-    border-bottom: 5px solid;
+    border-bottom: 3px solid;
     border-color: #55AA55;
-    padding-bottom: 5px;
+    padding-bottom: 4px;
     color: black !important;
 }
 
 .feed-active a {
-    border-bottom: 5px solid;
+    border-bottom: 3px solid;
     border-color: #55AA55;
     color: black !important;
-    padding-bottom: 5px;
+    padding-bottom: 4px;
 }
