@@ -24,7 +24,7 @@ class Spred
       CastHelper.save_cover(pic_path, params['picture'][:tempfile])
       "#{request.base_url}/#{pic_path}"
     else
-      "#{request.base_url}/img/cast.png"
+      "https://#{request.host}/img/cast.png"
     end
 
     params['tags'] = params['tags'].split(';')
