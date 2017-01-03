@@ -7,7 +7,7 @@
         - casts.each do |cast|
           %div.col-sm-3
             %div
-              %img.cast-picture{src: "#{request.base_url}/img/cast.png"}
+              %img.cast-picture{src: cast.cover_url}
             %div.cast-name
               %a.cast-name{ href: "#{request.base_url}/casts/#{cast.url}", title: cast.name }
                 = cast.name
