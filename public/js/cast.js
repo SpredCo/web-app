@@ -14,6 +14,13 @@ $(document).ready(function() {
 		castId: castId,
 		castToken: castToken
 	});
+
+	$('#terminate_cast').click(function() {
+		if (client) {
+			client.quit();
+			if (client.isPresenter) window.location.replace("/profile/casts");
+		}
+	});
 });
 
 function askQuestion() {

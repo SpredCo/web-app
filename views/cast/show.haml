@@ -15,7 +15,7 @@
         - else
           %a.btn.btn-success.follow-button{:href => '/casts/' + @cast.id + '/remind'} S'abonner
       - elsif session[:current_user] && @cast.creator.id == session[:current_user].id
-        %a.btn.btn-danger.follow-button{href: '#'}
+        %a#terminate_cast.btn.btn-danger.follow-button{href: '#'}
           Terminer
   %video#video.vcast-video{ 'autoplay' => "true" }
   %div.vcast-panel
