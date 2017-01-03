@@ -732,7 +732,7 @@ a, a:hover, a:active, a:visited {
 .mine-description {
     padding: 3px 10px;
     color: #777;
-    height: 110px;
+    height: 100px;
 }
 
 
@@ -861,4 +861,16 @@ a, a:hover, a:active, a:visited {
     border-color: #55AA55;
     color: black !important;
     padding-bottom: 4px;
+}
+
+.tag {
+    padding: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-left: 2px;
+    color: white;
+    background-color: #55AA55;
+    border-color: #55AA55;
+    border-radius: 4px;
+    text-align: center;
 }

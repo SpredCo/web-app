@@ -1,0 +1,28 @@
+- @casts_by_states[states].each_slice(2) do |casts|
+  %div.row.casts-row
+    - casts.each do |cast|
+      %div.col-sm-6
+        %div.row
+          %div.col-sm-4
+            %div
+              %img.cast-picture{src: cast.cover_url}
+          %div.col-sm-8
+            %div
+              %div
+                %span
+                  %a.cast-name{ href: "#{request.base_url}/casts/#{cast.url}", title: cast.name }
+                    = cast.name
+                %span by
+                %span
+                  %a{ href: "#{request.base_url}/@#{cast.creator.pseudo}"}
+                    = '@' + cast.creator.pseudo
+            %div.mine-description
+              %span= cast.description
+            %div.cast-tags
+              %div.row
+                - cast.tags.each_slice(3) do |tags|
+                  %div.col-sm-6
+                    - tags.each do |tag|
+                      %a{href: "/tags/#{tag['name']}"}
+                        %div.col-sm-4.tag
+                          = "##{tag['name']}"
