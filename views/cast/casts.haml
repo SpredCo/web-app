@@ -1,7 +1,7 @@
 - @casts_by_states[states].each_slice(2) do |casts|
   %div.row.casts-row
     - casts.each do |cast|
-      %div.col-sm-6
+      %div.col-sm-6{style: 'margin-bottom: 80px;'}
         %div.row
           %div.col-sm-4
             %div
@@ -19,10 +19,7 @@
             %div.mine-description
               %span= cast.description
             %div.cast-tags
-              %div.row
-                - cast.tags.each_slice(3) do |tags|
-                  %div.col-sm-6
-                    - tags.each do |tag|
-                      %a{href: "/tags/#{tag['name']}"}
-                        %div.col-sm-4.tag
-                          = "##{tag['name']}"
+              - cast.tags.each_slice(3) do |tags|
+                - tags.each do |tag|
+                  %a.tag{href: "/tags/#{tag['name']}"}
+                    = "##{tag['name']}"
