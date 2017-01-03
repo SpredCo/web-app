@@ -9,11 +9,14 @@
       %span par
       %a{:href => '/@' + @cast.creator.pseudo}= '@' + @cast.creator.pseudo
     %div.col-sm-2.col-sm-offset-2.edit-profile-btn
-      - if session[:current_user]
+      - if session[:current_user] && @cast.creator.id != session[:current_user].id
         - if @cast.has_reminder?(session[:spred_tokens])
           %a.btn.btn-danger.follow-button{:href => '/casts/' + @cast.id + '/unremind'} Se désabonner
         - else
           %a.btn.btn-success.follow-button{:href => '/casts/' + @cast.id + '/remind'} S'abonner
+      - elsif session[:current_user] && @cast.creator.id == session[:current_user].id
+        %a.btn.btn-danger.follow-button{href: '#'}
+          Terminer
   %video#video.vcast-video{ 'autoplay' => "true" }
   %div.vcast-panel
     %ul.nav.nav-tabs.nav-justified
