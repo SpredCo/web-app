@@ -44,6 +44,24 @@ class Spred
 
   get '/feed/trending' do
     @active = :trending
+    req = GetFeedTrendRequest.new
+    req.send
+    response = req.parse_response
+    @casts_by_states = {'0' => [], '1' => []}
+    if response.is_a? APIError
+      redirect '/'
+    else
+      @casts = response.body.each do |hashed_cast|
+        cast = SpredCast.from_hash(hashed_cast)
+        if cast.state < 2
+          if cast.state == 0
+            @casts_by_states['0'] << cast
+          else
+            @casts_by_states['1'] << cast
+          end
+        end
+      end
+    end
     haml :'home/trending', layout: :'layout/layout'
   end
 

@@ -35,6 +35,8 @@ module APIHelper
 
     TAGS = '/v1/tags'
     TAG_FOLLOW = TAGS + ''
+
+    FEED = '/v1/feed'
   end
 
   module Service
@@ -89,5 +91,7 @@ module APIHelper
     TAGS = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::TAGS}"}
     TAG_FOLLOW = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::TAG_FOLLOW}"}
     MY_TAG = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::TAGS}"}
+
+    FEED = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::FEED}"}
   end
 end
