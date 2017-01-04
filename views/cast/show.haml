@@ -35,9 +35,11 @@
           %li
             %a{:onclick => "changeSource('window')"} Fenêtre
   - if @cast.running?
-    %video#video.vcast-video{ 'autoplay' => "true" }
+    %video#video.vcast-video{ 'autoplay' => "true"}
+    %img#cast-image.hidden{src: @cast.cover_url, style: 'width: 100%; height: 100%;'}
   - else
-    %img{src: @cast.cover_url, style: 'width: 100%; height: 100%;'}
+    %video#video.vcast-video.hidden{ 'autoplay' => "true"}
+    %img#cast-image{src: @cast.cover_url, style: 'width: 100%; height: 100%;'}
   %hr
   %div.vcast-panel
     %ul.nav.nav-tabs.nav-justified

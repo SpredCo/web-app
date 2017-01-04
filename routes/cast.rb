@@ -47,7 +47,7 @@ class Spred
       @tags = get_tags
       haml :'cast/create', layout: :'layout/create_cast_layout'
     else
-      redirect '/profile/casts'
+      redirect '/profile'
     end
   end
 
