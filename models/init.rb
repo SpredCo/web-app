@@ -80,3 +80,5 @@ require_relative 'cast/spred_cast'
 require_relative 'cast/tag'
 
 require_relative 'requests/get_feed_trend_request'
+require_relative 'requests/get_my_feed_request'
+require_relative 'requests/get_home_feed_request'

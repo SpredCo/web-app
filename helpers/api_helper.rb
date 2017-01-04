@@ -93,5 +93,6 @@ module APIHelper
     MY_TAG = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::TAGS}"}
 
     FEED = {service: Service::LOGIN.to_sym, end_point: "#{SCHEME}://#{Service::LOGIN}.#{URL}#{EndPoint::FEED}"}
+    MY_FEED = {service: Service::API.to_sym, end_point: "#{SCHEME}://#{Service::API}.#{URL}#{EndPoint::FEED}"}
   end
 end

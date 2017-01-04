@@ -31,13 +31,7 @@ class BaseRequest
       @response.body = JSON.parse(@response.body)
     rescue JSON::ParserError => e
       p "Error: #{e} while parsing response"
-      if @tokens.is_a? TokenBox
-        req = self.class.send(:new, @tokens.reload!)
-        req.send
-        @response = req.parse_response
-      else
-        @response = APIError.new(403,5,1)
-      end
+      @response = APIError.new(403,5,1)
     end
     if !@response.is_a?(APIError) && APIError::ERRORS.has_key?(@response.code)
       return nil unless @response.body['code']
