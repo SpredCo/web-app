@@ -2,9 +2,7 @@ var client = null;
 
 $(document).keypress(function(e) {
 	if(e.which == 13) {
-		$(".js-send-button:visible").forEach(function(button) {
-			button.click();
-		});
+		$(".js-send-button:visible").click();
 	}
 });
 
