@@ -8,7 +8,6 @@ gem 'haml'
 gem 'rake'
 gem 'algoliasearch'
 gem 'dotenv'
-gem 'sinatra-flash'
 
 group :development do
   gem 'rerun'
