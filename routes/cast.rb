@@ -121,6 +121,18 @@ class Spred
     end
   end
 
+  get '/casts/:id/delete' do
+    authenticate!
+    req = DeleteCastRequest.new(session[:spred_tokens], params[:id])
+    req.send
+    response = req.parse_response
+    if response.is_a? APIError
+      not_found
+    else
+      redirect '/profile'
+    end
+  end
+
   def get_tags
     req = GetTagsRequest.new
     req.send

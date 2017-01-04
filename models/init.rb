@@ -53,6 +53,7 @@ require_relative 'requests/get_cast_request'
 require_relative 'requests/get_user_casts_request'
 require_relative 'requests/get_tags_request'
 require_relative 'requests/get_casts_from_tag_request'
+require_relative 'requests/delete_cast_request'
 
 require_relative 'requests/remind_cast_request'
 require_relative 'requests/unremind_cast_request'
