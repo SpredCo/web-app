@@ -16,6 +16,8 @@
                 %span
                   %a{ href: "#{request.base_url}/@#{cast.creator.pseudo}"}
                     = '@' + cast.creator.pseudo
+              %div
+                %span= "Le #{DateTime.parse(cast.date).strftime('%d/%m/%y à %H:%M')}"
             %div.mine-description
               %span= cast.description
             %div.cast-tags
