@@ -105,7 +105,7 @@ class Spred
     if response.is_a? APIError
       not_found
     else
-      redirect '/'
+      redirect back
     end
   end
 
@@ -117,7 +117,7 @@ class Spred
     if response.is_a? APIError
       not_found
     else
-      redirect '/'
+      redirect back
     end
   end
 

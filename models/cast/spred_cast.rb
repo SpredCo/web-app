@@ -61,4 +61,8 @@ class SpredCast
     response = req.parse_response
     response.body
   end
+
+  def running?
+    @state == 1
+  end
 end

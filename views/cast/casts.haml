@@ -20,8 +20,4 @@
                 %span= "Le #{DateTime.parse(cast.date).strftime('%d/%m/%y à %H:%M')}"
             %div.mine-description
               %span= cast.description
-            %div.cast-tags
-              - cast.tags.each_slice(3) do |tags|
-                - tags.each do |tag|
-                  %a.tag{href: "/tags/#{tag['name']}"}
-                    = "##{tag['name']}"
+            =haml :'tag/tag_list', locals: {cast: cast}

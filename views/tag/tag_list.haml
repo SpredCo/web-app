@@ -1,0 +1,5 @@
+%div.cast-tags
+  - cast.tags.each_slice(3) do |tags|
+    - tags.each do |tag|
+      %a.tag{href: "/tags/#{tag['name']}"}
+        = "##{tag['name']}"

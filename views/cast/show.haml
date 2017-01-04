@@ -8,32 +8,56 @@
       %span.vcast-name= @cast.name
       %span par
       %a{:href => '/@' + @cast.creator.pseudo}= '@' + @cast.creator.pseudo
-    %div.col-sm-4.col-sm-push-1.edit-profile-btn
+    %div.col-sm-4.col-sm-push-3.edit-profile-btn
       - if session[:current_user] && @cast.creator.id != session[:current_user].id
         - if @cast.has_reminder?(session[:spred_tokens])
-          %a.btn.btn-danger.follow-button{:href => '/casts/' + @cast.id + '/unremind'} Se désabonner
+          %a.btn.btn-danger.follow-button{:href => '/casts/' + @cast.id + '/unremind'}
+            %span.fa.fa-bell-slash-o
         - else
-          %a.btn.btn-success.follow-button{:href => '/casts/' + @cast.id + '/remind'} S'abonner
+          %a.btn.btn-success.follow-button{:href => '/casts/' + @cast.id + '/remind'}
+            %span.fa.fa-bell-o
       - elsif session[:current_user] && @cast.creator.id == session[:current_user].id
         %a#terminate_cast.btn.btn-danger.follow-button{href: '#'}
           Terminer
         %a#delete_cast.btn.btn-danger.follow-button{href: "/casts/#{@cast.id}/delete"}
           Supprimer
-  %video#video.vcast-video{ 'autoplay' => "true" }
+  - if @cast.running?
+    %video#video.vcast-video{ 'autoplay' => "true" }
+  - else
+    %img{src: @cast.cover_url, style: 'width: 100%; height: 100%;'}
+  %hr
   %div.vcast-panel
     %ul.nav.nav-tabs.nav-justified
-      %li
-        %a{'data-toggle' => 'tab', :href => '#info'} Informations
       %li.active
-        %a{'data-toggle' => 'tab', :href => '#questions'} Questions
-      %li
-        %a{'data-toggle' => 'tab', :href => '#chat'} Chat
+        %a{'data-toggle' => 'tab', :href => '#info'} Informations
+      - if @cast.running?
+        %li
+          %a{'data-toggle' => 'tab', :href => '#questions'} Questions
+        %li
+          %a{'data-toggle' => 'tab', :href => '#chat'} Chat
     %div.tab-content
-      %div#info.tab-pane.fade
+      %div#info.tab-pane.fade.in.active
+        %div.cast-info-creator
+          %div.col-sm-6
+            %h4.cast-info-title Animateur:
+            %div.row
+              %div.col-sm-3
+                %img.following-profile-picture{src: @cast.creator.picture_url}
+              %div.col-sm-9
+                %b.following-name= "#{@cast.creator.first_name.capitalize} #{@cast.creator.last_name.capitalize}"
+                %div
+                  %span
+                    %a{ href: "#{request.base_url}/@#{@cast.creator.pseudo}"}
+                      = '@' + @cast.creator.pseudo
+        %div.cast-info-title
+          %span= "Le #{DateTime.parse(@cast.date).strftime('%d/%m/%y à %H:%M')}"
         %div.cast-info-title Description:
         %div= @cast.description
+        %br
+        %div.cast-info-title Tags:
+        =haml :'tag/tag_list', locals: {cast: @cast}
 
-      %div#questions.tab-pane.fade.in.active
+      %div#questions.tab-pane.fade
         %div#question-box.question-box
         %div.row
           %div.col-sm-10
