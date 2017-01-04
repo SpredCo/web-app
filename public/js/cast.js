@@ -1,5 +1,13 @@
 var client = null;
 
+$(document).keypress(function(e) {
+	if(e.which == 13) {
+		$(".js-send-button:visible").forEach(function(button) {
+			button.click();
+		});
+	}
+});
+
 $(document).ready(function() {
 	client = new Spred.Client();
 	var castId = $("#castId").val();

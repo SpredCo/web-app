@@ -76,11 +76,11 @@
           %div.col-sm-10
             %input.form-control#question-input{:type => 'text', :placeholder => 'Posez votre question'}
           %div.col-sm-2
-            %button.form-control.btn.btn-success{:onclick => 'askQuestion();'} Envoyer
+            %button.form-control.btn.btn-success.js-send-button{:onclick => 'askQuestion();'} Envoyer
       %div#chat.tab-pane.fade
         %div#chat-box.chat-content
         %div.row
           %div.col-sm-10
             %input#chat-input.form-control{:type => 'input', :placeholder => 'Votre message ...'}
           %div.col-sm-2
-            %button.form-control.btn.btn-success{:onclick => 'sendMessage();'} Envoyer
+            %button.form-control.btn.btn-success.js-send-button{:onclick => 'sendMessage();'} Envoyer
