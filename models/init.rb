@@ -78,3 +78,5 @@ require_relative 'token_box'
 require_relative 'cast/cast_token'
 require_relative 'cast/spred_cast'
 require_relative 'cast/tag'
+
+require_relative 'requests/get_feed_trend_request'

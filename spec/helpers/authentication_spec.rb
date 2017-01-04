@@ -90,25 +90,6 @@ describe AuthenticationHelper do
       future_user[:signup_type].must_equal params['signup-type']
     end
 
-    describe 'Signup step 2' do
-      it 'should returns error in blank pseudo' do
-        params = {pseudo: ''}
-        expected_error = APIError.new(403, 2, 2)
-        error = AuthenticationHelper.signup_step2(GoogleSignupRequest, params)
-
-        error.message.must_equal expected_error.message
-      end
-
-      it 'should returns error in already user pseudo' do
-        params = {pseudo: 'toto', access_token: 'google_token'}
-        expected_error = APIError.new(403, 2, 2)
-        CheckPseudoRequest.any_instance.stubs(:parse_response).returns(APIError.new(403, 2, 2))
-        error = AuthenticationHelper.signup_step2(GoogleSignupRequest, params)
-
-        error.message.must_equal expected_error.message
-      end
-    end
-
     describe 'Fill future user' do
       it 'should verify and returns error if password and confirmation does not match' do
         params = {email: 'toto@titi.fr', password: 'password', 'confirm-password' => 'password12', 'first-name' => 'test', 'last-name' => 'test', 'signup-type' => 'password'}
