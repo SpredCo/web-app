@@ -1,23 +1,23 @@
 %div.feed-menu-container
-  %div.row
+  %div.row{style: 'width: 100%'}
     %div.col-sm-4.col-sm-push-5.feed-menu
       %div.row
         - if @active == :welcome
-          %div.col-sm-2.feed-active{style: 'text-align: center; margin-bottom: 20px;'}
+          %div.col-sm-2.feed-active{style: 'text-align: center; margin-bottom: 5px;'}
             %a{href: '/'} Accueil
         - else
-          %div.col-sm-2{style: 'text-align: center; margin-bottom: 20px;'}
+          %div.col-sm-2{style: 'text-align: center; margin-bottom: 5px;'}
             %a{href: '/'} Accueil
         - if @active == :trending
-          %div.col-sm-2.feed-active{style: 'text-align: center; margin-bottom: 20px;'}
+          %div.col-sm-2.feed-active{style: 'text-align: center; margin-bottom: 5px;'}
             %a{href: '/feed/trending'} Tendances
         - else
-          %div.col-sm-2{style: 'text-align: center; margin-bottom: 20px;'}
+          %div.col-sm-2{style: 'text-align: center; margin-bottom: 5px;'}
             %a{href: '/feed/trending'} Tendances
         - if session[:spred_tokens].is_a? TokenBox
           - if @active == :subscription
-            %div.col-sm-2.feed-active{style: 'text-align: center; margin-bottom: 20px;'}
+            %div.col-sm-2.feed-active{style: 'text-align: center; margin-bottom: 5px;'}
               %a{href: '/feed/subscriptions'} Abonnements
           - else
-            %div.col-sm-2{style: 'text-align: center; margin-bottom: 20px;'}
+            %div.col-sm-2{style: 'text-align: center; margin-bottom: 5px;'}
               %a{href: '/feed/subscriptions'} Abonnements
