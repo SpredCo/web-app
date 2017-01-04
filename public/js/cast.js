@@ -4,6 +4,27 @@ $(document).ready(function() {
 	client = new Spred.Client();
 	var castId = $("#castId").val();
 	var castToken = $("#castToken").val();
+
+	client.on('ready', function() {
+		if (client.isPresenter) {
+			var startButton = $('#start_cast');
+			var terminateButton = $('#terminate_cast');
+			var deleteButton = $('#delete_cast');
+			startButton.removeClass('disabled');
+			startButton.click(function() {
+				client.start();
+				startButton.addClass('hidden');
+				deleteButton.addClass('hidden');
+				terminateButton.removeClass('hidden');
+			});
+			terminateButton.click(function() {
+				client.quit();
+				window.location.replace("/profile");
+			});
+		} else {
+			client.start();
+		}
+	});
 	if (!castToken) {
 		client.on('messages', receiveMessage);
 		client.on('questions', receiveQuestion);
@@ -14,14 +35,25 @@ $(document).ready(function() {
 		castId: castId,
 		castToken: castToken
 	});
-
-	$('#terminate_cast').click(function() {
-		if (client) {
-			client.quit();
-			if (client.isPresenter) window.location.replace("/profile/casts");
-		}
-	});
+	var sourceDropdown = $('#source_dropdown');
+	sourceDropdown.tooltip();
+	disableSourceDropdown();
 });
+
+function disableSourceDropdown() {
+	var sourceDropdown = $('#source_dropdown');
+	sourceDropdown.addClass('disabled');
+	sourceDropdown.attr('title', 'Veuillez patienter pendant le changement de source...');
+	setTimeout(function() {
+		$('#source_dropdown').removeClass('disabled');
+		sourceDropdown.attr('title', '');
+	}, 10000);
+}
+
+function changeSource(source) {
+	client.setSource(source);
+	disableSourceDropdown();
+}
 
 function askQuestion() {
 	const question = $('#question-input').val();
