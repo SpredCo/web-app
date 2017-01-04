@@ -17,25 +17,15 @@
         - else
           %a.btn.btn-success.follow-button{:href => '/user/' + @user.id + '/follow'} S'abonner
   %div.row.profile-info-line
-    %div.col-sm-2.profile-info-cell
+    %div.col-sm-2.profile-info-cell.col-sm-push-3
       %h4 Following
       %span
         %a{href: "/user/#{@user.id}/following"}= @user.following.length
-    %div.col-sm-2.profile-info-cell
+    %div.col-sm-2.profile-info-cell.col-sm-push-3
       %h4 Follower
       %span
         %a{href: "/user/#{@user.id}/follower"}= @user.followers.length
-    %div.col-sm-2.profile-info-cell
+    %div.col-sm-2.profile-info-cell.col-sm-push-3{style: 'border-right: none;'}
       %h4 Spredcast
-      %span 0
-    %div.col-sm-2.profile-info-cell
-      %h4 Réputation
-      %span
-        %i.fa.fa-star
-        %i.fa.fa-star
-        %i.fa.fa-star
-        %i.fa.fa-star-half-o
-        %i.fa.fa-star-o
-    %div.col-sm-2.profile-info-cell
-      %h4 Points
-      %span 590
+      %span= @casts_by_states.is_a?(Hash) ? @casts_by_states['0'].size + @casts_by_states['1'].size : '0'
+  =haml :'cast/cast_list' if @casts_by_states

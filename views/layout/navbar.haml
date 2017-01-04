@@ -45,20 +45,9 @@
               %img.nav-profile-picture.dropdown-toggle{:src => session[:current_user].picture_url, :type => 'button', :data => {:toggle => 'dropdown'}}
               %ul.dropdown-menu{:role => 'menu', :aria => {:labelledby => 'menu1'}}
                 %li{:role => 'presentation'}
-                  %a{:role => 'menuitem'}= '@' + session[:current_user].pseudo
-                %li.divider{:role => 'separator'}
-                %li{:role => 'presentation'}
-                  %a{:href => '/profile'}
+                  %a{:href => '/profile', role: 'menu-item'}
                     %i.fa.fa-user{:aria => {:hidden => 'true'}}
-                    %span Mon profil
-                %li{:role => 'presentation'}
-                  %a{:href => '/profile/casts'}
-                    %i.fa.fa-video-camera{:aria => {:hidden => 'true'}}
-                    %span Mes casts
-                %li{:role => 'presentation'}
-                  %a{:href => '/setting'}
-                    %i.fa.fa-cog{:aria => {:hidden => 'true'}}
-                    %span Paramètres
+                    %span= '@' + session[:current_user].pseudo
                 %li.divider{:role => 'separator'}
                 %li{:role => 'presentation'}
                   %a{:href => '/logout'}

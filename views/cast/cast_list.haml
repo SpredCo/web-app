@@ -1,14 +1,14 @@
 %div
   %h3 Live
   %hr
-    -if @casts_by_states['0'] != nil && !@casts_by_states['0'].empty?
-      =haml :'cast/casts', locals: {states: '0'}
+    -if @casts_by_states['1'] != nil && !@casts_by_states['1'].empty?
+      =haml :'cast/casts', locals: {states: '1'}
     - else
       %h4 Aucun live disponible
   %div
     %h3 A Venir
     %hr
-      -if @casts_by_states['1'] != nil && !@casts_by_states['1'].empty?
-        =haml :'cast/casts', locals: {states: '1'}
+      -if @casts_by_states['0'] != nil && !@casts_by_states['0'].empty?
+        =haml :'cast/casts', locals: {states: '0'}
       - else
         %h4 Aucun cast à venir

@@ -86,7 +86,7 @@ class Spred
       @casts = response.body.each do |hashed_cast|
         cast = SpredCast.from_hash(hashed_cast)
         if cast.state < 2
-          if DateTime.parse(cast.date) < DateTime.now
+          if cast.state == 0
             @casts_by_states['0'] << cast
           else
             @casts_by_states['1'] << cast
