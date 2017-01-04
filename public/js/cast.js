@@ -14,7 +14,9 @@ $(document).ready(function() {
 		castId: castId,
 		castToken: castToken
 	});
-
+	var sourceDropdown = $('#source_dropdown');
+	sourceDropdown.tooltip();
+	disableSourceDropdown();
 	$('#terminate_cast').click(function() {
 		if (client) {
 			client.quit();
@@ -22,6 +24,21 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function disableSourceDropdown() {
+	var sourceDropdown = $('#source_dropdown');
+	sourceDropdown.addClass('disabled');
+	sourceDropdown.attr('title', 'Veuillez patienter pendant le changement de source...');
+	setTimeout(function() {
+		$('#source_dropdown').removeClass('disabled');
+		sourceDropdown.attr('title', '');
+	}, 10000);
+}
+
+function changeSource(source) {
+	client.setSource(source);
+	disableSourceDropdown();
+}
 
 function askQuestion() {
 	const question = $('#question-input').val();

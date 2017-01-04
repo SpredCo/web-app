@@ -8,7 +8,7 @@
       %span.vcast-name= @cast.name
       %span par
       %a{:href => '/@' + @cast.creator.pseudo}= '@' + @cast.creator.pseudo
-    %div.col-sm-4.col-sm-push-1.edit-profile-btn
+    %div.col-sm-4.edit-profile-btn
       - if session[:current_user] && @cast.creator.id != session[:current_user].id
         - if @cast.has_reminder?(session[:spred_tokens])
           %a.btn.btn-danger.follow-button{:href => '/casts/' + @cast.id + '/unremind'} Se désabonner
@@ -19,6 +19,17 @@
           Terminer
         %a#delete_cast.btn.btn-danger.follow-button{href: "/casts/#{@cast.id}/delete"}
           Supprimer
+        %div#source_dropdown.btn.dropdown{ 'data-toggle': "tooltip" }
+          %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+            Source
+            %span.caret
+          %ul#select-source.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}
+            %li
+              %a{:onclick => "changeSource('webcam')"} Caméra
+            %li
+              %a{:onclick => "changeSource('screen')"} Ecran
+            %li
+              %a{:onclick => "changeSource('window')"} Fenêtre
   %video#video.vcast-video{ 'autoplay' => "true" }
   %div.vcast-panel
     %ul.nav.nav-tabs.nav-justified
