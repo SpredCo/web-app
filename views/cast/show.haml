@@ -15,7 +15,9 @@
         - else
           %a.btn.btn-success.follow-button{:href => '/casts/' + @cast.id + '/remind'} S'abonner
       - elsif session[:current_user] && @cast.creator.id == session[:current_user].id
-        %a#terminate_cast.btn.btn-danger.follow-button{href: '#'}
+        %a#start_cast.btn.btn-success.follow-button.disabled{href: '#'}
+          Start
+        %a#terminate_cast.btn.btn-danger.follow-button.hidden{href: '#'}
           Terminer
         %a#delete_cast.btn.btn-danger.follow-button{href: "/casts/#{@cast.id}/delete"}
           Supprimer
