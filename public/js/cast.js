@@ -21,6 +21,8 @@ $(document).ready(function() {
 				client.start();
 				$("#cast-image").addClass('hidden');
 				$("#video").removeClass('hidden');
+				$("#question-tab").removeClass('hidden');
+				$("#chat-tab").removeClass('hidden');
 				startButton.addClass('hidden');
 				deleteButton.addClass('hidden');
 				terminateButton.removeClass('hidden');
