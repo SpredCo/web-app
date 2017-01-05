@@ -22,7 +22,7 @@
         %div.line-signup.active
     %br
     %br
-    %select#input-tags{:multiple => "multiple"}
+    %select#input-tags{:multiple => "multiple", placeholder: 'Chercher un tag'}
       - @tags.each do |tag|
         %option{value: tag.id}=tag.name
     %div.row
