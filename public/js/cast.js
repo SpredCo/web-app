@@ -1,7 +1,7 @@
 var client = null;
 
 $(document).keypress(function(e) {
-	if(e.which == 13) {
+	if (e.which == 13) {
 		$(".js-send-button:visible").click();
 	}
 });
@@ -40,6 +40,8 @@ $(document).ready(function() {
 		client.on('questions', receiveQuestion);
 		client.on('up_question', receiveQuestionUp);
 		client.on('down_question', receiveQuestionDown);
+		client.on('user_joined', updateUser);
+		client.on('user_left', updateUser);
 	}
 	client.connect({
 		castId: castId,
@@ -63,6 +65,12 @@ function disableSourceDropdown() {
 function changeSource(source) {
 	client.setSource(source);
 	disableSourceDropdown();
+}
+
+function updateUser(spredCast) {
+	var users_count = $('#user_count');
+
+	users_count.html(spredCast.nbUsers);
 }
 
 function askQuestion() {

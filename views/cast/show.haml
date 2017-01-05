@@ -6,6 +6,9 @@
   %div.row
     %div.cast-header.col-sm-8
       %span.vcast-name= @cast.name
+      %i.fa.fa-users{ 'aria-hidden': true }
+      %span#user_count
+        0
       %span par
       %a{:href => '/@' + @cast.creator.pseudo}= '@' + @cast.creator.pseudo
     %div.col-sm-4.edit-profile-btn
