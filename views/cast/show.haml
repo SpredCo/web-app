@@ -3,6 +3,9 @@
 %script{ :src => '/js/cast.js' }
 %div.container.main-content
   %input#castId.hidden{ 'value' => @cast.id }
+  %div#alert-box.alert.alert-danger.hidden
+    %strong#alert-box-content
+      Ici devrait changer si une erreur arrive
   %div.row
     %div.cast-header.col-sm-8
       %span.vcast-name= @cast.name
