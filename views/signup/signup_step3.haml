@@ -22,13 +22,13 @@
         %div.line-signup.active
     %br
     %br
-    %select#input-tags{:multiple => "multiple"}
+    %select#input-tags{:multiple => "multiple", placeholder: 'Chercher un tag'}
       - @tags.each do |tag|
         %option{value: tag.id}=tag.name
     %div.row
       %div.col-sm-8.col-sm-offset-2
         %div.row.validate-interest
           %div.col-xs-2
-            %a.btn.btn-default{:href => '/'} Passer cette étape
+            %a.btn.btn-default.classic-link{:href => '/'} Passer cette étape
           %div.col-xs-2.col-xs-offset-8
             %a.btn.btn-success{style: 'color: white;', onclick: 'endRegister()'} Valider

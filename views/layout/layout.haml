@@ -10,6 +10,7 @@
     %link{ rel:'stylesheet', type:'text/css', href:'/fonts/font-awesome-4.2.0/css/font-awesome.min.css' }
     %link{ rel:'stylesheet', type:'text/css', href:'/css/bootstrap.min.css' }
     %link{ rel:'stylesheet', type:'text/css', href:'/css/common.css' }
+    %title Spred.tv
   %body.body-main
     - if !session[:spred_tokens] && @title != 'Login'
       = haml :'login/login_modal'

@@ -899,3 +899,13 @@ a, a:hover, a:active, a:visited {
     color: #ccc;
     font-size: 15px;
 }
+
+.classic-link {
+    color: black;
+}
+.classic-link:hover {
+    color: black;
+}
+.classic-link:active {
+    color: black;
+}

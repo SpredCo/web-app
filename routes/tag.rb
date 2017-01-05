@@ -19,7 +19,7 @@ class Spred
           end
         end
       end
-      haml :'cast/by_tag', layout: :'layout/cast_layout'
+      haml :'cast/by_tag', layout: :'layout/layout'
     end
   end
 

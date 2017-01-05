@@ -21,7 +21,7 @@ $( document ).ready(function() {
             }
         }
     ]).on('autocomplete:selected', function (event, suggestion, dataset) {
-        $('#tokenfield').tokenfield('createToken', suggestion.pseudo);
+        $('#tokenfield').tokenfield('createToken', { value: suggestion.objectID, label: suggestion.pseudo });
         $('#aa-input-search').val('');
     })
 });
