@@ -38,8 +38,8 @@ $( document ).ready(function() {
 });
 
 window.performSearch = function() {
-    var value = $('#aa-input-search').val();
-    $('#aa-input-search').val('');
+    var value = $('#aa-input-search-toto').val();
+    $('#aa-input-search-toto').val('');
     window.location.replace(window.location.origin + '/search/' + value);
 };
 
