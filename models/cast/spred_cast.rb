@@ -69,6 +69,8 @@ class SpredCast
   def short_desc
     if @description.size > 150
       "#{@description[0...147]}..."
+    else
+      @description
     end
   end
 end
