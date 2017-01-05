@@ -17,6 +17,7 @@ $(document).ready(function() {
 			var terminateButton = $('#terminate_cast');
 			var deleteButton = $('#delete_cast');
 			startButton.removeClass('disabled');
+
 			startButton.click(function() {
 				client.start();
 				$("#cast-image").addClass('hidden');
@@ -27,9 +28,9 @@ $(document).ready(function() {
 				deleteButton.addClass('hidden');
 				terminateButton.removeClass('hidden');
 			});
+
 			terminateButton.click(function() {
 				client.quit();
-				window.location.replace("/profile");
 			});
 		} else {
 			client.start();
@@ -42,6 +43,14 @@ $(document).ready(function() {
 		client.on('down_question', updateQuestions);
 		client.on('user_joined', updateUser);
 		client.on('user_left', updateUser);
+		client.on('error', displayErrors);
+		client.on('presenter_left', displayErrors);
+		client.on('reload_cast', removeErrors);
+		client.on('cast_terminated', function() {
+			if (client.castToken && client.castToken.presenter) {
+				window.location.replace("/profile");
+			}
+		});
 	}
 	client.connect({
 		castId: castId,
@@ -51,6 +60,18 @@ $(document).ready(function() {
 	sourceDropdown.tooltip();
 	disableSourceDropdown();
 });
+
+function removeErrors() {
+	var isHidden = $('#alert-box').hasClass('hidden');
+	if (!isHidden) {
+		$('#alert-box').addClass('hidden');
+	}
+}
+
+function displayErrors(error) {
+	$('#alert-box').removeClass('hidden');
+	$('#alert-box-content').html(error.message);
+}
 
 function disableSourceDropdown() {
 	var sourceDropdown = $('#source_dropdown');

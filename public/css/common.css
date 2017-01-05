@@ -43,6 +43,7 @@ a, a:hover, a:active, a:visited {
     background-color: #fff;
     padding-bottom: 25px;
     margin-top: 20px;
+    padding-top: 15px;
 }
 
 .spredcast-grp h3 {
@@ -743,7 +744,6 @@ a, a:hover, a:active, a:visited {
     height: 100px;
 }
 
-
 .question {
     padding: 20px;
     padding-top: 30px;
@@ -759,6 +759,7 @@ a, a:hover, a:active, a:visited {
     color: #777;
     margin-bottom: 10px;
 }
+
 .question-vote-box {
     height: 70px;
     background-color: white;
@@ -768,9 +769,11 @@ a, a:hover, a:active, a:visited {
     color: #777;
     padding-top: 4px;
 }
+
 .question-vote-nb {
     font-size: 25px;
 }
+
 .question-btn-vote {
     height: 30px;
 }
@@ -786,29 +789,34 @@ a, a:hover, a:active, a:visited {
     margin: 20px;
 }
 
-
 .algolia-autocomplete {
     width: 100%;
 }
+
 .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
     width: 100%;
 }
+
 .algolia-autocomplete .aa-hint {
     color: #999;
 }
+
 .algolia-autocomplete .aa-dropdown-menu {
     width: 100%;
     background-color: #fff;
     border: 1px solid #999;
     border-top: none;
 }
+
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
     cursor: pointer;
     padding: 5px 4px;
 }
+
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
     background-color: #B2D7FF;
 }
+
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
     font-weight: bold;
     font-style: normal;
@@ -831,10 +839,12 @@ a, a:hover, a:active, a:visited {
     font-weight: bold;
     font-size: 40px;
 }
+
 .tag-description {
     margin-left: 20px;
     font-size: 20px;
 }
+
 .tag-subscribe-btn {
     font-style: normal;
     margin-top: 50px;
@@ -851,7 +861,7 @@ a, a:hover, a:active, a:visited {
     padding-bottom: 2px;
 }
 
-.feed-menu, .feed-menu a{
+.feed-menu, .feed-menu a {
     font-size: 15px;
     color: #777 !important;
     text-decoration: none;
