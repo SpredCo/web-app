@@ -111,6 +111,7 @@ function receiveQuestion(question) {
 function updateQuestions() {
 	var questionsHtml = "";
 	client.spredCast.questions.forEach(function(question) {
+		var isDisabled = question.alreadyVoted ? 'disabled' : '';
 		const questionHtml =
 			'<div id="question-' + question.id + '" class="question">' +
 			'<div class="row">' +
@@ -125,8 +126,8 @@ function updateQuestions() {
 			'<div class="question-vote-box"><span id="question-' + question.id + '-nbvote" class="question-vote-nb">' + question.nbVote + '</span><br/><span>vote(s)</span></div>' +
 			'</div>' +
 			'<div class="col-sm-1" style="margin-top: 5px">' +
-			'<button id="question-' + question.id + '-up-btn" class="btn btn-success question-btn-vote" onclick="voteQuestion(\'up\', ' + question.id + ');"><span class="glyphicon glyphicon-arrow-up"></span></button>' +
-			'<button id="question-' + question.id + '-down-btn" class="btn btn-danger question-btn-vote" onclick="voteQuestion(\'down\', ' + question.id + ');"><span class="glyphicon glyphicon-arrow-down"></span></button>' +
+			'<button id="question-' + question.id + '-up-btn" ' + isDisabled + ' " class="btn btn-success question-btn-vote" onclick="voteQuestion(\'up\', ' + question.id + ');"><span class="glyphicon glyphicon-arrow-up"></span></button>' +
+			'<button id="question-' + question.id + '-down-btn" ' + isDisabled + ' " class="btn btn-danger question-btn-vote" onclick="voteQuestion(\'down\', ' + question.id + ');"><span class="glyphicon glyphicon-arrow-down"></span></button>' +
 			'</div>' +
 			'</div>' +
 			'</div>' +
