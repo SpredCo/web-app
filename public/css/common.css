@@ -741,7 +741,9 @@ a, a:hover, a:active, a:visited {
 .mine-description {
     padding: 3px 10px;
     color: #777;
-    height: 100px;
+    max-height: 63px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .question {

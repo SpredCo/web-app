@@ -65,4 +65,10 @@ class SpredCast
   def running?
     @state == 1
   end
+
+  def short_desc
+    if @description.size > 150
+      "#{@description[0...147]}..."
+    end
+  end
 end
